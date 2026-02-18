@@ -1,0 +1,10 @@
+{
+  "component": "artifact-deployment",
+  "context": "before_analysis",
+  "timestamp": "2026-02-02T11:53:37.0470896-05:00",
+  "environment": {
+    "os_version": "10.0.22631.0",
+    "machine": "N35105213",
+    "user": "marco.presta"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "checkpoint_id": "analysis_complete",
+  "data": {
+    "project_type": "General Purpose Project",
+    "project_name": "artifact-templates",
+    "tech_stack": [],
+    "components": []
+  },
+  "timestamp": "2026-01-29T23:01:47.9177944-05:00",
+  "component": "artifact-deployment"
+}

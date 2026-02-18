@@ -1,0 +1,53 @@
+[run]
+# Coverage.py configuration for EVA Foundation automation
+
+# Source code to measure
+source = .
+
+# Omit patterns
+omit =
+    */tests/*
+    */test_*.py
+    */.venv/*
+    */venv/*
+    setup.py
+
+# Enable branch coverage
+branch = True
+
+[report]
+# Reporting options
+precision = 2
+show_missing = True
+skip_covered = False
+
+# Fail if coverage is below 80%
+fail_under = 80
+
+# Exclude lines from coverage
+exclude_lines =
+    # Standard pragmas
+    pragma: no cover
+    
+    # Don't complain about debug code
+    def __repr__
+    
+    # Don't complain if tests don't hit defensive assertion code
+    raise AssertionError
+    raise NotImplementedError
+    
+    # Don't complain if non-runnable code isn't run
+    if __name__ == .__main__.:
+    
+    # Don't complain about abstract methods
+    @abstractmethod
+
+[html]
+# HTML report options
+directory = htmlcov
+title = EVA Foundation Automation Coverage Report
+
+[json]
+# JSON report options
+output = coverage.json
+pretty_print = True

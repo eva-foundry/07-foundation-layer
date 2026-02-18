@@ -1,0 +1,119 @@
+{
+  "version": "1.0.0",
+  "projectType": "RAG",
+  "description": "Standard folder structure for RAG-based AI assistant systems",
+  "requiredFolders": [
+    "app/backend/approaches",
+    "app/backend/core",
+    "app/backend/auth",
+    "app/frontend/src/pages",
+    "app/frontend/src/components",
+    "docs/eva-foundation/projects",
+    "docs/eva-foundation/system-analysis",
+    "docs/eva-foundation/workspace-notes",
+    "docs/eva-foundation/comparison-reports",
+    "functions",
+    "scripts/deployment",
+    "scripts/testing",
+    "scripts/housekeeping",
+    "scripts/diagnostics",
+    "logs/deployment",
+    "logs/tests",
+    "evidence/screenshots",
+    "evidence/html-dumps",
+    "evidence/network-traces",
+    "sessions"
+  ],
+  "optionalFolders": [
+    "infra/terraform",
+    "tests/unit",
+    "tests/integration",
+    "azure_search"
+  ],
+  "allowedRootFiles": [
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "Makefile",
+    "package.json",
+    "package-lock.json",
+    "requirements.txt",
+    ".gitignore",
+    ".env.template",
+    "RESTART_SERVERS.ps1",
+    "STOP_SERVERS.ps1"
+  ],
+  "organizationRules": [
+    {
+      "pattern": "Deploy-*.ps1",
+      "destination": "scripts/deployment/",
+      "severity": "warning",
+      "reason": "Deployment scripts should be in scripts/deployment/"
+    },
+    {
+      "pattern": "TEST-*.ps1",
+      "destination": "scripts/testing/",
+      "severity": "warning",
+      "reason": "Test scripts should be in scripts/testing/"
+    },
+    {
+      "pattern": "*.test.js",
+      "destination": "tests/",
+      "severity": "info",
+      "reason": "Test files should be in tests/"
+    },
+    {
+      "pattern": "*-debug-*.md",
+      "destination": "docs/eva-foundation/projects/debug-sessions/",
+      "severity": "info",
+      "reason": "Debug notes should be organized in projects/debug-sessions/"
+    },
+    {
+      "pattern": "*-analysis.md",
+      "destination": "docs/eva-foundation/system-analysis/",
+      "severity": "info",
+      "reason": "Analysis documents belong in system-analysis/"
+    }
+  ],
+  "retentionPolicies": {
+    "logs/deployment": {
+      "maxAgeDays": 14,
+      "action": "archive",
+      "destination": "logs/archive/"
+    },
+    "evidence/screenshots": {
+      "maxAgeDays": 30,
+      "action": "archive",
+      "destination": "evidence/archive/"
+    },
+    "sessions": {
+      "maxAgeDays": 30,
+      "action": "archive",
+      "destination": "sessions/archive/"
+    },
+    "docs/eva-foundation/projects/debug-sessions": {
+      "maxAgeDays": 60,
+      "action": "archive",
+      "destination": "docs/eva-foundation/projects/archive/"
+    }
+  },
+  "folderDescriptions": {
+    "app/backend/approaches": "RAG implementation strategies (chatreadretrieveread.py, etc.)",
+    "app/frontend/src/pages": "React page components (Chat.tsx, Upload.tsx, etc.)",
+    "docs/eva-foundation/projects": "Active project work and debugging sessions",
+    "docs/eva-foundation/system-analysis": "Architecture analysis and inventory reports",
+    "docs/eva-foundation/workspace-notes": "Ephemeral notes and patterns",
+    "docs/eva-foundation/comparison-reports": "Automated comparison outputs",
+    "evidence": "Debug artifacts captured at operation boundaries",
+    "evidence/screenshots": "Visual evidence from browser automation",
+    "evidence/html-dumps": "HTML snapshots for debugging",
+    "evidence/network-traces": "Network request/response logs",
+    "sessions": "SessionManager checkpoints for long-running operations",
+    "scripts/housekeeping": "Workspace organization and maintenance scripts",
+    "scripts/deployment": "Deployment automation scripts",
+    "scripts/testing": "Test execution scripts",
+    "scripts/diagnostics": "Health checks and validation scripts",
+    "logs/deployment": "Deployment execution logs",
+    "logs/tests": "Test execution logs"
+  }
+}
