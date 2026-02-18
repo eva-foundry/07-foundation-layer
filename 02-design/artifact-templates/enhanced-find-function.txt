@@ -1,0 +1,81 @@
+function Find-Project07Source {
+    <#
+    .SYNOPSIS
+        Enhanced auto-detection with self-awareness and robustness
+    .DESCRIPTION
+        Multi-strategy detection:
+        1. Self-aware: Use script's own location
+        2. Environment variable: EVA_PROJECT07_PATH
+        3. Upward traversal: Find project root markers
+        4. Fallback: Search common workspace patterns
+    #>
+    
+    # STRATEGY 1: Self-aware detection (script knows where it lives)
+    if ($PSScriptRoot) {
+        $templatePath = Join-Path $PSScriptRoot "copilot-instructions-template.md"
+        if (Test-Path $templatePath) {
+            Write-Status "Source detected (self-aware): $PSScriptRoot" -Type Pass
+            return (Resolve-Path $PSScriptRoot).Path
+        }
+    }
+    
+    # STRATEGY 2: Environment variable
+    if ($env:EVA_PROJECT07_PATH) {
+        $envPath = $env:EVA_PROJECT07_PATH
+        $templatePath = Join-Path $envPath "copilot-instructions-template.md"
+        if (Test-Path $templatePath) {
+            Write-Status "Source detected (environment): $envPath" -Type Pass
+            return (Resolve-Path $envPath).Path
+        }
+    }
+    
+    # STRATEGY 3: Upward traversal from current location
+    $currentPath = Get-Location
+    $maxDepth = 10
+    $depth = 0
+    
+    while ($depth -lt $maxDepth) {
+        $searchPaths = @(
+            "docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates",
+            "..\07-foundation-layer\02-design\artifact-templates",
+            ".\02-design\artifact-templates"
+        )
+        
+        foreach ($relPath in $searchPaths) {
+            $testPath = Join-Path $currentPath $relPath
+            if (Test-Path $testPath) {
+                $templatePath = Join-Path $testPath "copilot-instructions-template.md"
+                if (Test-Path $templatePath) {
+                    Write-Status "Source detected (traversal): $testPath" -Type Pass
+                    return (Resolve-Path $testPath).Path
+                }
+            }
+        }
+        
+        $parent = Split-Path $currentPath -Parent
+        if (-not $parent -or $parent -eq $currentPath) {
+            break
+        }
+        $currentPath = $parent
+        $depth++
+    }
+    
+    # STRATEGY 4: Hardcoded fallback paths (updated after rename)
+    $fallbackPaths = @(
+        "I:\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates",
+        ".\docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates",
+        "..\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates"
+    )
+    
+    foreach ($path in $fallbackPaths) {
+        if (Test-Path $path) {
+            $templatePath = Join-Path $path "copilot-instructions-template.md"
+            if (Test-Path $templatePath) {
+                Write-Status "Source detected (fallback): $path" -Type Warn
+                return (Resolve-Path $path).Path
+            }
+        }
+    }
+    
+    return $null
+}
