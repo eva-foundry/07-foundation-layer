@@ -37,6 +37,25 @@ Work state and sprint context are read from `STATUS.md` and `PLAN.md` at bootstr
 - Capture error state with full diagnostics
 - Use timestamped naming: `{component}_{context}_{YYYYMMDD_HHMMSS}.{ext}`
 
+**Rule 6 -- Never PUT inside a `pwsh -Command` inline string**
+JSON escaping is silently mangled. Write a `.ps1` file and run with `pwsh -File`.
+```powershell
+# WRONG -- JSON body corrupted by shell quoting
+pwsh -NoLogo -Command "& { $body=... | ConvertTo-Json; Invoke-RestMethod ... -Body $body }"
+
+# RIGHT
+$script | Set-Content "$env:TEMP\put-model.ps1" -Encoding UTF8
+pwsh -NoProfile -File "$env:TEMP\put-model.ps1"
+```
+
+**Rule 7 -- `get_terminal_output` only accepts IDs from `run_in_terminal(isBackground=true)`**
+Never pass `"1"`, `"pwsh"`, or any label. The only valid ID is the opaque string
+returned by `run_in_terminal` when `isBackground=true`.
+
+**Rule 8 -- Never call `create_file` on a path that already exists**
+`create_file` on an existing file returns a hard error and makes no change.
+Always `Test-Path` first; use `replace_string_in_file` for edits to existing files.
+
 ---
 
 ## Primary Artifacts (What This Project Produces)
