@@ -1,0 +1,1938 @@
+{
+  "meta": {
+    "schema": "eva.discovery.v2",
+    "generated_at": "2026-02-25T06:36:59.825Z",
+    "repo": "C:\\AICOE\\eva-foundation\\07-foundation-layer"
+  },
+  "project": null,
+  "planned": {
+    "epic": {
+      "title": "Project 07: EVA Foundation Layer (Patterns & Standards Baseline)",
+      "source": "README.md"
+    },
+    "features": [
+      {
+        "id": "F07-01",
+        "title": "Goal",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-02",
+        "title": "Key Discovery Findings",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03",
+        "title": "Project Phases",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-04",
+        "title": "Project Structure",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-05",
+        "title": "Success Criteria",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-06",
+        "title": "Deploying Project 07 to Other Projects",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-07",
+        "title": "Troubleshooting",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-08",
+        "title": "References",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-09",
+        "title": "Change Log",
+        "source": "veritas-plan.json"
+      }
+    ],
+    "stories": [
+      {
+        "id": "F07-02-001",
+        "title": "**?? CRITICAL Pattern #1: Windows Enterprise Encoding Safety**",
+        "feature_id": "F07-02",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-02-002",
+        "title": "**? Pattern #2: Professional Component Architecture**",
+        "feature_id": "F07-02",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-02-003",
+        "title": "**? Pattern #3: Zero-Setup Execution**",
+        "feature_id": "F07-02",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-02-004",
+        "title": "**?? Patterns Pending Broader Validation**",
+        "feature_id": "F07-02",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001",
+        "title": "Phase 1: Discovery (?? IN PROGRESS)",
+        "feature_id": "F07-03",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002",
+        "title": "Phase 2: Design (complete - January 29, 2026)",
+        "feature_id": "F07-03",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003",
+        "title": "Phase 5: Workspace Management (? TESTED - v1.5.2 - January 30, 2026)",
+        "feature_id": "F07-03",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004",
+        "title": "Phase 3: Development (? COMPLETE - January 29, 2026)",
+        "feature_id": "F07-03",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005",
+        "title": "Phase 4: Testing (? READY - Pester 5.x Upgraded)",
+        "feature_id": "F07-03",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-006",
+        "title": "Phase 5: Implementation (?? ON HOLD - Waiting for Testing)",
+        "feature_id": "F07-03",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-05-001",
+        "title": "**Primary Success Metrics**",
+        "feature_id": "F07-05",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-05-002",
+        "title": "**Secondary Success Metrics**",
+        "feature_id": "F07-05",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-06-001",
+        "title": "Quick Deployment Guide",
+        "feature_id": "F07-06",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-06-002",
+        "title": "Deployment Decision Tree",
+        "feature_id": "F07-06",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-06-003",
+        "title": "What Gets Deployed",
+        "feature_id": "F07-06",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-06-004",
+        "title": "Supported Project Types",
+        "feature_id": "F07-06",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-07-001",
+        "title": "Common Issues",
+        "feature_id": "F07-07",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-08-001",
+        "title": "Deployment Tools",
+        "feature_id": "F07-08",
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-08-002",
+        "title": "Documentation",
+        "feature_id": "F07-08",
+        "source": "veritas-plan.json"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "F07-03-001-T01",
+        "title": "Create project structure",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T02",
+        "title": "Analyze Project 06 (JP Auto-Extraction) patterns thoroughly",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T03",
+        "title": "Extract Professional Component Architecture from Project 06",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T04",
+        "title": "Identify Windows Enterprise Encoding Safety critical issues",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T05",
+        "title": "Document Evidence Collection Infrastructure patterns",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T06",
+        "title": "Create initial pattern documentation based on Project 06 analysis",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T07",
+        "title": "Analyze current EVA-JP-v1.2 Copilot configuration effectiveness",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T08",
+        "title": "Survey existing Copilot configurations across other EVA projects",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T09",
+        "title": "Validate Project 06 patterns against different project types (RAG vs automation)",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T10",
+        "title": "Interview/survey developers about current Copilot pain points",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T11",
+        "title": "Test extracted patterns on non-JP projects for broader applicability",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T12",
+        "title": "Document gaps between Project 06 patterns and EVA-wide needs",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T13",
+        "title": "`01-discovery/artifacts-inventory.md` - Comprehensive catalog",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T14",
+        "title": "`01-discovery/current-state-assessment.md` - Analysis of existing configuration",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T15",
+        "title": "`01-discovery/gap-analysis.md` - Identification of missing elements",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T16",
+        "title": "Initial pattern extraction from Project 06 (documented in 02-design/ as drafts)",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T17",
+        "title": "**PENDING**: Broader EVA ecosystem analysis and pattern validation",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T18",
+        "title": "**PENDING**: Developer pain point survey results",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-001-T19",
+        "title": "**PENDING**: Cross-project pattern applicability validation",
+        "story_id": "F07-03-001",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T01",
+        "title": "Document Project 06 patterns as initial design templates",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T02",
+        "title": "Create Professional Component Architecture specification",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T03",
+        "title": "Define Windows Enterprise Encoding Safety standards",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T04",
+        "title": "Extract Evidence Collection Infrastructure requirements",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T05",
+        "title": "Document dependency management strategy",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T06",
+        "title": "Create initial Copilot instructions template",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T07",
+        "title": "**COMPLETED**: Enhanced template v2.0.0 with complete production patterns (January 29, 2026)",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T08",
+        "title": "**COMPLETED**: Migrated 1,000+ lines from EVA-JP-v1.2 production copilot-instructions.md",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T09",
+        "title": "**COMPLETED**: Added comprehensive Table of Contents with GitHub-style anchors",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T10",
+        "title": "**COMPLETED**: Included complete working implementations of 4 professional components",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T11",
+        "title": "**COMPLETED**: Added Quick Reference section, AI Context Management, Workspace Housekeeping",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T12",
+        "title": "**COMPLETED**: Implemented semantic versioning (v2.0.0) with Release Notes",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T13",
+        "title": "**COMPLETED**: Created template-v2-usage-guide.md with comprehensive usage instructions",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T14",
+        "title": "`02-design/standards-specification.md` - Standards based on Project 06",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T15",
+        "title": "`02-design/artifact-templates/copilot-instructions-template.md` - **v2.1.0 production-ready** (1,902 lines)",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T16",
+        "title": "`02-design/artifact-templates/professional-runner-template.py` - Runner implementation",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T17",
+        "title": "`02-design/architecture-decision-records/ADR-004-*.md` - ADRs documented",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T18",
+        "title": "`02-design/best-practices-reference.md` - Comprehensive patterns",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-002-T19",
+        "title": "`02-design/artifact-templates/template-v2-usage-guide.md` - **NEW**: Complete usage guide for template v2.1.0",
+        "story_id": "F07-03-002",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T01",
+        "title": "Created Initialize-ProjectStructure.ps1 v1.0.0 - Scaffold projects from JSON templates",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T02",
+        "title": "Created Capture-ProjectStructure.ps1 v1.0.1 - Generate filesystem snapshots (bug fixed)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T03",
+        "title": "Created Invoke-WorkspaceHousekeeping.ps1 v1.0.0 - Enforce workspace organization",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T04",
+        "title": "Created supported-folder-structure-rag.json v1.0.0 - RAG project template",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T05",
+        "title": "Implemented professional components in all scripts (DebugArtifactCollectorPS, SessionManagerPS, StructuredErrorHandlerPS)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T06",
+        "title": "Enforced ASCII-only output throughout (Windows enterprise encoding safety)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T07",
+        "title": "Added DryRun modes for safe preview",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T08",
+        "title": "Integrated compliance reporting with remediation commands",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T09",
+        "title": "**TESTED**: Manual validation on Project 01 (01-documentation-generator)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T10",
+        "title": "**BUG FIXED**: Capture v1.0.1 - Fixed null array crash",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T11",
+        "title": "**DOCUMENTED**: Comprehensive test results (test-results-workspace-mgmt-v1.0.0.md)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T12",
+        "title": "`02-design/artifact-templates/Initialize-ProjectStructure.ps1` v1.0.0 (370 lines)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T13",
+        "title": "`02-design/artifact-templates/Capture-ProjectStructure.ps1` v1.0.1 (237 lines, bug fixed)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T14",
+        "title": "`02-design/artifact-templates/Invoke-WorkspaceHousekeeping.ps1` v1.0.0 (530 lines)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T15",
+        "title": "`02-design/artifact-templates/supported-folder-structure-rag.json` v1.0.0",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T16",
+        "title": "`04-testing/manual-test-workspace-mgmt.ps1` - Test suite (290 lines)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T17",
+        "title": "`04-testing/test-results-workspace-mgmt-v1.0.0.md` - Test results documentation",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T18",
+        "title": "Integrate workspace management into Apply-Project07-Artifacts.ps1",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T19",
+        "title": "Add automated tests to Test-Project07-Deployment.ps1 (~15 test cases)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T20",
+        "title": "Create additional templates (automation, api, infrastructure)",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-003-T21",
+        "title": "Add retention policy automation to housekeeping script",
+        "story_id": "F07-03-003",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T01",
+        "title": "Created Apply-Project07-Artifacts.ps1 (1,200+ lines) - Self-demonstrating primer script",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T02",
+        "title": "Implemented PowerShell professional components (DebugArtifactCollectorPS, SessionManagerPS, StructuredErrorHandlerPS)",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T03",
+        "title": "Added project type detection (RAG, Automation, API, Serverless)",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T04",
+        "title": "Implemented smart content preservation (extracts and preserves existing PART 2)",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T05",
+        "title": "Added backup creation with timestamped safety",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T06",
+        "title": "Created Test-DeploymentCompliance validation function",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T07",
+        "title": "Implemented compliance reporting with remediation steps",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T08",
+        "title": "Added DryRun mode for preview",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T09",
+        "title": "Ensured ASCII-only output (Windows enterprise encoding safety)",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T10",
+        "title": "Evidence collection at all operation boundaries",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T11",
+        "title": "`02-design/artifact-templates/Apply-Project07-Artifacts.ps1` - Production-ready primer (1,200+ lines)",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T12",
+        "title": "`02-design/artifact-templates/Test-Project07-Deployment.ps1` - Pester 5.x test suite (650+ lines)",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T13",
+        "title": "Comprehensive inline documentation with usage examples",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-004-T14",
+        "title": "Professional component implementations demonstrating Project 07 patterns",
+        "story_id": "F07-03-004",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T01",
+        "title": "Test suite created with comprehensive coverage (60+ test cases)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T02",
+        "title": "Professional Component Architecture tests (DebugArtifactCollectorPS, SessionManagerPS, StructuredErrorHandlerPS)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T03",
+        "title": "Encoding Safety Compliance tests (Unicode detection, ASCII validation)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T04",
+        "title": "Standards Validation tests (PART 1/PART 2, professional components, compliance reporting)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T05",
+        "title": "Evidence Collection tests (operation boundaries, checkpoints)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T06",
+        "title": "Project Type Detection tests (RAG, Automation, API, tech stack)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T07",
+        "title": "File Operation Safety tests (backup, preservation, DryRun)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T08",
+        "title": "**COMPLETED**: Pester 5.x upgrade complete, test suite ready for execution",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T09",
+        "title": "Execute full test suite with Pester 5.x",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      },
+      {
+        "id": "F07-03-005-T10",
+        "title": "Integration tests (ready to execute)",
+        "story_id": "F07-03-005",
+        "feature_id": "F07-03",
+        "done": false,
+        "source": "veritas-plan.json"
+      }
+    ],
+    "acceptance": [],
+    "declared_status": {}
+  },
+  "actual": {
+    "artifacts": [
+      {
+        "path": ".gitignore",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "CHANGELOG.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "IMPLEMENTATION-COMPLETE-v1.5.2.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "PHASE-3-IMPLEMENTATION-COMPLETE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "PLAN.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "PREVIEW-Project14.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "PROJECT7-VALUE-TO-AI-AGENTS.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "STATUS.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "v1.3.0-IMPLEMENTATION-SUMMARY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".github/copilot-instructions.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/artifacts-inventory.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/assessment-framework.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/current-state-assessment.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/discovery-summary.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/gap-analysis.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/pattern-application-methodology.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/PYTHON-DEPENDENCY-MANAGEMENT.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/best-practices-reference.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/marco-framework-architecture.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/MIGRATION-GUIDE-v1.0-to-v1.3.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/MIGRATION-GUIDE-v1.3-to-v1.7.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/SPRINT-BACKLOG-v1.7.0.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/standards-specification.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/v1.7.0-IMPLEMENTATION-SUMMARY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "04-testing/manual-test-workspace-mgmt.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "04-testing/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "04-testing/test-results-workspace-mgmt-v1.0.0.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "03-development/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "05-implementation/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "patterns/APIM-ANALYSIS-METHODOLOGY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "patterns/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".github/copilot-skills/00-skill-index.skill.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/.coveragerc",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/.env.example",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/evidence.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/generate-docs.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/generate.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/preflight-check.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/pytest.ini",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/QUICKSTART.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/requirements.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/run-tests.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/test_generator.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/test_generator_OLD.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "01-discovery/automation/validators.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/architecture-decision-records/ADR-004-Professional-Transformation-Methodology.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/architecture-decision-records/ADR-005-Dependency-Management-Strategy.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Apply-Project07-Artifacts-v1.4.1.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+        "type": "code",
+        "story_tags": [
+          "F07-02-001",
+          "F07-02-002",
+          "F07-02-003",
+          "F07-02-004",
+          "F07-03-001",
+          "F07-03-002",
+          "F07-03-003",
+          "F07-03-004",
+          "F07-03-005",
+          "F07-03-006",
+          "F07-05-001",
+          "F07-05-002",
+          "F07-06-001",
+          "F07-06-002",
+          "F07-06-003",
+          "F07-06-004",
+          "F07-07-001",
+          "F07-08-001",
+          "F07-08-002"
+        ]
+      },
+      {
+        "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1.backup_20260202_115209",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Capture-ProjectStructure.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/copilot-instructions-template.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/enhanced-find-function.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Fix-Project07-Paths.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Initialize-ProjectStructure.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Invoke-WorkspaceHousekeeping.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/PATH-FIX-IMPLEMENTATION-SUMMARY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/professional-runner-template.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Reseed-Projects.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/supported-folder-structure-rag.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/template-v2-usage-guide.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Test-Project07-Deployment.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/Test-Project07-Deployment.ps1.backup_20260202_115209",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "04-testing/results/housekeeping-dryrun_20260130_175553.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "04-testing/results/initialize-dryrun_20260130_175453.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "04-testing/results/initialize-dryrun_20260130_175553.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "04-testing/results/project-folder-picture_20260130_175553.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "05-implementation/archive/copilot-instructions-ORIGINAL-20260129.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "15-cdc/sessions/artifact-deployment/session_state.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/31-eva-faces/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/29-foundry/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/37-data-model/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/33-eva-brain-v2/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/38-ado-poc/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/39-ado-dashboard/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/43-spark/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/backups/44-eva-jp-spark/copilot-instructions_20260223_131448.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/session_state.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260202_115337.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260202_115337.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260202_115337.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260129_230147.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_074655.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_081013.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_083119.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_083243.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_083247.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260129_230147.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_074655.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_081013.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_083119.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_083243.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_083247.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260129_230147.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_074655.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_081013.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_083119.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_083243.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_083247.json",
+        "type": "data",
+        "story_tags": []
+      }
+    ],
+    "story_artifact_map": {
+      "F07-02-001": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-02-002": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-02-003": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-02-004": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-03-001": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-03-002": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-03-003": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-03-004": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-03-005": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-03-006": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-05-001": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-05-002": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-06-001": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-06-002": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-06-003": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-06-004": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-07-001": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-08-001": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      },
+      "F07-08-002": {
+        "artifacts": [
+          {
+            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "type": "code",
+            "story_tags": [
+              "F07-02-001",
+              "F07-02-002",
+              "F07-02-003",
+              "F07-02-004",
+              "F07-03-001",
+              "F07-03-002",
+              "F07-03-003",
+              "F07-03-004",
+              "F07-03-005",
+              "F07-03-006",
+              "F07-05-001",
+              "F07-05-002",
+              "F07-06-001",
+              "F07-06-002",
+              "F07-06-003",
+              "F07-06-004",
+              "F07-07-001",
+              "F07-08-001",
+              "F07-08-002"
+            ]
+          }
+        ]
+      }
+    },
+    "commit_evidence_map": {}
+  }
+}

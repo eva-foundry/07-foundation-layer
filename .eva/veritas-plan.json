@@ -1,0 +1,873 @@
+{
+  "schema": "eva.veritas-plan.v1",
+  "generated_at": "2026-02-25T06:36:59.285Z",
+  "generated_from": [
+    "PLAN.md"
+  ],
+  "format_detected": "veritas",
+  "prefix": "F07",
+  "features": [
+    {
+      "id": "F07-01",
+      "title": "Goal",
+      "source_heading": "## Feature: Goal [ID=F07-01]",
+      "stories": []
+    },
+    {
+      "id": "F07-02",
+      "title": "Key Discovery Findings",
+      "source_heading": "## Feature: Key Discovery Findings [ID=F07-02]",
+      "stories": [
+        {
+          "id": "F07-02-001",
+          "title": "**?? CRITICAL Pattern #1: Windows Enterprise Encoding Safety**",
+          "feature_id": "F07-02",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-02-002",
+          "title": "**? Pattern #2: Professional Component Architecture**",
+          "feature_id": "F07-02",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-02-003",
+          "title": "**? Pattern #3: Zero-Setup Execution**",
+          "feature_id": "F07-02",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-02-004",
+          "title": "**?? Patterns Pending Broader Validation**",
+          "feature_id": "F07-02",
+          "source": "heading",
+          "tasks": []
+        }
+      ]
+    },
+    {
+      "id": "F07-03",
+      "title": "Project Phases",
+      "source_heading": "## Feature: Project Phases [ID=F07-03]",
+      "stories": [
+        {
+          "id": "F07-03-001",
+          "title": "Phase 1: Discovery (?? IN PROGRESS)",
+          "feature_id": "F07-03",
+          "source": "heading",
+          "tasks": [
+            {
+              "id": "F07-03-001-T01",
+              "title": "Create project structure",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T02",
+              "title": "Analyze Project 06 (JP Auto-Extraction) patterns thoroughly",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T03",
+              "title": "Extract Professional Component Architecture from Project 06",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T04",
+              "title": "Identify Windows Enterprise Encoding Safety critical issues",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T05",
+              "title": "Document Evidence Collection Infrastructure patterns",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T06",
+              "title": "Create initial pattern documentation based on Project 06 analysis",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T07",
+              "title": "Analyze current EVA-JP-v1.2 Copilot configuration effectiveness",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T08",
+              "title": "Survey existing Copilot configurations across other EVA projects",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T09",
+              "title": "Validate Project 06 patterns against different project types (RAG vs automation)",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T10",
+              "title": "Interview/survey developers about current Copilot pain points",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T11",
+              "title": "Test extracted patterns on non-JP projects for broader applicability",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T12",
+              "title": "Document gaps between Project 06 patterns and EVA-wide needs",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T13",
+              "title": "`01-discovery/artifacts-inventory.md` - Comprehensive catalog",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T14",
+              "title": "`01-discovery/current-state-assessment.md` - Analysis of existing configuration",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T15",
+              "title": "`01-discovery/gap-analysis.md` - Identification of missing elements",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T16",
+              "title": "Initial pattern extraction from Project 06 (documented in 02-design/ as drafts)",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T17",
+              "title": "**PENDING**: Broader EVA ecosystem analysis and pattern validation",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T18",
+              "title": "**PENDING**: Developer pain point survey results",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-001-T19",
+              "title": "**PENDING**: Cross-project pattern applicability validation",
+              "story_id": "F07-03-001",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            }
+          ]
+        },
+        {
+          "id": "F07-03-002",
+          "title": "Phase 2: Design (complete - January 29, 2026)",
+          "feature_id": "F07-03",
+          "source": "heading",
+          "tasks": [
+            {
+              "id": "F07-03-002-T01",
+              "title": "Document Project 06 patterns as initial design templates",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T02",
+              "title": "Create Professional Component Architecture specification",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T03",
+              "title": "Define Windows Enterprise Encoding Safety standards",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T04",
+              "title": "Extract Evidence Collection Infrastructure requirements",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T05",
+              "title": "Document dependency management strategy",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T06",
+              "title": "Create initial Copilot instructions template",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T07",
+              "title": "**COMPLETED**: Enhanced template v2.0.0 with complete production patterns (January 29, 2026)",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T08",
+              "title": "**COMPLETED**: Migrated 1,000+ lines from EVA-JP-v1.2 production copilot-instructions.md",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T09",
+              "title": "**COMPLETED**: Added comprehensive Table of Contents with GitHub-style anchors",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T10",
+              "title": "**COMPLETED**: Included complete working implementations of 4 professional components",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T11",
+              "title": "**COMPLETED**: Added Quick Reference section, AI Context Management, Workspace Housekeeping",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T12",
+              "title": "**COMPLETED**: Implemented semantic versioning (v2.0.0) with Release Notes",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T13",
+              "title": "**COMPLETED**: Created template-v2-usage-guide.md with comprehensive usage instructions",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T14",
+              "title": "`02-design/standards-specification.md` - Standards based on Project 06",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T15",
+              "title": "`02-design/artifact-templates/copilot-instructions-template.md` - **v2.1.0 production-ready** (1,902 lines)",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T16",
+              "title": "`02-design/artifact-templates/professional-runner-template.py` - Runner implementation",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T17",
+              "title": "`02-design/architecture-decision-records/ADR-004-*.md` - ADRs documented",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T18",
+              "title": "`02-design/best-practices-reference.md` - Comprehensive patterns",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-002-T19",
+              "title": "`02-design/artifact-templates/template-v2-usage-guide.md` - **NEW**: Complete usage guide for template v2.1.0",
+              "story_id": "F07-03-002",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            }
+          ]
+        },
+        {
+          "id": "F07-03-003",
+          "title": "Phase 5: Workspace Management (? TESTED - v1.5.2 - January 30, 2026)",
+          "feature_id": "F07-03",
+          "source": "heading",
+          "tasks": [
+            {
+              "id": "F07-03-003-T01",
+              "title": "Created Initialize-ProjectStructure.ps1 v1.0.0 - Scaffold projects from JSON templates",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T02",
+              "title": "Created Capture-ProjectStructure.ps1 v1.0.1 - Generate filesystem snapshots (bug fixed)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T03",
+              "title": "Created Invoke-WorkspaceHousekeeping.ps1 v1.0.0 - Enforce workspace organization",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T04",
+              "title": "Created supported-folder-structure-rag.json v1.0.0 - RAG project template",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T05",
+              "title": "Implemented professional components in all scripts (DebugArtifactCollectorPS, SessionManagerPS, StructuredErrorHandlerPS)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T06",
+              "title": "Enforced ASCII-only output throughout (Windows enterprise encoding safety)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T07",
+              "title": "Added DryRun modes for safe preview",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T08",
+              "title": "Integrated compliance reporting with remediation commands",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T09",
+              "title": "**TESTED**: Manual validation on Project 01 (01-documentation-generator)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T10",
+              "title": "**BUG FIXED**: Capture v1.0.1 - Fixed null array crash",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T11",
+              "title": "**DOCUMENTED**: Comprehensive test results (test-results-workspace-mgmt-v1.0.0.md)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T12",
+              "title": "`02-design/artifact-templates/Initialize-ProjectStructure.ps1` v1.0.0 (370 lines)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T13",
+              "title": "`02-design/artifact-templates/Capture-ProjectStructure.ps1` v1.0.1 (237 lines, bug fixed)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T14",
+              "title": "`02-design/artifact-templates/Invoke-WorkspaceHousekeeping.ps1` v1.0.0 (530 lines)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T15",
+              "title": "`02-design/artifact-templates/supported-folder-structure-rag.json` v1.0.0",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T16",
+              "title": "`04-testing/manual-test-workspace-mgmt.ps1` - Test suite (290 lines)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T17",
+              "title": "`04-testing/test-results-workspace-mgmt-v1.0.0.md` - Test results documentation",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T18",
+              "title": "Integrate workspace management into Apply-Project07-Artifacts.ps1",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T19",
+              "title": "Add automated tests to Test-Project07-Deployment.ps1 (~15 test cases)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T20",
+              "title": "Create additional templates (automation, api, infrastructure)",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-003-T21",
+              "title": "Add retention policy automation to housekeeping script",
+              "story_id": "F07-03-003",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            }
+          ]
+        },
+        {
+          "id": "F07-03-004",
+          "title": "Phase 3: Development (? COMPLETE - January 29, 2026)",
+          "feature_id": "F07-03",
+          "source": "heading",
+          "tasks": [
+            {
+              "id": "F07-03-004-T01",
+              "title": "Created Apply-Project07-Artifacts.ps1 (1,200+ lines) - Self-demonstrating primer script",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T02",
+              "title": "Implemented PowerShell professional components (DebugArtifactCollectorPS, SessionManagerPS, StructuredErrorHandlerPS)",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T03",
+              "title": "Added project type detection (RAG, Automation, API, Serverless)",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T04",
+              "title": "Implemented smart content preservation (extracts and preserves existing PART 2)",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T05",
+              "title": "Added backup creation with timestamped safety",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T06",
+              "title": "Created Test-DeploymentCompliance validation function",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T07",
+              "title": "Implemented compliance reporting with remediation steps",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T08",
+              "title": "Added DryRun mode for preview",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T09",
+              "title": "Ensured ASCII-only output (Windows enterprise encoding safety)",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T10",
+              "title": "Evidence collection at all operation boundaries",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T11",
+              "title": "`02-design/artifact-templates/Apply-Project07-Artifacts.ps1` - Production-ready primer (1,200+ lines)",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T12",
+              "title": "`02-design/artifact-templates/Test-Project07-Deployment.ps1` - Pester 5.x test suite (650+ lines)",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T13",
+              "title": "Comprehensive inline documentation with usage examples",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-004-T14",
+              "title": "Professional component implementations demonstrating Project 07 patterns",
+              "story_id": "F07-03-004",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            }
+          ]
+        },
+        {
+          "id": "F07-03-005",
+          "title": "Phase 4: Testing (? READY - Pester 5.x Upgraded)",
+          "feature_id": "F07-03",
+          "source": "heading",
+          "tasks": [
+            {
+              "id": "F07-03-005-T01",
+              "title": "Test suite created with comprehensive coverage (60+ test cases)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T02",
+              "title": "Professional Component Architecture tests (DebugArtifactCollectorPS, SessionManagerPS, StructuredErrorHandlerPS)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T03",
+              "title": "Encoding Safety Compliance tests (Unicode detection, ASCII validation)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T04",
+              "title": "Standards Validation tests (PART 1/PART 2, professional components, compliance reporting)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T05",
+              "title": "Evidence Collection tests (operation boundaries, checkpoints)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T06",
+              "title": "Project Type Detection tests (RAG, Automation, API, tech stack)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T07",
+              "title": "File Operation Safety tests (backup, preservation, DryRun)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T08",
+              "title": "**COMPLETED**: Pester 5.x upgrade complete, test suite ready for execution",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T09",
+              "title": "Execute full test suite with Pester 5.x",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            },
+            {
+              "id": "F07-03-005-T10",
+              "title": "Integration tests (ready to execute)",
+              "story_id": "F07-03-005",
+              "feature_id": "F07-03",
+              "done": false,
+              "source": "checklist"
+            }
+          ]
+        },
+        {
+          "id": "F07-03-006",
+          "title": "Phase 5: Implementation (?? ON HOLD - Waiting for Testing)",
+          "feature_id": "F07-03",
+          "source": "heading",
+          "tasks": []
+        }
+      ]
+    },
+    {
+      "id": "F07-04",
+      "title": "Project Structure",
+      "source_heading": "## Feature: Project Structure [ID=F07-04]",
+      "stories": []
+    },
+    {
+      "id": "F07-05",
+      "title": "Success Criteria",
+      "source_heading": "## Feature: Success Criteria [ID=F07-05]",
+      "stories": [
+        {
+          "id": "F07-05-001",
+          "title": "**Primary Success Metrics**",
+          "feature_id": "F07-05",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-05-002",
+          "title": "**Secondary Success Metrics**",
+          "feature_id": "F07-05",
+          "source": "heading",
+          "tasks": []
+        }
+      ]
+    },
+    {
+      "id": "F07-06",
+      "title": "Deploying Project 07 to Other Projects",
+      "source_heading": "## Feature: Deploying Project 07 to Other Projects [ID=F07-06]",
+      "stories": [
+        {
+          "id": "F07-06-001",
+          "title": "Quick Deployment Guide",
+          "feature_id": "F07-06",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-06-002",
+          "title": "Deployment Decision Tree",
+          "feature_id": "F07-06",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-06-003",
+          "title": "What Gets Deployed",
+          "feature_id": "F07-06",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-06-004",
+          "title": "Supported Project Types",
+          "feature_id": "F07-06",
+          "source": "heading",
+          "tasks": []
+        }
+      ]
+    },
+    {
+      "id": "F07-07",
+      "title": "Troubleshooting",
+      "source_heading": "## Feature: Troubleshooting [ID=F07-07]",
+      "stories": [
+        {
+          "id": "F07-07-001",
+          "title": "Common Issues",
+          "feature_id": "F07-07",
+          "source": "heading",
+          "tasks": []
+        }
+      ]
+    },
+    {
+      "id": "F07-08",
+      "title": "References",
+      "source_heading": "## Feature: References [ID=F07-08]",
+      "stories": [
+        {
+          "id": "F07-08-001",
+          "title": "Deployment Tools",
+          "feature_id": "F07-08",
+          "source": "heading",
+          "tasks": []
+        },
+        {
+          "id": "F07-08-002",
+          "title": "Documentation",
+          "feature_id": "F07-08",
+          "source": "heading",
+          "tasks": []
+        }
+      ]
+    },
+    {
+      "id": "F07-09",
+      "title": "Change Log",
+      "source_heading": "## Feature: Change Log [ID=F07-09]",
+      "stories": []
+    }
+  ]
+}

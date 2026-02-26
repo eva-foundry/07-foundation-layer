@@ -1,10 +1,10 @@
 # Project 07: EVA Foundation Layer (Patterns & Standards Baseline)
 
-**Project Status**: 🔍 Discovery Ongoing (Phase 1 Active)  
+**Project Status**: Active -- Phases 1-5 complete; MCP server added 2026-02-25  
 **Start Date**: January 22, 2026  
 **Renamed**: January 30, 2026 (from "copilot-instructions" to "foundation-layer")  
-**Current Activity**: Pattern extraction engine - captures patterns from implementation projects  
-**Phase 1 Status**: IN PROGRESS - Project 06 patterns identified, Project 14 mock testing extracted  
+**Current Activity**: MCP server (foundation-primer) enabling agentic primer deployment  
+**Last Updated**: 2026-02-25 by agent:copilot -- Apply script v3.x bug fixes, MCP server added  
 **Owner**: Marco Presta
 
 ---
@@ -107,9 +107,9 @@ echo [INFO] Starting automation...
 - [ ] **PENDING**: Developer pain point survey results
 - [ ] **PENDING**: Cross-project pattern applicability validation
 
-### Phase 2: Design (✅ COMPLETE - January 29, 2026)
+### Phase 2: Design (complete - January 29, 2026)
 **Objective**: Define optimal Copilot configuration architecture
-**Status**: Template v2.1.0 completed with 1,902 lines of production-tested patterns from EVA-JP-v1.2
+**Status**: Template v3.1.0 (428 lines, lean PART 1 / PART 2 / PART 3 structure) -- replaced v2.1.0 (1,902 lines) in February 2026 rewrite
 
 **Completed Activities**:
 - [x] Document Project 06 patterns as initial design templates
@@ -128,7 +128,7 @@ echo [INFO] Starting automation...
 
 **Deliverables** (All Complete):
 - [x] `02-design/standards-specification.md` - Standards based on Project 06
-- [x] `02-design/artifact-templates/copilot-instructions-template.md` - **v2.1.0 production-ready** (1,902 lines)
+- [x] `02-design/artifact-templates/copilot-instructions-template.md` - **v3.1.0 production-ready** (428 lines)
 - [x] `02-design/artifact-templates/professional-runner-template.py` - Runner implementation
 - [x] `02-design/architecture-decision-records/ADR-004-*.md` - ADRs documented
 - [x] `02-design/best-practices-reference.md` - Comprehensive patterns
@@ -266,7 +266,7 @@ Invoke-Pester .\Test-Project07-Deployment.ps1 -Output Detailed
 ├── 02-design/
 │   ├── standards-specification.md
 │   ├── artifact-templates/
-│   │   ├── copilot-instructions-template.md (v2.0.0)
+│   │   ├── copilot-instructions-template.md (v3.1.0)
 │   │   ├── Apply-Project07-Artifacts.ps1 (primer script)
 │   │   ├── Test-Project07-Deployment.ps1 (test suite)
 │   │   └── template-v2-usage-guide.md
@@ -508,6 +508,9 @@ Invoke-Pester .\Test-Project07-Deployment.ps1 -Output Detailed
 
 | Date | Phase | Changes | Author |
 |------|-------|---------|--------|
+| 2026-02-25 | Maintenance | STATUS.md created (first ever). Template synced to v3.1.0 -- PART 1 bootstrap updated with ACA URL as primary data model endpoint, GOLDEN RULE preamble, endpoint lifecycle rows added to query table, encoding rule tightened (no emoji anywhere). README change log and phase status corrected. Veritas audit run: score 0 (no story plan defined -- action item added to STATUS.md). | Marco Presta |
+| 2026-02-24 | Maintenance | Workspace-level `C:\AICOE\.github\copilot-instructions.md` updated to v1.1.0. Added: ACA URL as primary data model endpoint, GOLDEN RULE preamble, Endpoint Lifecycle (Register/Discover/Use) section, EVA-Veritas MCP section, 29-Foundry capabilities registry, Workspace-Level Skills placeholder, Source of Truth Hierarchy, full 46-project registry table. Template PART 1 lagged these changes (addressed 2026-02-25). | Marco Presta |
+| 2026-02-23 | Maintenance | Template rewritten to v3.0.0 (409 lines, lean PART 1/2/3 structure -- down from 1,902 lines). Reseed-Projects.ps1 v1.0.0 created and run against 12 active projects. Backups taken for 33-eva-brain-v2 and 44-eva-jp-spark. Project 07 own `.github/copilot-instructions.md` and `00-skill-index.skill.md` seeded. Apply-Project07-Artifacts.ps1 version bumped. APIM-ANALYSIS-METHODOLOGY.md filed in patterns/ (675 lines, source: Project 17). | Marco Presta |
 | 2026-01-29 | Development | **Self-Referential Copilot Instructions Created**: Added `.github/copilot-instructions.md` (300+ lines) - minimal, self-referential instructions for Project 07 itself. Strategic exception to meta-project nature: demonstrates the patterns it teaches. Features: Critical pattern enforcement (encoding safety, professional components, evidence collection), primary artifact references (template v2.0.0, usage guide, primer script, test suite), self-consistency check process, pattern validation workflow, quality gates checklist. File is intentionally minimal (~300 lines vs. 1,200+ in full template) but comprehensive enough to guide AI assistants working on Project 07. Updated README.md project structure to include new `.github/` directory. Project 07 now practices what it preaches - using ASCII-only, following professional patterns, maintaining self-consistency. | Marco Presta |
 | 2026-01-29 | Development | **Phase 3 Complete - Deployment Automation**: Created Apply-Project07-Artifacts.ps1 (1,200+ lines) - intelligent primer script that embodies Project 07 best practices. Implements PowerShell professional components (DebugArtifactCollectorPS, SessionManagerPS, StructuredErrorHandlerPS). Features: project type detection (RAG/Automation/API/Serverless), smart PART 2 extraction and preservation, timestamped backup creation, Test-DeploymentCompliance validation with 8 compliance checks, compliance reporting with remediation steps, DryRun preview mode, ASCII-only output throughout, evidence collection at operation boundaries. Created Test-Project07-Deployment.ps1 (650+ lines) - comprehensive Pester 5.x test suite with 60+ test cases covering Professional Component Architecture, Encoding Safety Compliance, Standards Validation, Evidence Collection, Project Type Detection, File Operation Safety. Primer is self-demonstrating: uses the same patterns it deploys. Phase 4 testing blocked on Pester version upgrade (3.x → 5.x required). | Marco Presta |
 | 2026-01-29 | Design | **Phase 2 Complete - Template v2.0.0**: Enhanced copilot-instructions-template.md with 1,000+ lines from EVA-JP-v1.2 production file. Added comprehensive TOC with GitHub-style anchors (#critical-encoding--script-safety format), complete working implementations of 4 professional components (DebugArtifactCollector 80 lines, SessionManager 100 lines, StructuredErrorHandler 120 lines, ProfessionalRunner 200 lines), Quick Reference section with critical patterns table, AI Context Management Strategy (5-step process), Azure Services Inventory, Workspace Housekeeping Principles with self-organizing rules, Evidence Collection patterns with timestamped naming. Implemented semantic versioning (v2.0.0) with Release Notes documenting v1.0.0 and v2.0.0. Created template-v2-usage-guide.md (comprehensive usage instructions with 5-step process, placeholder reference, customization examples for RAG/Automation/API/Pipeline projects, validation checklist). Template now production-ready with 1,200+ lines of tested patterns. Phase 3 status changed to READY. | Marco Presta |
