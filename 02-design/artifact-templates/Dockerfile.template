@@ -1,0 +1,39 @@
+# Sprint Agent Docker Image Template
+# Copy to {PROJECT_ROOT}/Dockerfile
+# Customize: IMAGE_NAME, PROJECT_NAME, requirements.txt path
+
+FROM python:3.12-slim
+
+LABEL org.opencontainers.image.title="{PROJECT_NAME} Sprint Agent"
+LABEL org.opencontainers.image.description="EVA Factory DPDCA orchestration agent for {PROJECT_NAME}"
+LABEL org.opencontainers.image.authors="eva-foundry"
+LABEL org.opencontainers.image.source="https://github.com/eva-foundry/{PROJECT_REPO}"
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git curl jq ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install GitHub CLI
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.sources > /dev/null \
+    && apt-get update && apt-get install -y gh && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+# Install Python dependencies
+COPY {REQUIREMENTS_PATH} ./
+RUN pip install --no-cache-dir -r {REQUIREMENTS_PATH} \
+    && pip install --no-cache-dir openai ruff pytest pytest-asyncio httpx
+
+# Copy repository files
+COPY .github .github
+COPY PLAN.md STATUS.md README.md ./
+COPY .eva .eva
+COPY {SERVICE_PATHS} ./
+
+# Security: non-root user
+RUN useradd -m -u 1000 agent && chown -R agent:agent /workspace
+USER agent
+
+CMD ["python3", "--version"]
