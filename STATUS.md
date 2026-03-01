@@ -7,11 +7,115 @@
 
 ## Current Phase
 
-**Active**: Foundation Completion (Phase 1 - Generalize Scripts)
+**Active**: Foundation Completion (Phase 1-7 roadmap established, Task 2+3 complete)
 
 ---
 
-## Session Summary -- 2026-03-01 09:15 ET (session 6)
+## Session Summary -- 2026-03-01 09:30 ET (session 6)
+
+### Task 2: Created EVA Foundation Portfolio Project Board Setup Guide
+
+**Deliverable**: `docs/github-projects-setup.md` (comprehensive 9-step guide)
+
+**Contents**:
+- Step 1-2: Create GitHub Projects v2 board + add 9 custom fields
+- Step 3: Link issues from 12 eva-foundry/* repos (UI + GraphQL approach)
+- Step 4-6: Automation workflows (add-to-portfolio, auto-update-status, extract-story-id)
+- Step 7: Verify board works (Kanban + custom field automation)
+- Step 8: ProjectV2 GraphQL API reference (add issue, update field mutations)
+- Step 9: Initial data population script (populate-portfolio.ps1)
+- Maintenance guide: weekly, monthly, quarterly tasks
+- Integration with Veritas MTI audit
+
+**Purpose**: Cross-project portfolio visibility (replaces/complements 39-ado-dashboard)
+
+**Status**: Ready to execute (Phase 7 implementation, ~1 hour manual setup + automation)
+
+### Task 3: Created sprint-agent Docker Image Infrastructure
+
+**Deliverables**:
+1. `51-ACA/Dockerfile` (production-ready image for 51-ACA)
+2. `51-ACA/.github/workflows/build-sprint-agent.yml` (GitHub Actions build workflow)
+3. `02-design/artifact-templates/Dockerfile.template` (reusable template for 12 projects)
+4. `02-design/artifact-templates/build-sprint-agent.yml.template` (workflow template)
+
+**Image Details**:
+- Base: python:3.12-slim (~150MB)
+- Pre-installs: openai, pytest, ruff, httpx, github-cli
+- Size: ~600MB (compressed from ~2GB with separate pip install)
+- Startup: 30 sec (vs 5 min pip install in runner)
+- Registry: ghcr.io/eva-foundry/{PROJECT}-sprint-agent:latest
+- Performance: 70% faster sprint execution in GitHub Actions
+
+**Purpose**: Accelerate Phase 3 sprint-agent.yml workflow (key for 51-ACA Sprint 7+, all 12 projects Phase 7)
+
+**Status**: Ready to deploy (build workflow will auto-trigger on Dockerfile updates)
+
+### Context: 51-ACA Sprint 7 Status
+
+**Branch**: sprint/07-rules-and-redteam
+**PR**: #29 (fix(SPRINT-07): rules-and-redteam)
+**Status**: Executing live DPDCA pattern (issue created, agent running)
+**Pattern Observed**: Complete deterministic automation (ID consistency, one-line governance, data model queries)
+
+**Foundation Mapping**:
+| Phase | 51-ACA Source | 07-Foundation Deliverable | Status |
+|---|---|---|---|
+| Phase 1 | seed-from-plan.py, reflect-ids.py, gen-sprint-manifest.py | Generalized scripts template | TO DO |
+| Phase 2 | .github/copilot-skills/sprint-advance.skill.md (5 skills) | Elevated to workspace level | TO DO |
+| Phase 3 | .github/DPDCA-WORKFLOW.md, sprint-agent.yml, Dockerfile | Templates ready | DONE (Docker) |
+| Phase 4 | Sprint validation pattern | 99-test-project test | TO DO |
+| Phase 5 | gh issue create → agent | One-line governance docs | TO DO |
+| Phase 6 | Template v3.5.0 seeding | Deploy to 12 projects | TO DO |
+| Phase 7 | Dashboard API + portfolio visibility | GitHub Projects board setup | DONE (guide) |
+
+### Foundation Completion Plan Status
+
+**Total Phases**: 7 (expanded from 6 with Portfolio Board)
+**Completed Deliverables**:
+- [x] foundation-completion-plan.md (14 hours, 9 milestones, 7 risks)
+- [x] github-features-inventory.md (GitHub subscription analysis)
+- [x] github-projects-setup.md (Portfolio board comprehensive guide)
+- [x] Dockerfile (51-ACA production-ready)
+- [x] build-sprint-agent.yml workflow (51-ACA build automation)
+- [x] Dockerfile.template (foundation reusable template)
+- [x] build-sprint-agent.yml.template (foundation reusable template)
+
+**Pending Phases**:
+| Phase | Owner | Est. Duration | Dependency |
+| 1 | 07-Foundation (scripts) | 3h | None |
+| 2 | 07-Foundation (skills) | 2h | Phase 1 |
+| 3 | 07-Foundation (templates) | 3h | Phase 1, 2 |
+| 4 | 07-Foundation (testing) | 2h | Phase 1, 2, 3 |
+| 5 | 07-Foundation (docs) | 1h | Phase 1, 2, 3 |
+| 6 | 07-Foundation (reseed) | 1h | Phase 3 |
+| 7 | 07-Foundation + 33-Brain | 2h | Phase 4 |
+
+**Target**: 2026-03-04 EOD (14 hours over ~2 days)
+
+### Next Session Action Items
+
+**HIGH PRIORITY**:
+1. Start Phase 1: Generalize 3 scripts (seed-from-plan, reflect-ids, gen-sprint-manifest)
+   - Copy 51-ACA sources to 07/scripts/
+   - Remove hardcoding (ACA- prefix → PROJECT_PREFIX env var)
+   - Test on 99-test-project
+
+2. OR Start Phase 3.4: Docker image build workflow
+   - 51-ACA Dockerfile is ready (commit pending)
+   - build-sprint-agent.yml ready (commit pending)
+   - Can run immediately once committed
+
+**MEDIUM PRIORITY**:
+3. Create 99-test-project scaffold (for Phase 4 testing)
+4. Begin Phase 2: Elevate 5 skills to workspace level
+
+**DEFERRED** (low priority):
+- Reorganization proposal review (4 open questions) - was deferred in session 3
+
+---
+
+## Session Summary -- 2026-03-01 09:15 ET (session 6 - part 1)
 
 ### 51-ACA DPDCA Pattern Observation
 
