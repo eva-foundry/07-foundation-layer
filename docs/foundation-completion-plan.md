@@ -292,7 +292,53 @@ jobs:
           branch: sprint/${{ steps.manifest.outputs.sprint_number }}-${{ steps.manifest.outputs.sprint_name }}
 ```
 
-### Task 3.4: scripts/ Directory Seed Template
+### Task 3.4: Docker Image for sprint-agent (NEW)
+
+**Source**: 51-ACA Dockerfile + build-sprint-agent.yml workflow
+
+**Goal**: Pre-built environment for GitHub Actions (30 sec startup vs 5 min pip install)
+
+**Deliverables**:
+1. `C:\AICOE\eva-foundry\51-ACA\Dockerfile` (for 51-ACA)
+2. `C:\AICOE\eva-foundry\51-ACA\.github\workflows\build-sprint-agent.yml` (for 51-ACA)
+3. Templates:
+   - `C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Dockerfile.template`
+   - `C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\build-sprint-agent.yml.template`
+
+**Image Details**:
+- Base: `python:3.12-slim` (~150MB)
+- Dependencies: openai, pytest, ruff, httpx, github-cli
+- Size: ~600MB (compressed)
+- Registry: ghcr.io/eva-foundry/{PROJECT_SLUG}-sprint-agent
+- Tags: latest, main-{commit-sha}, {branch-name}
+
+**How to Use** (in sprint-agent.yml):
+
+```yaml
+jobs:
+  execute-sprint:
+    container:
+      image: ghcr.io/eva-foundry/51-aca-sprint-agent:latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run sprint agent
+        run: python3 .github/scripts/sprint_agent.py --issue "$ISSUE_NUM"
+```
+
+**Startup Comparison**:
+| Step | Without Docker | With Docker |
+|---|---|---|
+| Setup runner | 30 sec | 30 sec |
+| Install dependencies | 4 min 30 sec | (pre-built in image) |
+| Run sprint agent | 1 min | 1 min |
+| **Total** | **6 min** | **1.5 min** |
+
+**Rollout**:
+- 51-ACA: Commit Dockerfile + build workflow (immediate)
+- Phase 3 complete: Template available for all 12 projects
+- Phase 6 (Reseed): Deploy templates via Apply-Project07-Artifacts.ps1
+
+### Task 3.5: scripts/ Directory Seed Template
 
 **Deliverable**: `C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\scripts-seed-structure.json`
 
@@ -526,9 +572,59 @@ Select-String -Path $p33 -Pattern "## PART 2" -Context 5
 
 ---
 
-## Phase 7: Dashboard Integration Test (1 hour)
+## Phase 7: Dashboard Integration + Portfolio Board Setup (2 hours)
 
-### Task 7.1: Seed Test Project in Data Model
+### Task 7.1: Create GitHub Projects Portfolio Board (NEW)
+
+**Purpose**: Organization-level portfolio visibility cross-linked to all 12 active EVA projects
+
+**URL**: https://github.com/orgs/eva-foundry/projects
+
+**Setup Steps** (reference: docs/github-projects-setup.md):
+
+1. **Create Board** (UI, 10 min):
+   - Navigate to eva-foundry organization
+   - Click "New project"
+   - Name: "EVA Foundation Portfolio"
+   - Template: "Table"
+   - Visibility: Public
+
+2. **Add Custom Fields** (UI, 15 min):
+   - Status (Single Select: Not Started, In Progress, Review, Done, Blocked)
+   - Project (Single Select: 12 projects)
+   - Story ID (Text: PROJECT-NN-NNN format)
+   - Sprint (Text: Sprint-NN format)
+   - Size (Single Select: XS, S, M, L, Epic)
+   - MTI Impact (Single Select: Critical, High, Medium, Low)
+   - Test Count (Number)
+
+3. **Link Issues** (Script + Automation, 15 min):
+   - Add label `portfolio` to all open issues in 12 repos
+   - Deploy automation workflow: add-to-portfolio.yml
+   - Workflow: auto-adds issues with `portfolio` label to project
+
+4. **Verify Board Works** (Testing, 10 min):
+   - Check portfolio project displays issues from all 12 repos
+   - Test: Create issue in 51-ACA with label `portfolio`
+   - Verify: Within 60 sec, appears in portfolio project
+   - Test custom field updates (manually set Story ID, MTI Impact)
+
+**Expected Result**:
+- Portfolio board shows real-time sprint status across all projects
+- Kanban view: Not Started → In Progress → Review → Done
+- Custom fields: Can filter by Sprint, Project, Size, MTI Impact
+- Automation: New issues auto-appear in board (via workflow)
+
+**Integration with Veritas**:
+- Workflow: update-mti-impact.yml queries veritas audit, updates MTI field
+- Portfolio board = single source of truth for sprint metrics (replaces/complements 39-ado-dashboard)
+
+**Reference Documentation**:
+- Full setup guide: `C:\AICOE\eva-foundry\07-foundation-layer\docs\github-projects-setup.md`
+- GraphQL API queries (advanced automation)
+- Maintenance schedule (weekly, monthly, quarterly tasks)
+
+### Task 7.2: Seed Test Project in Data Model
 
 ```powershell
 $base = "https://marco-eva-data-model.livelyflower-7990bc7b.canadacentral.azurecontainerapps.io"
@@ -555,7 +651,7 @@ $sprint = @{
 Invoke-RestMethod "$base/model/sprints/" -Method POST -ContentType "application/json" -Body $sprint
 ```
 
-### Task 7.2: Query Dashboard API
+### Task 7.3: Query Dashboard API
 
 ```powershell
 # Query brain-v2 /v1/scrum/dashboard
@@ -563,7 +659,7 @@ Invoke-RestMethod "http://localhost:8000/v1/scrum/dashboard?project=99-test-proj
 # Expected: Returns WBS stories for Sprint 01
 ```
 
-### Task 7.3: Verify 39-ado-dashboard Display
+### Task 7.4: Verify 39-ado-dashboard Display
 
 Open EVA Home in browser:
 - http://localhost:3000/ (if 31-eva-faces running)
@@ -578,15 +674,15 @@ Open EVA Home in browser:
 |---|---|---|---|
 | 1. Generalize Scripts | 3 hours | None | 07-Foundation |
 | 2. Elevate Skills | 2 hours | Phase 1 | 07-Foundation |
-| 3. Create Templates | 2 hours | Phase 1, 2 | 07-Foundation |
+| 3. Create Templates + Docker | 3 hours | Phase 1, 2 | 07-Foundation |
 | 4. Test Deterministic | 2 hours | Phase 1, 2, 3 | 07-Foundation |
 | 5. Document Governance | 1 hour | Phase 1, 2, 3 | 07-Foundation |
 | 6. Reseed Projects | 1 hour | Phase 3 | 07-Foundation |
-| 7. Dashboard Test | 1 hour | Phase 4 | 07-Foundation + 33-Brain |
+| 7. Dashboard + Portfolio | 2 hours | Phase 4 | 07-Foundation + 33-Brain |
 
-**Total**: 12 hours (~1.5 days)
+**Total**: 14 hours (~2 days)
 
-**Target Completion**: 2026-03-03 EOD (Monday)
+**Target Completion**: 2026-03-04 EOD (Tuesday, extended 1 day for Docker + Portfolio)
 
 ---
 
@@ -631,6 +727,21 @@ Open EVA Home in browser:
 - [ ] EVA Home shows test project tile
 - [ ] Sprint badge displays correctly
 
+### Milestone 8: Docker Image Built (NEW)
+- [ ] Dockerfile created for 51-ACA
+- [ ] build-sprint-agent.yml workflow committed
+- [ ] Image builds successfully: ghcr.io/eva-foundry/51-aca-sprint-agent:latest
+- [ ] Docker image startup: 30 sec (vs 5 min without container)
+- [ ] Templates available for all 12 projects
+
+### Milestone 9: Portfolio Project Board Live (NEW)
+- [ ] EVA Foundation Portfolio board created: https://github.com/orgs/eva-foundry/projects/X
+- [ ] Custom fields configured (Story ID, Sprint, Size, MTI Impact, Test Count)
+- [ ] Issues linked from all 12 active projects
+- [ ] Automation workflow deployed (add-to-portfolio.yml)
+- [ ] Portfolio board shows cross-project sprint metrics
+- [ ] Integration with Veritas audit validates (MTI field auto-populated)
+
 ---
 
 ## Risks & Mitigation
@@ -642,14 +753,16 @@ Open EVA Home in browser:
 | Reseed overwrites PART 2 customizations | HIGH | Reseed-Projects.ps1 already preserves PART 2 (tested v3.2.0) |
 | Dashboard API not ready | LOW | 33-brain-v2 already has /v1/scrum/dashboard (active) |
 | GitHub Actions workflow requires secrets | MEDIUM | Document required secrets in template README |
+| Docker image build fails in public registry | MEDIUM | Test build with GitHub Actions cache before deploying to 12 projects |
+| Portfolio board GraphQL mutations fail | MEDIUM | Add error handling in automation workflows; fallback to manual sync |
 
 ---
 
 ## Next Steps (Immediate)
 
-1. **Start Phase 1**: Generalize seed-from-plan.py
-2. **Create 99-test-project** folder structure
-3. **Update PLAN.md** in 07-foundation-layer with Phase 1-7 tasks
-4. **Commit** this plan to `docs/foundation-completion-plan.md`
+1. **Commit Phase 3 updates** (Docker image tasks, timeline changes)
+2. **Commit Phase 7 updates** (Portfolio board setup tasks)
+3. **Start Phase 1 OR Phase 3.4** (Docker image is ready now, can start in any order)
+4. **Create 99-test-project** folder structure for Phase 4 validation
 
-**Ready to begin Phase 1?**
+**Ready to begin implementation?**
