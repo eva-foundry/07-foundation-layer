@@ -1,13 +1,46 @@
 # Project 07 -- Foundation Layer -- Status
 
-> Last updated: 2026-03-01 08:31 ET (session 5)
+> Last updated: 2026-03-01 09:15 ET (session 6)
 > Status key: [x] Done -- [ ] Not started -- [~] In progress -- [!] Blocked
 
 ---
 
 ## Current Phase
 
-**Active**: Strategic Elevation -- 07 is now the Workspace PM/Scrum Master
+**Active**: Foundation Completion (Phase 1 - Generalize Scripts)
+
+---
+
+## Session Summary -- 2026-03-01 09:15 ET (session 6)
+
+### 51-ACA DPDCA Pattern Observation
+
+**Context**: Observed 51-ACA executing Sprint 7 with complete DPDCA automation.
+
+**Key Patterns Confirmed**:
+- **.github/DPDCA-WORKFLOW.md** (238 lines): Complete operating manual (D/P/D/C/A steps)
+- **.github/workflows/sprint-agent.yml**: GitHub Actions trigger on "sprint-task" label
+- **.github/scripts/sprint_agent.py**: Parses SPRINT_MANIFEST JSON, calls gpt-4o/gpt-4o-mini
+- **3 core scripts**: seed-from-plan.py, reflect-ids.py, gen-sprint-manifest.py
+- **ID consistency solved**: reflect-ids.py writes [ACA-NN-NNN] inline in PLAN.md
+- **One-line governance**: gh issue create --label sprint-task -> automated execution
+
+**51-ACA Status** (2026-03-01):
+- Sprint 7 PR #29 active: rules-and-redteam (3 stories)
+- Branch: sprint/07-rules-and-redteam
+- Pattern: issue created -> workflow fires -> agent writes code -> PR opened
+- Next: monitor execution, merge PR, verify tests, update STATUS, Sprint 8
+
+**Foundation Mapping**:
+| Foundation Phase | 51-ACA Source |
+|---|---|
+| Phase 1: Generalize Scripts | scripts/*.py (remove ACA hardcoding) |
+| Phase 2: Elevate Skills | .github/copilot-skills/sprint-advance.skill.md |
+| Phase 3: Create Templates | DPDCA-WORKFLOW.md, sprint-agent.yml |
+| Phase 4: Test Deterministic | 99-test-project validation |
+| Phase 5: Document Governance | gh issue create pattern |
+
+**Context Switch**: Exploring GitHub subscription features (Projects, Codespaces, Actions) for EVA Factory enhancement.
 
 ---
 
