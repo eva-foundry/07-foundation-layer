@@ -81,12 +81,39 @@ LOOP BACK TO D -- next sprint
 - **DPDCA-WORKFLOW.md**: Complete 5-phase loop documentation
 
 **Immediate Tasks** (next sessions):
-1. Generalize 51-ACA scripts to work for ANY EVA project (not just ACA)
-2. Elevate 5 skills to workspace level (make project-agnostic)
-3. Create scaffolding templates: DPDCA-WORKFLOW.md, sprint manifest, GitHub Actions workflow
-4. Document one-line governance pattern in workspace copilot-instructions
-5. Update 07's own PLAN.md to reflect toolchain ownership
-6. Answer 4 reorganization questions (DPDCA location, encoding rule split, etc.)
+1. ✅ **COMPLETE**: Clarify 40-eva-control-plane RACI (ownership boundaries documented)
+2. Generalize 51-ACA scripts to work for ANY EVA project (not just ACA)
+3. Elevate 5 skills to workspace level (make project-agnostic)
+4. Create scaffolding templates: DPDCA-WORKFLOW.md, sprint manifest, GitHub Actions workflow
+5. Document one-line governance pattern in workspace copilot-instructions
+6. Update 07's own PLAN.md to reflect toolchain ownership
+7. Test deterministic behavior on a new project (validate end-to-end DPDCA loop)
+8. Reseed 12 active projects with template v3.5.0
+
+**40-Control-Plane RACI Clarified**:
+- **07-Foundation**: ACCOUNTABLE for evidence schemas, runbook catalog, Evidence ID format
+- **40-Control-Plane**: ACCOUNTABLE for runtime API (port 8020), run execution, operational data
+- **38-ADO-POC**: ACCOUNTABLE for sprint metrics collection, ADO sync
+- **33-Brain-v2**: ACCOUNTABLE for dashboard data API (/v1/scrum)
+- **31-Faces**: ACCOUNTABLE for dashboard UI (EVA Home, Sprint Board)
+- Full matrix: `docs/40-control-plane-RACI.md`
+
+**Sprint Data Flow** (DPDCA → Metrics → Dashboards):
+```
+DPDCA Loop Execution
+  ↓
+37-data-model WBS layer (status=done, story_points, sprint_id)
+  ↓
+40-control-plane evidence packs (test count, coverage, artifacts)
+  ↓
+38-ado-poc metrics calculation (velocity, FP delivered, MTI trend)
+  ↓
+33-brain-v2 /v1/scrum/dashboard API (cached in Cosmos, TTL 24h)
+  ↓
+39-ado-dashboard UI (EVA Home tiles, Sprint Board, velocity charts)
+  ↓
+31-faces portal rendering
+```
 
 **Artifacts Updated**:
 - README.md: New purpose statement, 3-pillar responsibilities, EVA Factory architecture
