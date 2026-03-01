@@ -61,11 +61,12 @@ Always `Test-Path` first; use `replace_string_in_file` for edits to existing fil
 ## Primary Artifacts (What This Project Produces)
 
 ### Templates
-- **[copilot-instructions-template.md](../02-design/artifact-templates/copilot-instructions-template.md)** - **v3.1.0** (428 lines)
+- **[copilot-instructions-template.md](../02-design/artifact-templates/copilot-instructions-template.md)** - **v3.3.3** (588 lines)
   - PART 1: Universal best practices (encoding safety, professional components, Azure patterns)
   - PART 2: Project-specific placeholder sections (11 categories)
   - Complete working implementations of 4 professional components
   - AI-instructional placeholders with context and examples
+  - Section 8: Sandbox AI Services (marco-sandbox) -- tested resources, TPM, use-case recommendations
 
 - **[template-v2-usage-guide.md](../02-design/artifact-templates/template-v2-usage-guide.md)** - Usage instructions
   - 5-step deployment process
