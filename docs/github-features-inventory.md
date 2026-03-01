@@ -1,4 +1,4 @@
-# GitHub Features Inventory for EVA Factory
+go for sprint 8 planning# GitHub Features Inventory for EVA Factory
 
 Version: 1.0.0
 Date: 2026-03-01
