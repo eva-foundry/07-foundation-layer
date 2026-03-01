@@ -1,10 +1,86 @@
 # Project Plan
 
-<!-- veritas-normalized 2026-02-25 prefix=F07 source=README.md -->
+<!-- veritas-normalized 2026-03-01 prefix=F07 source=README.md -->
 
 ## Feature: Goal [ID=F07-01]
 
-## Feature: Key Discovery Findings [ID=F07-02]
+**07-Foundation-Layer is the Workspace PM/Scrum Master** -- the first touch on all new EVA projects.
+
+Core Responsibilities:
+1. Project Scaffolding (README, PLAN, STATUS, ACCEPTANCE, skills, data model seeding)
+2. Governance Toolchain Ownership (36, 37, 38, 39, 40-partial, 48)
+3. Pattern Propagation (template v3.4.0, seeder scripts, workspace tools)
+
+## Feature: Governance Toolchain Ownership [ID=F07-02]
+
+### Story: Own 36-red-teaming (Promptfoo adversarial testing harness) [ID=F07-02-001]
+
+- [ ] Document 36-red-teaming integration in 07 copilot-instructions [ID=F07-02-001-T01]
+- [ ] Create skill: red-teaming-integration.skill.md [ID=F07-02-001-T02]
+- [ ] Add to scaffolding templates (new projects get red-teaming setup) [ID=F07-02-001-T03]
+
+### Story: Own 37-data-model (Single source of truth API, 27+ layers) [ID=F07-02-002]
+
+- [ ] Document data model ownership in 07 README [ID=F07-02-002-T01]
+- [ ] Create skill: data-model-admin.skill.md (seeding, layer management, validation) [ID=F07-02-002-T02]
+- [ ] Formalize seed-from-plan.py generalization pattern [ID=F07-02-002-T03]
+
+### Story: Own 38-ado-poc (ADO Command Center, scrum orchestration) [ID=F07-02-003]
+
+- [ ] Document 38-ado-poc ownership in 07 README [ID=F07-02-003-T01]
+- [ ] Create skill: ado-integration.skill.md [ID=F07-02-003-T02]
+- [ ] Add ADO project creation to scaffolding workflow [ID=F07-02-003-T03]
+
+### Story: Own 39-ado-dashboard (EVA Home + sprint views) [ID=F07-02-004]
+
+- [ ] Document 39-ado-dashboard ownership in 07 README [ID=F07-02-004-T01]
+- [ ] Create skill: ado-dashboard-admin.skill.md [ID=F07-02-004-T02]
+
+### Story: Own 40-eva-control-plane (partial: runtime evidence spine) [ID=F07-02-005]
+
+- [ ] Clarify 40-eva-control-plane ownership boundaries (which parts 07 owns) [ID=F07-02-005-T01]
+- [ ] Document control-plane integration in 07 README [ID=F07-02-005-T02]
+
+### Story: Own 48-eva-veritas (Requirements traceability + MTI gating) [ID=F07-02-006]
+
+- [ ] Document 48-eva-veritas ownership in 07 README [ID=F07-02-006-T01]
+- [ ] Create skill: veritas-admin.skill.md (audit, MTI gates, evidence receipts) [ID=F07-02-006-T02]
+- [ ] Add veritas setup to scaffolding workflow (new projects get .eva/ directory) [ID=F07-02-006-T03]
+
+## Feature: 51-ACA Pattern Elevation [ID=F07-03]
+
+### Story: Generalize 3 Core Scripts for Any EVA Project [ID=F07-03-001]
+
+- [ ] Create seed-from-plan.py template (project-agnostic, reads PLAN.md) [ID=F07-03-001-T01]
+- [ ] Create reflect-ids.py template (writes IDs inline to PLAN.md) [ID=F07-03-001-T02]
+- [ ] Create gen-sprint-manifest.py template (generates sprint manifests) [ID=F07-03-001-T03]
+- [ ] Add to 07/scripts/ directory [ID=F07-03-001-T04]
+- [ ] Update 07/README.md with usage instructions [ID=F07-03-001-T05]
+
+### Story: Elevate 5 Skills to Workspace Level [ID=F07-03-002]
+
+- [ ] Elevate sprint-advance.skill.md (make project-agnostic) [ID=F07-03-002-T01]
+- [ ] Elevate veritas-expert.skill.md (generalize to any project) [ID=F07-03-002-T02]
+- [ ] Elevate gap-report.skill.md (remove 51-ACA hardcoding) [ID=F07-03-002-T03]
+- [ ] Elevate sprint-report.skill.md (parameterize project_id) [ID=F07-03-002-T04]
+- [ ] Elevate progress-report.skill.md (make project-agnostic) [ID=F07-03-002-T05]
+- [ ] Add to C:\AICOE\.github\copilot-skills\ (workspace level) [ID=F07-03-002-T06]
+
+### Story: Create Scaffolding Templates [ID=F07-03-003]
+
+- [ ] Create DPDCA-WORKFLOW.md template (5-phase loop documentation) [ID=F07-03-003-T01]
+- [ ] Create sprint manifest template (.github/sprints/sprint-NN-name.md) [ID=F07-03-003-T02]
+- [ ] Create GitHub Actions workflow template (sprint-agent.yml) [ID=F07-03-003-T03]
+- [ ] Create scripts/ directory seed structure template [ID=F07-03-003-T04]
+- [ ] Add to 07/02-design/artifact-templates/ [ID=F07-03-003-T05]
+
+### Story: Document One-Line Governance Pattern [ID=F07-03-004]
+
+- [ ] Add to workspace copilot-instructions.md (gh issue create pattern) [ID=F07-03-004-T01]
+- [ ] Document GitHub Copilot cloud agent integration [ID=F07-03-004-T02]
+- [ ] Add to template copilot-instructions-template.md (reference workspace) [ID=F07-03-004-T03]
+
+## Feature: Key Discovery Findings [ID=F07-04]
 
 ### Story: **?? CRITICAL Pattern #1: Windows Enterprise Encoding Safety** [ID=F07-02-001]
 

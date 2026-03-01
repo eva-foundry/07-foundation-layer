@@ -1,7 +1,7 @@
 # GitHub Copilot Instructions -- {PROJECT_NAME}
 
-**Template Version**: 3.3.2
-**Last Updated**: February 26, 2026 ET
+**Template Version**: 3.5.0
+**Last Updated**: 2026-03-01 ET
 **Project**: {PROJECT_NAME} -- {PROJECT_ONE_LINE_DESCRIPTION}
 **Path**: `C:\AICOE\eva-foundation\{PROJECT_FOLDER}\`
 **Stack**: {PROJECT_STACK}
@@ -50,18 +50,41 @@ Before answering any question or writing any code:
 
 ### 2. DPDCA Execution Loop
 
+> **See workspace copilot-instructions** section "The EVA Factory Architecture" for the complete DPDCA loop explanation.
+> This is data-driven AI-enabled Software Engineering, not code vibes.
+
 Every session runs this cycle. Do not skip steps.
 
 ```
-Discover  --> synthesise current sprint from plan + findings docs
-Plan      --> pick next unchecked task from yyyymmdd-plan.md checklist
-Do        --> implement -- make the change, do not just describe it
-Check     --> run the project test command (see PART 2); must exit 0
-Act       --> update STATUS.md, PLAN.md, yyyymmdd-plan.md, findings doc
-Loop      --> return to Discover if tasks remain
+Discover  --> Query data model (WBS, services, endpoints) + veritas audit (MTI, gaps)
+Plan      --> gen-sprint-manifest.py: filter undone stories, size, generate manifest
+Do        --> Agent writes code using data model context (exact schemas, routes, locations)
+Check     --> pytest (exit 0) + veritas MTI gate (>= 30 Sprint 2, >= 70 Sprint 3+)
+Act       --> PUT status=done to WBS, reseed veritas-plan.json, reflect-ids.py updates PLAN.md
+Loop      --> return to Discover for next sprint
 ```
 
 **Execution Rule**: Make the change. Do not propose, narrate, or ask for permission on a step you can determine yourself. If uncertain about scope, ask one clarifying question then proceed.
+
+**Why Deterministic**: Data model provides EXACT route paths, auth requirements, request/response schemas, file locations. Zero hallucination. One HTTP call beats 10 file reads.
+
+---
+
+### 2.1. Azure Best Practices Reference
+
+When working on Azure infrastructure, always consult the workspace-level Azure best practices library before making design decisions or implementing Azure resources.
+
+**Library**: `C:\AICOE\eva-foundry\18-azure-best\` (32 entries covering WAF, security, AI, resiliency, IaC, cost)
+**Index**: `C:\AICOE\eva-foundry\18-azure-best\00-index.json`
+**Usage**: See workspace copilot-instructions section "18-Azure-Best -- Azure Best Practices Library"
+
+**Quick examples**:
+- Designing Azure AI workload -> Read `04-ai-workloads/ai-security.md` + `02-well-architected/waf-ai-workload.md`
+- RBAC design -> Read `12-security/rbac.md`
+- Bicep IaC validation -> Read `07-iac/bicep.md` + `01-assessment-tools/psrule.md`
+- Cost optimization -> Read `02-well-architected/cost-optimization.md` + `08-finops/finops-toolkit.md`
+
+Each file has structured summaries, code snippets, and an Agent Checklist at the bottom for workload evaluation.
 
 ---
 
@@ -363,6 +386,97 @@ az logout; az login --use-device-code --tenant {TENANT_ID}
 
 ---
 
+### 8. Sandbox AI Services -- marco-sandbox (EsDAICoE-Sandbox)
+
+> Tested and confirmed 2026-02-27. Use these for all EVA AI workloads in sandbox/dev.
+> All resources are in resource group `EsDAICoE-Sandbox`, region `canadaeast`.
+
+#### Resources
+
+| Resource | Kind | Endpoint |
+|---|---|---|
+| `marco-sandbox-foundry` | Azure AI Services (AIServices) | `https://marco-sandbox-foundry.cognitiveservices.azure.com/` |
+| `marco-sandbox-openai-v2` | Azure OpenAI | `https://marco-sandbox-openai-v2.openai.azure.com/` |
+| `marco-sandbox-aisvc` | CognitiveServices (multi) | `https://marco-sandbox-aisvc.cognitiveservices.azure.com/` |
+| `marco-sandbox-docint` | Form Recognizer / Doc Intelligence | `https://marco-sandbox-docint.cognitiveservices.azure.com/` |
+
+#### Confirmed Deployed Models (marco-sandbox-foundry)
+
+| Deployment | Model | Version | TPM | Unit | Tool Calling | Status |
+|---|---|---|---|---|---|---|
+| `gpt-4o` | gpt-4o | 2024-11-20 | 20K | Standard | [PASS] | [PASS] BYOK-ready |
+| `gpt-4o-mini` | gpt-4o-mini | 2024-07-18 | 50K | GlobalStandard | [PASS] | [PASS] BYOK-ready |
+| `gpt-5.1-chat` | gpt-5.1-chat | 2025-11-13 | 100K | GlobalStandard | [PASS] | [PASS] BYOK-ready |
+| `gpt-5-nano` | gpt-5-nano | 2025-08-07 | 250K | GlobalStandard | not tested | [PASS] chat-ready |
+| `text-embedding-ada-002` | text-embedding-ada-002 | 2 | 100K | Standard | n/a | [PASS] embeddings |
+| `gpt-5.1-codex` | gpt-5.1-codex | 2025-11-13 | 1K | GlobalStandard | n/a | [WARN] responses-API-only, 1K TPM cap |
+
+#### Confirmed Deployed Models (marco-sandbox-openai-v2)
+
+| Deployment | Model | Version | TPM | Unit | Status |
+|---|---|---|---|---|---|
+| `gpt-5.1-chat` | gpt-5.1-chat | 2025-11-13 | 100K | GlobalStandard | [PASS] chat + tool calling |
+
+#### API Notes (gpt-5.x / gpt-5-nano)
+
+These models have breaking changes vs. gpt-4 family -- always apply when calling directly:
+- Use `max_completion_tokens` not `max_tokens`
+- Omit `temperature` (only default value `1` is supported)
+- API version: `2025-04-01-preview` minimum; do NOT use `2025-05-01-preview` (404 in canadaeast)
+- `gpt-5.1-codex` requires the `/openai/responses` endpoint, not `/chat/completions`
+
+#### Retrieve API Key (PowerShell)
+
+```powershell
+# marco-sandbox-foundry (preferred -- most deployments)
+$key  = (az cognitiveservices account keys list `
+             --name marco-sandbox-foundry `
+             --resource-group EsDAICoE-Sandbox `
+             --query "key1" -o tsv).Trim()
+$base = "https://marco-sandbox-foundry.cognitiveservices.azure.com"
+```
+
+#### Use-Case Recommendations
+
+**GitHub Copilot Chat (VS Code BYOK)**
+- Primary:   `marco-sandbox-foundry` / `gpt-4o` -- most reliable tool calling; [PASS] agent mode
+- Secondary: `marco-sandbox-foundry` / `gpt-5.1-chat` -- best quality, 100K TPM
+- Budget:    `marco-sandbox-foundry` / `gpt-4o-mini` -- fast/cheap, 50K TPM, agent mode [PASS]
+- To configure: VS Code model picker -> Manage Models -> Add Models -> Azure OpenAI
+  - Endpoint: `https://marco-sandbox-foundry.cognitiveservices.azure.com/`
+  - API key: retrieve with command above
+
+**RAG Data Pipeline (embeddings + retrieval + generation)**
+- Embeddings: `marco-sandbox-foundry` / `text-embedding-ada-002` -- 100K TPM Standard
+- Chunk reranking / summarization: `marco-sandbox-foundry` / `gpt-4o-mini` -- highest TPM/cost ratio
+- Answer synthesis: `marco-sandbox-foundry` / `gpt-4o` -- best accuracy for legal/policy content
+- Document extraction: `marco-sandbox-docint` -- Form Recognizer for PDFs, tables, forms
+- Search: `marco-sandbox-aisvc` -- Azure AI Search (vector + hybrid) via this multi-service key
+- Pattern for EVA RAG (see `29-foundry/tools/rag.py`):
+```python
+AZURE_OPENAI_ENDPOINT   = "https://marco-sandbox-foundry.cognitiveservices.azure.com/"
+EMBEDDING_DEPLOYMENT    = "text-embedding-ada-002"
+COMPLETION_DEPLOYMENT   = "gpt-4o"
+```
+
+**Chat Apps (user-facing conversation, eva-brain, eva-jp-spark)**
+- Default conversation model: `marco-sandbox-foundry` / `gpt-5.1-chat`
+  - 100K TPM GlobalStandard -- highest throughput for multi-user chat
+  - Use `max_completion_tokens`; omit `temperature`
+- Fallback / low-cost: `marco-sandbox-foundry` / `gpt-4o-mini` -- 50K TPM
+- High-context sessions: `marco-sandbox-foundry` / `gpt-4o` -- most stable context window
+- Streaming note: all three support streaming via `stream=True` / SSE
+
+**Cloud Coding (agentic code fix, devbench, brain-v2 code generation)**
+- Primary: `marco-sandbox-openai-v2` / `gpt-5.1-chat`
+  - Dedicated endpoint, 100K TPM GlobalStandard, no shared quota with chat apps
+  - Confirmed tool-calling [PASS] -- required for agentic code-fix loops
+- Secondary: `marco-sandbox-foundry` / `gpt-5.1-codex`
+  - [WARN] 1K TPM cap + responses-API-only -- use only for single-shot completions, not loops
+- Inline suggestions: NOT via BYOK (VS Code inline completions require separate provider extension)
+
+---
+
 ## PART 2 -- PROJECT-SPECIFIC
 > Replace all `{PLACEHOLDER}` values before use. Delete unused sections.
 
@@ -491,6 +605,6 @@ All must pass before merging a PR:
 
 ---
 
-*Source template*: `C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\copilot-instructions-template.md` v3.3.0
+*Source template*: `C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\copilot-instructions-template.md` v3.3.3
 *Project 07 README*: `C:\AICOE\eva-foundry\07-foundation-layer\README.md`
 *EVA Data Model USER-GUIDE*: `C:\AICOE\eva-foundry\37-data-model\USER-GUIDE.md`
