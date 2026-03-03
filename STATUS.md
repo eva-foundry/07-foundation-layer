@@ -65,7 +65,7 @@
 | Phase 2 | .github/copilot-skills/sprint-advance.skill.md (5 skills) | Elevated to workspace level | TO DO |
 | Phase 3 | .github/DPDCA-WORKFLOW.md, sprint-agent.yml, Dockerfile | Templates ready | DONE (Docker) |
 | Phase 4 | Sprint validation pattern | 99-test-project test | TO DO |
-| Phase 5 | gh issue create → agent | One-line governance docs | TO DO |
+| Phase 5 | gh issue create ? agent | One-line governance docs | TO DO |
 | Phase 6 | Template v3.5.0 seeding | Deploy to 12 projects | TO DO |
 | Phase 7 | Dashboard API + portfolio visibility | GitHub Projects board setup | DONE (guide) |
 
@@ -98,7 +98,7 @@
 **HIGH PRIORITY**:
 1. Start Phase 1: Generalize 3 scripts (seed-from-plan, reflect-ids, gen-sprint-manifest)
    - Copy 51-ACA sources to 07/scripts/
-   - Remove hardcoding (ACA- prefix → PROJECT_PREFIX env var)
+   - Remove hardcoding (ACA- prefix ? PROJECT_PREFIX env var)
    - Test on 99-test-project
 
 2. OR Start Phase 3.4: Docker image build workflow
@@ -186,22 +186,22 @@
 
 ```
 HUMAN INTENT
-  ↓
-README → PLAN → STATUS → ACCEPTANCE
-  ↓
-seed-from-plan.py parses PLAN.md → assigns canonical IDs
-  ↓
+  ?
+README ? PLAN ? STATUS ? ACCEPTANCE
+  ?
+seed-from-plan.py parses PLAN.md ? assigns canonical IDs
+  ?
 DATA MODEL (37-data-model API, 27+ layers)
-  ↓
+  ?
 AGENT SKILLS query data model (sprint-advance, gap-report, veritas-expert, etc.)
-  ↓
+  ?
 DPDCA EXECUTION LOOP (deterministic, repeatable, auditable)
   D -- Discover: Query data model (WBS, services, endpoints, screens, containers)
   P -- Plan: gen-sprint-manifest.py (filter undone stories, size, generate manifest)
   D -- Do: Agent writes code using data model context (exact schemas, routes, etc.)
   C -- Check: pytest + veritas MTI gate (>= 30 Sprint 2, >= 70 Sprint 3+)
   A -- Act: PUT status=done to WBS, reseed, reflect-ids.py updates PLAN.md
-  ↓
+  ?
 LOOP BACK TO D -- next sprint
 ```
 
@@ -213,12 +213,12 @@ LOOP BACK TO D -- next sprint
 **51-ACA Breakthrough Patterns** (to be elevated to workspace):
 - **5 automation skills**: sprint-advance, veritas-expert, gap-report, sprint-report, progress-report
 - **3 core scripts**: seed-from-plan.py, reflect-ids.py, gen-sprint-manifest.py
-- **ID consistency solved**: reflect-ids.py writes [ACA-NN-NNN] inline into PLAN.md → no more invented IDs
-- **One-line governance**: `gh issue create` with sprint manifest → GitHub Copilot cloud agent executes
+- **ID consistency solved**: reflect-ids.py writes [ACA-NN-NNN] inline into PLAN.md ? no more invented IDs
+- **One-line governance**: `gh issue create` with sprint manifest ? GitHub Copilot cloud agent executes
 - **DPDCA-WORKFLOW.md**: Complete 5-phase loop documentation
 
 **Immediate Tasks** (next sessions):
-1. ✅ **COMPLETE**: Clarify 40-eva-control-plane RACI (ownership boundaries documented)
+1. ? **COMPLETE**: Clarify 40-eva-control-plane RACI (ownership boundaries documented)
 2. Generalize 51-ACA scripts to work for ANY EVA project (not just ACA)
 3. Elevate 5 skills to workspace level (make project-agnostic)
 4. Create scaffolding templates: DPDCA-WORKFLOW.md, sprint manifest, GitHub Actions workflow
@@ -235,20 +235,20 @@ LOOP BACK TO D -- next sprint
 - **31-Faces**: ACCOUNTABLE for dashboard UI (EVA Home, Sprint Board)
 - Full matrix: `docs/40-control-plane-RACI.md`
 
-**Sprint Data Flow** (DPDCA → Metrics → Dashboards):
+**Sprint Data Flow** (DPDCA ? Metrics ? Dashboards):
 ```
 DPDCA Loop Execution
-  ↓
+  ?
 37-data-model WBS layer (status=done, story_points, sprint_id)
-  ↓
+  ?
 40-control-plane evidence packs (test count, coverage, artifacts)
-  ↓
+  ?
 38-ado-poc metrics calculation (velocity, FP delivered, MTI trend)
-  ↓
+  ?
 33-brain-v2 /v1/scrum/dashboard API (cached in Cosmos, TTL 24h)
-  ↓
+  ?
 39-ado-dashboard UI (EVA Home tiles, Sprint Board, velocity charts)
-  ↓
+  ?
 31-faces portal rendering
 ```
 
@@ -310,10 +310,10 @@ DPDCA Loop Execution
    - `QUICK-START.md` -- 3-command quick reference (80 lines)
 
 **Confirmed Gaps (51-ACA Sprint 2)**:
-- ✅ LOCAL DB: 15 stories in Sprint-02 (READY)
-- ❌ ADO Sprint 2: Empty (user screenshot confirmed)
-- ⏳ Baseline tests: Unknown (need manual run)
-- ❌ Cloud model: ado_project = "eva-poc" (should be "51-aca")
+- ? LOCAL DB: 15 stories in Sprint-02 (READY)
+- ? ADO Sprint 2: Empty (user screenshot confirmed)
+- ? Baseline tests: Unknown (need manual run)
+- ? Cloud model: ado_project = "eva-poc" (should be "51-aca")
 
 **Deliverables**:
 - Foundation wrapper: 2 implementations (PowerShell + Python)
@@ -559,3 +559,14 @@ DPDCA Loop Execution
 | APIM methodology | patterns/APIM-ANALYSIS-METHODOLOGY.md | 1.0 | To Be Reviewed |
 | Skill index | .github/copilot-skills/00-skill-index.skill.md | 1.0.0 | Stub only |
 | Own instructions | .github/copilot-instructions.md | matches reseed output | Active |
+
+
+---
+
+## 2026-03-03 -- Re-primed by agent:copilot
+
+<!-- eva-primed-status -->
+
+Data model: GET http://localhost:8010/model/projects/07-foundation-layer
+29-foundry agents: C:\AICOE\eva-foundation\29-foundry\agents\
+48-eva-veritas: run audit_repo MCP tool

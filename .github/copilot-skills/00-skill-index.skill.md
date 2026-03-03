@@ -23,7 +23,19 @@ last_updated: February 23, 2026
 | # | File | Trigger phrases | Purpose |
 |---|------|-----------------|---------|
 | 0 | 00-skill-index.skill.md | list skills, what can you do, skill menu | This index |
-| [TODO] | [TODO].skill.md | [TODO trigger phrases] | [TODO purpose] |
+| 1 | foundation-expert.skill.md | foundation expert, workspace pm, prime workspace, scaffold project, apply governance, eva factory | Complete workspace PM/Scrum Master capabilities: priming, scaffolding, templates, patterns |
+| 2 | universal-command-wrapper.skill.md | run command, execute script | Safe command execution wrapper |
+
+---
+
+## Workspace-Level Skills (Available From Any Folder)
+
+| Skill | Location | Purpose |
+|-------|----------|---------|
+| eva-factory-guide | C:\AICOE\.github\copilot-skills\eva-factory-guide.skill.md | Learn EVA architecture - DPDCA, data model, veritas, patterns |
+| foundation-expert | 07-foundation-layer/.github/copilot-skills/foundation-expert.skill.md | Setup & governance - priming, scaffolding, templates (THIS SKILL also) |
+| scrum-master | C:\AICOE\.github\copilot-skills\scrum-master.skill.md | Sprint management - advance, reporting, evidence tracking |
+| workflow-forensics-expert | C:\AICOE\.github\copilot-skills\workflow-forensics-expert.skill.md | Quality auditor - evidence validation, metrics accuracy, dashboard audit |
 
 ---
 
