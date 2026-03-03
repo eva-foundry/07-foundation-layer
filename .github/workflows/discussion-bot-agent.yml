@@ -1,0 +1,59 @@
+name: Discussion Bot Agent
+
+on:
+  discussion:
+    types: [created]
+
+permissions:
+  discussions: write
+  contents: read
+
+jobs:
+  sprint-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml requests httpx
+
+      - name: Run Discussion Agent
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_DISCUSSION_ID: ${{ github.event.discussion.id }}
+          GH_DISCUSSION_BODY: ${{ github.event.discussion.body }}
+          GH_REPO: ${{ github.repository }}
+          GH_AUTHOR: ${{ github.event.discussion.user.login }}
+          DPDCA_DATA_MODEL: "http://localhost:8010"
+        run: |
+          python 07-foundation-layer/github-discussion-agent/agent.py
+
+      - name: Post Response to Discussion
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_DISCUSSION_ID: ${{ github.event.discussion.id }}
+        run: |
+          cat discussion_response.md | gh api graphql -F query=@- -F body=@/dev/stdin || true
+
+---
+# GraphQL mutation helper (embedded in script)
+# mutation PostResponse($discussionId: ID!, $body: String!) {
+#   addDiscussionComment(input: {discussionId: $discussionId, body: $body}) {
+#     comment {
+#       id
+#     }
+#   }
+# }

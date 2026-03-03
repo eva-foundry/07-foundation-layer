@@ -1,0 +1,35 @@
+# .github/DISCUSSION_TEMPLATE/sprint-planning.md
+
+<!--
+  Sprint Planning Discussion Template
+  Use this to ask the agent to plan or manage sprints.
+-->
+
+---
+name: Sprint Planning
+about: Plan or manage sprints with the discussion agent
+labels: ["sprint", "planning"]
+---
+
+## What do you want to know or do?
+
+<!-- Replace this with your sprint question. Examples:
+
+- "progress report"
+- "gap report"
+- "sprint advance"
+- "veritas expert"
+- "plan sprint 09"
+- "show velocity"
+- "what's blocking us"
+
+The agent will analyze your project and respond with detailed analysis.
+-->
+
+## Context
+
+**Sprint**: [e.g., 08]
+**Team**: [e.g., ACA]
+**Project**: [e.g., 51-ACA]
+
+<!-- Optional: add any specific context about your request -->
