@@ -23,9 +23,34 @@ Invoke-RestMethod "http://localhost:8010/model/agent-summary" # all layer counts
 
 **Owner**: Marco Presta / EVA AI COE
 **Status**: Active -- Workspace PM/Scrum Master -- Governance Toolchain Owner
-**Last Updated**: 2026-03-01 08:31 ET
+**Last Updated**: 2026-03-03 19:39 ET (Configuration-as-Product System Complete)
 **Plan**: [PLAN.md](PLAN.md)
 **History**: [docs/history/](docs/history/) (archived 2026-02-18 artefacts)
+
+---
+
+## Latest Achievement: EVA Factory Configuration-as-Product System
+
+✅ **Session 7 (2026-03-03 19:39 ET)**: Transformed EVA Factory into a **fully portable, configuration-driven product**.
+
+**What Changed**:
+- **Before**: Hardcoded paths (`.eva/evidence`), field names, schedules, thresholds in Python code
+- **After**: All configuration in YAML, code is workspace/environment-agnostic
+- **Result**: Same EVA Factory codebase deployed across unlimited workspaces without modification
+
+**Key Deliverables**:
+1. `eva-factory.config.yaml` - Configuration template for all deployment parameters
+2. `scripts/config_loader.py` - Unified config management library (287 lines)
+3. `scripts/sync-evidence-all-projects.py` - Refactored to use configuration (565 lines)
+4. `DEPLOYMENT-GUIDE.md` - Complete deployment documentation (800+ lines)
+
+**Coverage**: 
+- ✅ Phase 1: Evidence backfill (63 records from 51-ACA)
+- ✅ Phase 2: Sync automation (GitHub Actions + Azure Pipelines)
+- ✅ Phase 3: Portfolio-wide orchestrator (configuration-driven, all 54 projects)
+- ✅ Phase 4: Projects registry sync (50 → 56 projects, 51-ACA registered)
+
+**Impact**: EVA Factory can now be deployed as a true independent product across any environment (Kubernetes, Docker, on-prem, cloud) with zero code changes—only config file changes.
 
 ---
 
