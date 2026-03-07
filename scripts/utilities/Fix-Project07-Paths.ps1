@@ -14,13 +14,13 @@ Write-Host ""
 
 $fixes = @(
     @{
-        File = "I:\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates\Apply-Project07-Artifacts.ps1"
+        File = "I:\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\scripts\deployment\Apply-Project07-Artifacts.ps1"
         OldText = "07-copilot-instructions"
         NewText = "07-foundation-layer"
         Description = "Apply-Project07-Artifacts.ps1 - Auto-detection paths"
     },
     @{
-        File = "I:\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates\Test-Project07-Deployment.ps1"
+        File = "I:\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\scripts\testing\Test-Project07-Deployment.ps1"
         OldText = "07-copilot-instructions"
         NewText = "07-foundation-layer"
         Description = "Test-Project07-Deployment.ps1 - Pester test paths"

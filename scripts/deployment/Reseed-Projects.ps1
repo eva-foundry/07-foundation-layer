@@ -32,8 +32,8 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $FOUNDATION   = "C:\AICOE\eva-foundation"
-$TEMPLATE     = "$FOUNDATION\07-foundation-layer\02-design\artifact-templates\copilot-instructions-template.md"
-$BACKUP_ROOT  = "$FOUNDATION\07-foundation-layer\02-design\artifact-templates\backups"
+$TEMPLATE     = "$FOUNDATION\07-foundation-layer\templates\copilot-instructions-template.md"
+$BACKUP_ROOT  = "$FOUNDATION\07-foundation-layer\.archive\02-design-artifacts\backups"
 
 # ----- Active project list (update if registry changes) -----
 $ACTIVE_PROJECTS = @(

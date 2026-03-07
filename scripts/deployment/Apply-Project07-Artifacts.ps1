@@ -385,10 +385,10 @@ function Find-Project07Source {
     #>
     
     $searchPaths = @(
-        "C:\AICOE\eva-foundation\07-foundation-layer\02-design\artifact-templates",
-        (Join-Path (Split-Path $PSScriptRoot -Parent) "02-design\artifact-templates"),
+        "C:\AICOE\eva-foundation\07-foundation-layer\templates",
+        (Join-Path (Split-Path $PSScriptRoot -Parent) "templates"),
         (Join-Path $PSScriptRoot "."),
-        ".\02-design\artifact-templates"
+        ".\templates"
     )
     
     foreach ($path in $searchPaths) {

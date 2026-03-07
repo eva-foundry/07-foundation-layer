@@ -54,8 +54,8 @@ BeforeAll {
     # Auto-detect Project 07 location
     if ([string]::IsNullOrWhiteSpace($script:SourcePath)) {
         $possiblePaths = @(
-            "I:\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates",
-            ".\docs\eva-foundation\projects\07-foundation-layer\02-design\artifact-templates"
+            "I:\EVA-JP-v1.2\docs\eva-foundation\projects\07-foundation-layer\templates",
+            ".\docs\eva-foundation\projects\07-foundation-layer\templates"
         )
         
         foreach ($path in $possiblePaths) {
