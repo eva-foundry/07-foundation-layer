@@ -102,7 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **supported-folder-structure-rag.json v1.0.0**: RAG project template
   - 20+ required folders (app, docs, scripts, logs, evidence, sessions)
-  - Organization rules (Deploy-*.ps1 → scripts/deployment/, etc.)
+  - Organization rules (Deploy-*.ps1 -> scripts/deployment/, etc.)
   - Retention policies (logs 14 days, evidence 30 days, sessions 30 days)
   - Folder descriptions for AI context
   - Version metadata for compatibility checking
@@ -128,7 +128,7 @@ Copy-Item "supported-folder-structure-rag.json" -Destination "<target>/.github/s
 
 ### Documentation
 - Workspace management lifecycle documented
-- Closed-loop system: Initialize → Deploy → Capture → Housekeep
+- Closed-loop system: Initialize -> Deploy -> Capture -> Housekeep
 - Evidence-based organization principles
 - Template-driven folder structure patterns
 
@@ -193,8 +193,8 @@ Copy-Item "supported-folder-structure-rag.json" -Destination "<target>/.github/s
   - `[TEST_FRAMEWORK]` - Jest, pytest, Pester, Playwright
   - `[MONITORING_STACK]` - Application Insights, CloudWatch, etc.
 - **Project type detection hierarchy** (BREAKING CHANGE):
-  - Old: Simple file existence checks → "General Purpose Project"
-  - New: Keyword analysis → specific patterns → fallback with warning
+  - Old: Simple file existence checks -> "General Purpose Project"
+  - New: Keyword analysis -> specific patterns -> fallback with warning
 - **Validation rules tightened**:
   - Quality check now fails if >50% of content is [TODO] placeholders
   - Professional components required for automation projects
@@ -216,7 +216,7 @@ Copy-Item "supported-folder-structure-rag.json" -Destination "<target>/.github/s
   - Rollback procedure if needed
 
 ### Testing
-- **Test suite expanded**: 60 → 70+ test cases
+- **Test suite expanded**: 60 -> 70+ test cases
   - New: Enhanced project type detection tests
   - New: TODO prioritization validation
   - New: Environment variable discovery tests
@@ -253,7 +253,7 @@ Copy-Item "supported-folder-structure-rag.json" -Destination "<target>/.github/s
 ### Upgrading from v1.0.0 to v1.3.0
 
 **BREAKING CHANGES**:
-1. Template v2.0.0 → v2.1.0 requires re-run on existing deployments
+1. Template v2.0.0 -> v2.1.0 requires re-run on existing deployments
 2. Project type detection logic changed (may reclassify projects)
 3. Quality validation now enforces completion thresholds
 

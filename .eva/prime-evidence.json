@@ -1,16 +1,16 @@
 {
-  "primed_at": "2026-03-03T13:04:56-05:00",
-  "primed_by": "agent:copilot",
   "dry_run": false,
+  "template_version": "v3.1.0",
   "results": {
-    "folder": "07-foundation-layer",
     "steps": [
       "copilot-instructions:PASS",
-      "PLAN.md:INJECTED",
-      "STATUS.md:APPENDED",
-      "ACCEPTANCE.md:CREATED",
+      "PLAN.md:SKIP",
+      "STATUS.md:SKIP",
+      "ACCEPTANCE.md:SKIP",
       "README.md:CHECKED"
-    ]
+    ],
+    "folder": "07-foundation-layer"
   },
-  "template_version": "v3.1.0"
+  "primed_at": "2026-03-05T12:46:29-03:00",
+  "primed_by": "agent:copilot"
 }

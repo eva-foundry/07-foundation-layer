@@ -49,7 +49,6 @@ $VscMcpJson   = "C:\AICOE\.vscode\mcp.json"
 $Venv         = "C:\AICOE\.venv\Scripts\python.exe"
 
 $AcaBase      = "https://marco-eva-data-model.livelyflower-7990bc7b.canadacentral.azurecontainerapps.io"
-$LocalBase    = "http://localhost:8010"
 
 $Issues = [System.Collections.Generic.List[string]]::new()
 
@@ -59,28 +58,23 @@ Write-Host "  Date: $(Get-Date -Format 'yyyy-MM-dd HH:mm zzz')"
 Write-Host ""
 
 # ---------------------------------------------------------------------------
-# 1. Data model health
+# 1. Data model health (ACA cloud endpoint only)
 # ---------------------------------------------------------------------------
 
-Write-Host "--- [1] Data Model Health ---"
+Write-Host "--- [1] Data Model Health (Cloud only) ---"
 
-$base = $DataModelBase
-if (-not $base) {
-    $h = Invoke-RestMethod "$AcaBase/health" -TimeoutSec 5 -ErrorAction SilentlyContinue
-    if ($h -and $h.status) {
-        $base = $AcaBase
-        Write-Host "  [PASS] ACA data model reachable: store=$($h.store) v=$($h.version)"
-    } else {
-        $h = Invoke-RestMethod "$LocalBase/health" -TimeoutSec 5 -ErrorAction SilentlyContinue
-        if ($h -and $h.status) {
-            $base = $LocalBase
-            Write-Host "  [PASS] Local data model reachable: store=$($h.store) v=$($h.version)"
-        } else {
-            Write-Host "  [FAIL] Data model unreachable (ACA + local both down)"
-            $Issues.Add("Data model unreachable")
-            $base = $LocalBase
-        }
-    }
+$base = $AcaBase
+$aca_health = $null
+$aca_ok = $false
+
+# Test ACA endpoint (CLOUD ONLY - localhost:8010 disabled)
+$aca_health = Invoke-RestMethod "$AcaBase/health" -TimeoutSec 5 -ErrorAction SilentlyContinue
+if ($aca_health -and $aca_health.status -eq "ok") {
+    $aca_ok = $true
+    Write-Host "  [PASS] Cloud API: store=$($aca_health.store) v=$($aca_health.version) uptime=$($aca_health.uptime_seconds)s"
+} else {
+    Write-Host "  [FAIL] Cloud API unreachable (localhost:8010 disabled - cloud only)"
+    $Issues.Add("Data model cloud endpoint unreachable")
 }
 
 # ---------------------------------------------------------------------------
@@ -92,12 +86,12 @@ Write-Host "--- [2] Template Checks ---"
 
 if (Test-Path $TemplateFile) {
     $tLines = (Get-Content $TemplateFile).Count
-    $tVer   = Select-String -Path $TemplateFile -Pattern "^version:" | Select-Object -First 1
+    $tVer   = Select-String -Path $TemplateFile -Pattern "^\*\*Template Version\*\*:" | Select-Object -First 1
     $verStr = if ($tVer) { $tVer.Line.Trim() } else { "(version line not found)" }
-    if ($tLines -ge 420 -and $tLines -le 450) {
+    if ($tLines -ge 550 -and $tLines -le 650) {
         Write-Host "  [PASS] copilot-instructions-template.md: $tLines lines, $verStr"
     } else {
-        Write-Host "  [WARN] copilot-instructions-template.md: $tLines lines (expected 420-450), $verStr"
+        Write-Host "  [WARN] copilot-instructions-template.md: $tLines lines (expected 550-650), $verStr"
         $Issues.Add("Template line count unexpected: $tLines")
     }
     # Check PART markers are v3.x style (dash, not colon)

@@ -47,6 +47,10 @@ param(
 $ErrorActionPreference = "Stop"
 
 BeforeAll {
+    # Transfer param values to script scope (Pester 5.x requirement)
+    $script:SourcePath = $SourcePath
+    $script:TargetPath = $TargetPath
+    
     # Auto-detect Project 07 location
     if ([string]::IsNullOrWhiteSpace($script:SourcePath)) {
         $possiblePaths = @(

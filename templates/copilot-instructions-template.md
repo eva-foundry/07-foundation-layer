@@ -42,10 +42,10 @@ try {
     exit 1
 }
 
-# Step 4: Verify 41 layers are available
+# Step 4: Verify 51 layers are available (50 base + 1 metadata)
 $layerCount = ($session.guide.layers_available | Measure-Object).Count
-if ($layerCount -ne 41) {
-    [WARN] "Expected 41 layers; API reports $layerCount. Some features may be unavailable."
+if ($layerCount -ne 51) {
+    [WARN] "Expected 51 layers; API reports $layerCount. Some features may be unavailable."
 }
 
 # Step 5: Read project artifacts

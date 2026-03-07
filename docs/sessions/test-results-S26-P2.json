@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-03-05T17:55:41.555631",
+  "scenarios": {
+    "1_happy_path": {
+      "status": "PASS",
+      "query1_time": 2.350388765335083,
+      "query2_time": 2.117988109588623,
+      "total_time": 4.468376874923706,
+      "workspace_projects": 56,
+      "workspace_active": 56,
+      "with_governance": 45
+    },
+    "2_fallback_path": {
+      "status": "PASS",
+      "file_read_time": 0.0020279884338378906,
+      "files_available": {
+        "best_practices": true,
+        "standards": true
+      },
+      "note": "Fallback to files when cloud timeout"
+    },
+    "3_pagination": {
+      "status": "READY",
+      "total_projects": 56,
+      "implementation_phase": "Session 26 P0 (Project 37)"
+    },
+    "4_data_accuracy": {
+      "status": "PASS",
+      "workspace_valid": true,
+      "projects_valid": true,
+      "governance_fields_present": true,
+      "acceptance_fields_present": true
+    }
+  },
+  "metrics": {
+    "cloud_query_times": [
+      2.350388765335083,
+      2.117988109588623
+    ],
+    "file_read_times": [
+      0.0020279884338378906
+    ],
+    "performance_improvement_factor": 0.0004538534887732622
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-01-30T08:32:47.8510062-05:00",
+  "latest_checkpoint": ".\\sessions\\artifact-deployment\\checkpoints\\checkpoint_analysis_complete_20260305_122015.json",
   "component": "artifact-deployment",
   "checkpoint_id": "analysis_complete",
-  "latest_checkpoint": ".\\sessions\\artifact-deployment\\checkpoints\\checkpoint_analysis_complete_20260130_083247.json"
+  "last_updated": "2026-03-05T12:20:15.7414675-03:00"
 }

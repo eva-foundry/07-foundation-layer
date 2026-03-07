@@ -7,31 +7,68 @@
 
 | Tool | Purpose | How to Use |
 |------|---------|------------|
-| 37-data-model | Single source of truth for all project entities | GET http://localhost:8010/model/projects/07-foundation-layer |
+| 37-data-model | Single source of truth for all project entities | Cloud: https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io/model/projects/07-foundation-layer (localhost:8010 disabled) |
 | 29-foundry | Agentic capabilities (search, RAG, eval, observability) | C:\AICOE\eva-foundation\29-foundry |
 | 48-eva-veritas | Trust score and coverage audit | MCP tool: audit_repo / get_trust_score |
 | 07-foundation-layer | Copilot instructions primer + governance templates | MCP tool: apply_primer / audit_project |
 
-**Agent rule**: Query the data model API before reading source files.
-```powershell
-Invoke-RestMethod "http://localhost:8010/model/agent-guide"   # complete protocol
-Invoke-RestMethod "http://localhost:8010/model/agent-summary" # all layer counts
-```
+**Agent rule**: Read governance docs (README, PLAN, STATUS, ACCEPTANCE) for project context. Data model API query is optional supplementary context - if cloud endpoint times out, continue with governance docs.
 
 ---
 
 
 **Owner**: Marco Presta / EVA AI COE
 **Status**: Active -- Workspace PM/Scrum Master -- Governance Toolchain Owner
-**Last Updated**: 2026-03-03 19:39 ET (Configuration-as-Product System Complete)
+**Last Updated**: 2026-03-07 (Session 38 - Reorganized for clarity and maintainability)
 **Plan**: [PLAN.md](PLAN.md)
-**History**: [docs/history/](docs/history/) (archived 2026-02-18 artefacts)
+**History**: [docs/](docs/) (discovery reference, architecture decisions)
+
+---
+
+## Project Structure (Session 38 Reorganization)
+
+```
+07-foundation-layer/
+├── scripts/                          Production automation scripts
+│   ├── deployment/                   Workspace deployment & priming
+│   ├── utilities/                    Supporting utilities
+│   ├── testing/                      Test suite
+│   ├── planning/                     Sprint automation
+│   └── data-seeding/                Data model seeding
+├── templates/                        Production template library
+│   ├── copilot-instructions-template.md
+│   ├── professional-runner-template.py
+│   ├── supported-folder-structure-rag.json
+│   ├── docker/                      Docker templates
+│   └── docs/                        Template usage guides
+├── docs/                            Reference & discovery
+│   ├── architecture-decisions/      ADRs (design decisions)
+│   ├── discovery-reference/         Discovery phase documentation
+│   └── patterns/                    Pattern library
+├── .archive/                        Superseded items
+│   ├── session-37/                 Session 37 completion docs
+│   ├── old-backups/                Version backups
+│   ├── diagnostics/                Diagnostic reports
+│   └── testing-2026-01/            Old test results
+├── .github/                         GitHub configuration
+│   ├── copilot-instructions.md     Project-level AI guidance
+│   ├── copilot-skills/             AI agent skills
+│   ├── workflows/                  GitHub Actions
+│   └── discussion_templates/       Issue/PR templates
+├── tests/                          Test scripts & results
+├── PLAN.md                         Sprint plan
+├── STATUS.md                       Progress tracking
+├── ACCEPTANCE.md                   Governance checkpoints
+└── CHANGELOG.md                    Version history
+```
+
+---
 
 ---
 
 ## Latest Achievement: EVA Factory Configuration-as-Product System
 
-✅ **Session 7 (2026-03-03 19:39 ET)**: Transformed EVA Factory into a **fully portable, configuration-driven product**.
+[x] **Session 7 (2026-03-03 19:39 ET)**: Transformed EVA Factory into a **fully portable, configuration-driven product**.
 
 **What Changed**:
 - **Before**: Hardcoded paths (`.eva/evidence`), field names, schedules, thresholds in Python code
@@ -45,12 +82,12 @@ Invoke-RestMethod "http://localhost:8010/model/agent-summary" # all layer counts
 4. `DEPLOYMENT-GUIDE.md` - Complete deployment documentation (800+ lines)
 
 **Coverage**: 
-- ✅ Phase 1: Evidence backfill (63 records from 51-ACA)
-- ✅ Phase 2: Sync automation (GitHub Actions + Azure Pipelines)
-- ✅ Phase 3: Portfolio-wide orchestrator (configuration-driven, all 54 projects)
-- ✅ Phase 4: Projects registry sync (50 → 56 projects, 51-ACA registered)
+- [x] Phase 1: Evidence backfill (63 records from 51-ACA)
+- [x] Phase 2: Sync automation (GitHub Actions + Azure Pipelines)
+- [x] Phase 3: Portfolio-wide orchestrator (configuration-driven, all 54 projects)
+- [x] Phase 4: Projects registry sync (50 -> 56 projects, 51-ACA registered)
 
-**Impact**: EVA Factory can now be deployed as a true independent product across any environment (Kubernetes, Docker, on-prem, cloud) with zero code changes—only config file changes.
+**Impact**: EVA Factory can now be deployed as a true independent product across any environment (Kubernetes, Docker, on-prem, cloud) with zero code changes--only config file changes.
 
 ---
 

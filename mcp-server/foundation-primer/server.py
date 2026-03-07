@@ -41,7 +41,28 @@ _TEMPLATES_DIR = _PROJECT_ROOT / "02-design" / "artifact-templates"
 _TEMPLATE_FILE = _TEMPLATES_DIR / "copilot-instructions-template.md"
 _APPLY_SCRIPT  = _TEMPLATES_DIR / "Apply-Project07-Artifacts.ps1"
 _FIX_ENCODING  = Path("C:/AICOE/tools/fix-encoding.ps1")
-_DATA_MODEL_BASE = "http://localhost:8010"
+
+# Data model endpoints (ACA primary, local fallback)
+_ACA_BASE = "https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io"
+_LOCAL_BASE = "http://localhost:8010"
+
+def _detect_data_model_base() -> str:
+    """Detect which data model endpoint is reachable. Prefer ACA, fallback to local."""
+    try:
+        resp = urlopen(_ACA_BASE + "/health", timeout=5)
+        if resp.status == 200:
+            return _ACA_BASE
+    except (URLError, Exception):
+        pass
+    try:
+        resp = urlopen(_LOCAL_BASE + "/health", timeout=5)
+        if resp.status == 200:
+            return _LOCAL_BASE
+    except (URLError, Exception):
+        pass
+    return _LOCAL_BASE  # fallback even if both are down
+
+_DATA_MODEL_BASE = _detect_data_model_base()
 
 # ---------------------------------------------------------------------------
 # Server
