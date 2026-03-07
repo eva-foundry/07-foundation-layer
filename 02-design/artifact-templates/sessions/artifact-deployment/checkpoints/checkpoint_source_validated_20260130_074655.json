@@ -1,9 +1,0 @@
-{
-  "timestamp": "2026-01-30T07:46:55.0707294-05:00",
-  "checkpoint_id": "source_validated",
-  "component": "artifact-deployment",
-  "data": {
-    "source_path": "I:\\EVA-JP-v1.2\\docs\\eva-foundation\\projects\\07-copilot-instructions\\02-design\\artifact-templates",
-    "template_path": "I:\\EVA-JP-v1.2\\docs\\eva-foundation\\projects\\07-copilot-instructions\\02-design\\artifact-templates\\copilot-instructions-template.md"
-  }
-}

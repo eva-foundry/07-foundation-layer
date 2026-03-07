@@ -1,9 +1,0 @@
-{
-  "component": "artifact-deployment",
-  "checkpoint_id": "paths_validated",
-  "data": {
-    "dry_run": true,
-    "target_path": "I:\\EVA-JP-v1.2\\docs\\eva-foundation\\projects\\07-copilot-instructions\\02-design\\artifact-templates"
-  },
-  "timestamp": "2026-01-30T08:32:47.8115162-05:00"
-}

@@ -1,9 +1,0 @@
-{
-  "checkpoint_id": "paths_validated",
-  "component": "artifact-deployment",
-  "data": {
-    "target_path": "C:\\AICOE\\eva-foundry\\07-foundation-layer\\02-design\\artifact-templates",
-    "dry_run": true
-  },
-  "timestamp": "2026-03-05T12:20:15.6851548-03:00"
-}
