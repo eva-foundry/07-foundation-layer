@@ -1,7 +1,7 @@
 # GitHub Copilot Instructions -- {PROJECT_NAME}
 
-**Template Version**: 4.0.0 (Session 38 - GitHub Best Practices Aligned)
-**Last Updated**: 2026-03-07 ET
+**Template Version**: 4.1.0 (Session 41 - CHECK Phase Hardening)
+**Last Updated**: 2026-03-08 ET
 **Project**: {PROJECT_NAME}
 **Path**: `C:\AICOE\eva-foundry\{PROJECT_FOLDER}\`
 **Stack**: {PROJECT_STACK}
@@ -222,15 +222,116 @@ Write-Host "Total projects: $count"
 
 ## PART 3 -- QUALITY GATES
 
-All must pass before PR merge:
+**CHECK Phase Requirements** (before EVERY commit):
 
-- [ ] Test command exits 0
+### 3.1 Static Analysis (Mandatory)
+
+**Python Projects**:
+```powershell
+# Run both - each catches different issues
+pylint {changed_files} --disable=C,R,W  # E errors only = blockers
+flake8 {changed_files}                  # F/E errors only = blockers
+```
+
+**JavaScript/TypeScript**:
+```powershell
+eslint {changed_files}
+tsc --noEmit  # type check without compile
+```
+
+**PowerShell**:
+```powershell
+Invoke-ScriptAnalyzer {changed_files} -Severity Error
+```
+
+### 3.2 Test Suite (Mandatory)
+
+```powershell
+{TEST_COMMAND}  # Must exit 0 before commit
+```
+
+**If no tests exist**: Create minimal test for modified code OR acknowledge gap in commit message.
+
+### 3.3 Manual Verification (Context-Dependent)
+
+**HTTP APIs** (FastAPI, Flask, Express, etc.):
+```powershell
+# Test modified endpoints manually
+Invoke-RestMethod "http://localhost:{PORT}/{modified_endpoint}" -Method GET
+# Verify: 200 status, expected response structure, no 500 errors
+```
+
+**CLIs**:
+```powershell
+# Run smoke test with sample inputs
+.\{cli_command} {sample_args}
+# Verify: Expected output, exit code 0, no exceptions
+```
+
+**Libraries/Modules**:
+```python
+# Import and call modified functions
+import {module}
+result = {module}.{modified_function}({test_data})
+assert result == expected_output
+```
+
+### 3.4 Session 41 Anti-Pattern (Document for Prevention)
+
+**Root Cause**: Lowercase boolean `true` (JavaScript syntax) used in Python dict
+
+```python
+# ❌ WRONG: JavaScript/JSON boolean in Python
+response = {
+    "data_available": true,   # NameError: name 'true' is not defined
+    "ready": false            # NameError: name 'false' is not defined
+}
+
+# ✅ CORRECT: Python boolean (capitalized)
+response = {
+    "data_available": True,   # Python boolean
+    "ready": False            # Python boolean
+}
+```
+
+**Why py_compile Didn't Catch It**:
+- `py_compile` only validates syntax (colons, brackets, indentation)
+- Semantic errors (undefined variables) only appear at runtime
+- Functions not called during import → bug hidden until endpoint invoked
+
+**Detection Method Effectiveness**:
+| Tool | Detects This Bug? | Error Code |
+|------|-------------------|------------|
+| **pylint** | ✅ YES | E0602: Undefined variable 'true' |
+| **flake8** | ✅ YES | F821: undefined name 'true' |
+| **py_compile** | ❌ NO | Only syntax errors |
+| **pytest** | ✅ YES | NameError at runtime (if test calls endpoint) |
+| **Manual test** | ✅ YES | 500 Internal Server Error |
+
+**Session 41 Timeline** (What Went Wrong):
+1. Committed code with lowercase `true` in line 907
+2. Skipped CHECK phase (no pylint, no flake8, no manual test)
+3. Deployed to Azure → 500 error in production
+4. Required debug endpoint + DPDCA investigation to isolate
+5. Bug was trivial but detection gap made it expensive
+
+**Lesson**: Static analysis is NOT optional. Run pylint/flake8 BEFORE every commit.
+
+### 3.5 Quality Gate Checklist (Before PR Merge)
+
+All must pass:
+
+- [ ] Static analysis exits 0 (pylint E errors, flake8 F/E errors)
+- [ ] Test command exits 0: `{TEST_COMMAND}`
+- [ ] Manual verification complete (if HTTP API/CLI/modified function)
 - [ ] `validate-model.ps1` exits 0 (if model layer changed)
-- [ ] No [FORBIDDEN] encoding patterns
+- [ ] No [FORBIDDEN] encoding patterns (Unicode, emoji, cp1252 violations)
 - [ ] STATUS.md updated with session summary
 - [ ] PLAN.md reflects actual remaining work
-- [ ] If new model entity added: PUT + write cycle closed
+- [ ] If new model entity added: PUT + write cycle closed with evidence
+- [ ] No undefined variables (pylint E0602, flake8 F821)
+- [ ] All imports resolve (no ImportError at runtime)
 
 ---
 
-*Template v4.0.0 (Session 38 - GitHub best practices aligned)* | [Workspace instructions](../../../.github/copilot-instructions.md) | [EVA Data Model](../../../37-data-model/USER-GUIDE.md) | [Best Practices](../../../.github/best-practices-reference.md)
+*Template v4.1.0 (Session 41 - CHECK phase hardening)* | [Workspace instructions](../../../.github/copilot-instructions.md) | [EVA Data Model](../../../37-data-model/USER-GUIDE.md) | [Best Practices](../../../.github/best-practices-reference.md)

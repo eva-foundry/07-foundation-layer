@@ -1,7 +1,7 @@
 # GitHub Copilot Instructions -- [PROJECT_NAME]
 
-**Template Version**: 3.4.0  
-**Last Updated**: March 6, 2026 @ 6:53 PM ET  
+**Template Version**: 3.5.0 (Session 41 - CHECK Phase Hardening)  
+**Last Updated**: March 8, 2026 @ 8:45 PM ET  
 **Project**: [XX-PROJECT-ID] -- [PROJECT_FULL_NAME]  
 **Path**: `C:\AICOE\eva-foundry\[XX-PROJECT-ID]\`  
 **Stack**: [TECH_STACK]  
@@ -56,12 +56,78 @@ Every session runs this cycle. Do not skip steps.
 Discover  --> synthesise current sprint from plan + findings docs
 Plan      --> pick next unchecked task from yyyymmdd-plan.md checklist
 Do        --> implement -- make the change, do not just describe it
-Check     --> run the project test command (see PART 2); must exit 0
+Check     --> run verification checklist (see 2.1); ALL must pass
 Act       --> update STATUS.md, PLAN.md, yyyymmdd-plan.md, findings doc
 Loop      --> return to Discover if tasks remain
 ```
 
 **Execution Rule**: Make the change. Do not propose, narrate, or ask for permission on a step you can determine yourself. If uncertain about scope, ask one clarifying question then proceed.
+
+#### 2.1 CHECK Phase -- Mandatory Verification
+
+**CRITICAL**: Session 41 proved that skipping CHECK results in production bugs. This checklist is MANDATORY before any commit.
+
+**Python Projects**:
+```powershell
+# 1. Static Analysis (catches undefined variables, syntax errors)
+pylint {changed_files}  # Must show no E errors (C/R/W acceptable)
+flake8 {changed_files}  # Must show no F/E errors
+
+# 2. Test Suite
+pytest tests/ -v  # Must exit 0
+
+# 3. Manual Verification (if applicable)
+# - For HTTP APIs: Test modified endpoints manually
+# - For CLIs: Run smoke test with sample inputs
+# - For libraries: Import and call modified functions
+```
+
+**PowerShell/Bash Scripts**:
+```powershell
+# 1. Syntax Check
+PowerShell -NoProfile -Command "& '{script.ps1}' -WhatIf" 2>&1
+
+# 2. Dry Run
+.\{script.ps1} -DryRun  # if script supports it
+
+# 3. Test Suite (if exists)
+Invoke-Pester tests/  # Must exit 0
+```
+
+**All Projects**:
+- [ ] Run project test command (see PART 2) → must exit 0
+- [ ] If modified HTTP endpoint: Manual curl/Invoke-RestMethod test
+- [ ] If modified function: Import and call with sample data
+- [ ] No syntax errors, no undefined variables, no import failures
+- [ ] Verify behavior matches intended change
+
+**Session 41 Anti-Pattern** (Documented for Prevention):
+```python
+# ❌ WRONG: JavaScript boolean syntax in Python dict
+return {"data_available": true}  # NameError: name 'true' is not defined
+
+# ✅ CORRECT: Python boolean syntax
+return {"data_available": True}  # Capitalized
+```
+
+**Why CHECK Failed in Session 41**:
+- ❌ No pylint/flake8 run → Would have caught `E0602: undefined variable 'true'`
+- ❌ No manual endpoint test → Would have shown 500 error immediately
+- ❌ No pytest run → Would have failed if test existed
+- ✅ py_compile passed → But only catches syntax errors, not semantic errors
+
+**Detection Methods by Error Type**:
+| Error Type | pylint | flake8 | pytest | Manual Test |
+|------------|--------|--------|--------|-------------|
+| Undefined variable | ✅ E0602 | ✅ F821 | ✅ Runtime | ✅ 500 error |
+| Syntax error | ✅ | ✅ | ✅ | ✅ |
+| Logic error | ❌ | ❌ | ✅ | ✅ |
+| Missing import | ✅ | ✅ | ✅ | ✅ |
+
+**Minimum Acceptable CHECK** (before ANY commit):
+1. Static analysis (pylint OR flake8) → no E/F errors
+2. Test suite (if exists) → exit 0
+3. Manual verification (if HTTP API/CLI) → expected behavior confirmed
 
 ---
 
@@ -127,5 +193,5 @@ Invoke-RestMethod "$base/model/agent-summary" -Headers $hdrs
 
 ---
 
-**Generated**: 2026-03-06 @ 6:53 PM ET  
+**Generated**: 2026-03-08 @ 8:45 PM ET (Session 41 - CHECK Phase Hardening)  
 **For project re-priming**: Use `@foundation-expert prime [XX-PROJECT-ID]`  

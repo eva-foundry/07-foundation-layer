@@ -3,7 +3,7 @@
 **Workspace**: C:\AICOE\eva-foundry  
 **Owner**: {WORKSPACE_OWNER} / EVA AI COE  
 **Last Updated**: {TIMESTAMP} (Session {SESSION_NUMBER} - {SESSION_DESCRIPTION})  
-**Template Version**: 4.1.0 (API-First Bootstrap Aligned)
+**Template Version**: 4.2.0 (Session 41 - Quality Standards Update)
 
 ---
 
@@ -80,6 +80,39 @@ Each project may add skills in `.github/copilot-skills/`. Say "list skills" in t
 
 ---
 
+## Workspace Quality Standards (Session 41 Update)
+
+**CRITICAL**: All EVA projects follow mandatory CHECK phase before commits. Skipping verification leads to production bugs.
+
+### Minimum CHECK Requirements (All Projects)
+
+**Before EVERY commit**:
+1. **Static Analysis**: pylint/flake8/eslint (language-appropriate) → no E/F errors
+2. **Test Suite**: Project test command → exit 0
+3. **Manual Verification**: Test modified endpoints/functions/scripts
+
+**Session 41 Documented Anti-Pattern**:
+```python
+# ❌ WRONG: JavaScript boolean in Python
+{"available": true}   # NameError: 'true' undefined
+
+# ✅ CORRECT: Python boolean (capitalized)
+{"available": True}   # Python syntax
+```
+
+**Detection Gap Analysis** (Session 41):
+- pylint: ✅ Would catch E0602 (undefined variable)
+- flake8: ✅ Would catch F821 (undefined name)
+- pytest: ✅ Would catch runtime error (if test exists)
+- Manual test: ✅ Would show 500 error immediately
+- **Gap**: Skipped all 4 → Bug reached production
+
+**Consequence**: 3 failed fix attempts, debug endpoint creation, DPDCA investigation—all avoidable with CHECK phase compliance.
+
+See project-level copilot-instructions.md for full CHECK phase details.
+
+---
+
 ## Workspace Context per Session
 
 | Item | Value |
@@ -140,4 +173,4 @@ git commit -m "chore: Update workspace instructions (Session $sessionNumber)"
 
 ---
 
-*Workspace template v4.1.0 | Created for Session 38+ distribution*
+*Workspace template v4.2.0 (Session 41 - Quality standards hardening) | Created for Session 38+ distribution*
