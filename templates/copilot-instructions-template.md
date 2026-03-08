@@ -141,9 +141,25 @@ This file governs **{PROJECT_FOLDER}** ({PROJECT_NAME}) for the active session o
 
 ### Anti-Patterns (DO NOT)
 
+**Project-Specific Anti-Patterns**:
+
 | Anti-Pattern | Do Instead |
 |---|---|
 | {FORBIDDEN} | {CORRECT} |
+
+**GitHub Actions Workflows** (if project has workflows):
+
+See [37-data-model/docs/workflows/ANTI-PATTERNS-AND-BEST-PRACTICES.md](../../37-data-model/docs/workflows/ANTI-PATTERNS-AND-BEST-PRACTICES.md) for complete guide.
+
+| Anti-Pattern | Do Instead |
+|---|---|
+| Check `$LASTEXITCODE` in separate step after script | Let GitHub Actions handle exit codes natively OR use `steps.<id>.outcome` |
+| End PowerShell scripts without explicit exit code | Add `exit 0` on success, `exit 1` on failure |
+| Single-step workflows without evidence | Generate correlation ID, create receipt, upload artifacts with `if: always()` |
+| Fail fast without collecting issues | Use `continue-on-error: true`, collect all results, report comprehensive summary |
+| No job-to-job communication | Use `outputs:` in jobs, access via `needs.<job>.outputs.<key>` |
+
+**Critical**: Each workflow step = NEW shell session. Exit codes don't persist. Use job outputs or `steps.<id>.outcome`.
 
 ### Project Skills
 
