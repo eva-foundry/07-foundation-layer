@@ -23,11 +23,13 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { {{LAYER_TITLE}}ListView } from './{{LAYER_TITLE}}ListView';
-import { fetch{{LAYER_TITLE}}Records } from '@api/{{LAYER_NAME}}Api';
+import { getDefault{{LAYER_TITLE}} } from '@eva/data-model-ui';
 import { LangProvider } from '@context/LangContext';
 
-// Mock API
-vi.mock('@api/{{LAYER_NAME}}Api');
+// Mock Data Model Views
+vi.mock('@eva/data-model-ui', () => ({
+  getDefault{{LAYER_TITLE}}: vi.fn(),
+}));
 
 // Mock NavHeader to simplify tests
 vi.mock('@components/NavHeader', () => ({
@@ -68,7 +70,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
 
   describe('Loading State', () => {
     it('displays loading message while fetching records', () => {
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockImplementation(
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockImplementation(
         () => new Promise(() => {}) // Never resolves
       );
 
@@ -82,7 +84,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
   describe('Error State', () => {
     it('displays error message when fetch fails', async () => {
       const errorMessage = 'Failed to fetch records';
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockRejectedValue(new Error(errorMessage));
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockRejectedValue(new Error(errorMessage));
 
       renderComponent();
 
@@ -95,7 +97,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
     });
 
     it('displays error message in French when lang=fr', async () => {
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockRejectedValue(new Error('Test error'));
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockRejectedValue(new Error('Test error'));
 
       renderComponent('fr');
 
@@ -107,10 +109,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
 
   describe('Success State', () => {
     beforeEach(() => {
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockResolvedValue({
-        records: mockRecords,
-        refreshed_at: '2026-03-10T02:00:00Z',
-      });
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockResolvedValue(mockRecords);
     });
 
     it('renders page header with title', async () => {
@@ -163,10 +162,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
 
   describe('Interactivity', () => {
     beforeEach(() => {
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockResolvedValue({
-        records: mockRecords,
-        refreshed_at: '2026-03-10T02:00:00Z',
-      });
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockResolvedValue(mockRecords);
     });
 
     it('opens detail drawer when card clicked', async () => {
@@ -262,10 +258,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
 
   describe('No Results', () => {
     it('displays no results message when no records match filters', async () => {
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockResolvedValue({
-        records: [],
-        refreshed_at: '2026-03-10T02:00:00Z',
-      });
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockResolvedValue([]);
 
       renderComponent();
 
@@ -279,10 +272,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
 
   describe('Accessibility', () => {
     beforeEach(() => {
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockResolvedValue({
-        records: mockRecords,
-        refreshed_at: '2026-03-10T02:00:00Z',
-      });
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockResolvedValue(mockRecords);
     });
 
     it('has proper ARIA labels', async () => {
@@ -318,10 +308,7 @@ describe('{{LAYER_TITLE}}ListView', () => {
 
   describe('i18n', () => {
     beforeEach(() => {
-      vi.mocked(fetch{{LAYER_TITLE}}Records).mockResolvedValue({
-        records: mockRecords,
-        refreshed_at: '2026-03-10T02:00:00Z',
-      });
+      vi.mocked(getDefault{{LAYER_TITLE}}).mockResolvedValue(mockRecords);
     });
 
     it('displays French translations when lang=fr', async () => {

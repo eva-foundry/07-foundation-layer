@@ -20,9 +20,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Nav{{LAYER_TITLE}}Header } from '@components/NavHeader';
 import { {{LAYER_TITLE}}Card } from '@components/{{LAYER_TITLE}}Card';
 import { {{LAYER_TITLE}}DetailDrawer } from '@components/{{LAYER_TITLE}}DetailDrawer';
-import { fetch{{LAYER_TITLE}}Records } from '@api/{{LAYER_NAME}}Api';
+import { getDefault{{LAYER_TITLE}} } from '@eva/data-model-ui';
 import { useLang } from '@context/LangContext';
-import type { {{ENTITY_TYPE}} } from '@/types/{{LAYER_NAME}}';
+import type { {{ENTITY_TYPE}} } from '@eva/data-model-ui';
 
 // GC Design System colors
 const GC_TEXT    = '#0b0c0e';
@@ -58,10 +58,10 @@ export const {{LAYER_TITLE}}ListView: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch{{LAYER_TITLE}}Records()
-      .then((res) => {
-        setRecords(res.records);
-        setRefreshed(res.refreshed_at);
+    getDefault{{LAYER_TITLE}}()
+      .then((data) => {
+        setRecords(data);
+        setRefreshed(new Date().toISOString());
       })
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
