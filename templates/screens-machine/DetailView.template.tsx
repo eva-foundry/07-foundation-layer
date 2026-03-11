@@ -144,26 +144,13 @@ export const {{LAYER_TITLE}}DetailDrawer: React.FC<{{LAYER_TITLE}}DetailDrawerPr
         </section>
 
         {/* Field sections (auto-generated from schema) */}
-        {{#FIELD_SECTIONS}}
         <section>
           <h3 style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: 8, color: GC_MUTED }}>
-            {{SECTION_TITLE}}
+            Record Details
           </h3>
-          <dl style={{ margin: 0, display: 'grid', gridTemplateColumns: '120px 1fr', gap: '8px 12px', fontSize: '0.875rem' }}>
-            {{#FIELDS}}
-            <dt style={{ color: GC_MUTED, fontWeight: 600 }}>{{FIELD_LABEL}}:</dt>
-            <dd
-              data-testid="{{LAYER_NAME}}-field-{{FIELD_NAME}}"
-              style={{ margin: 0, color: GC_TEXT, wordBreak: 'break-word' }}
-            >
-              {record.{{FIELD_NAME}} !== null && record.{{FIELD_NAME}} !== undefined
-                ? String(record.{{FIELD_NAME}})
-                : '-'}
-            </dd>
-            {{/FIELDS}}
-          </dl>
+          {{#DETAIL_FIELDS}}
+          {{/DETAIL_FIELDS}}
         </section>
-        {{/FIELD_SECTIONS}}
 
         {/* TODO: Add actions (Edit, Delete, etc.) */}
         <div style={{ marginTop: 'auto', paddingTop: 16, borderTop: `1px solid ${GC_BORDER}` }}>
