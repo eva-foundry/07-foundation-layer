@@ -1,7 +1,7 @@
 
 Traceback (most recent call last):
 ======================================================================
-  File "C:\AICOE\eva-foundry\07-foundation-layer\tests\test-bootstrap-api.py", line 356, in <module>
+  File "C:\eva-foundry\07-foundation-layer\tests\test-bootstrap-api.py", line 356, in <module>
 BOOTSTRAP API-FIRST TEST SUITE
 ======================================================================
 Timestamp: 2026-03-05T17:56:53.421255
@@ -11,12 +11,12 @@ Cloud timeout: 2s
 
     exit_code = tester.run_all_tests()
                 ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\AICOE\eva-foundry\07-foundation-layer\tests\test-bootstrap-api.py", line 310, in run_all_tests
+  File "C:\eva-foundry\07-foundation-layer\tests\test-bootstrap-api.py", line 310, in run_all_tests
     test2 = self.test_scenario_2_fallback_path()
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ============================================================
 TEST 1: Happy Path (Cloud Available)
-  File "C:\AICOE\eva-foundry\07-foundation-layer\tests\test-bootstrap-api.py", line 129, in test_scenario_2_fallback_path
+  File "C:\eva-foundry\07-foundation-layer\tests\test-bootstrap-api.py", line 129, in test_scenario_2_fallback_path
 ============================================================
     print(f"       Best practices: {'\u2713' if files_exist['best_practices'] else '\u2717'} {best_practices_path}")
 [OK] Query 1 (workspace_config): 3.232s

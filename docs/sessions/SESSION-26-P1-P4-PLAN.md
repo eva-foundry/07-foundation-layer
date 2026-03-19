@@ -89,8 +89,8 @@ Project 7 P4 (Bi-Directional Sync)
 - **Current Pattern** (file-based):
   ```
   Agent → reads copilot-instructions.md
-       → reads C:\AICOE\.github\best-practices-reference.md
-       → reads C:\AICOE\.github\standards-specification.md
+       → reads C:\eva-foundry\.github\best-practices-reference.md
+       → reads C:\eva-foundry\.github\standards-specification.md
        → reads each project's README/PLAN/STATUS/ACCEPTANCE
        → TOTAL: 236+ file reads
   ```
@@ -125,7 +125,7 @@ Project 7 P4 (Bi-Directional Sync)
 - **Lines**: ~300-350 (comprehensive but concise)
 
 **P1.4: Update Workspace copilot-instructions.md** (10 min)
-- **File**: `C:\AICOE\.github\copilot-instructions.md`
+- **File**: `C:\eva-foundry\.github\copilot-instructions.md`
 - **Changes**:
   1. Replace "Session Bootstrap (MANDATORY)" section with new approach
   2. **Step 1 (NEW)**: Query Cloud API for workspace governance (2 queries)
@@ -330,7 +330,7 @@ Project 7 P4 (Bi-Directional Sync)
 - Mark F07-03-004-T02 DONE (API-first bootstrap documented)
 - Update F07-02-002 (data-model ownership includes governance query patterns)
 
-**File**: `C:\AICOE\.github\copilot-instructions.md`
+**File**: `C:\eva-foundry\.github\copilot-instructions.md`
 - Already updated in P1.4
 - Add evidence of change (timestamp, session reference)
 
@@ -352,7 +352,7 @@ Project 7 P4 (Bi-Directional Sync)
   "artifacts": [
     {"path": "07-foundation-layer/.github/BOOTSTRAP-API-FIRST.md", "type": "guide", "action": "created"},
     {"path": "07-foundation-layer/tests/test-bootstrap-api.py", "type": "test", "action": "created"},
-    {"path": "C:\\AICOE\\.github\\copilot-instructions.md", "type": "guide", "action": "updated"},
+    {"path": "C:\\eva-foundry\\.github\\copilot-instructions.md", "type": "guide", "action": "updated"},
     {"path": "07-foundation-layer/docs/sessions/SESSION-26-RESULTS-P1-P2.md", "type": "documentation", "action": "created"},
     {"path": "07-foundation-layer/docs/sessions/SESSION-26-P3-SCOPE.md", "type": "planning", "action": "created"},
     {"path": "07-foundation-layer/docs/sessions/SESSION-26-P4-SCOPE.md", "type": "planning", "action": "created"}

@@ -67,38 +67,38 @@ The foundation-layer provides production-ready priming scripts in `02-design/art
 #### Step 1: Prime Single Project (Dry-Run First)
 
 ```powershell
-cd C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates
+cd C:\eva-foundry\07-foundation-layer\02-design\artifact-templates
 
 # Preview what would be applied (no changes)
 .\Invoke-PrimeWorkspace.ps1 `
-  -TargetPath "C:\AICOE\eva-foundry\01-documentation-generator" `
+  -TargetPath "C:\eva-foundry\01-documentation-generator" `
   -DryRun
 
 # Apply for real (creates backup, preserves PART 2)
 .\Invoke-PrimeWorkspace.ps1 `
-  -TargetPath "C:\AICOE\eva-foundry\01-documentation-generator"
+  -TargetPath "C:\eva-foundry\01-documentation-generator"
 ```
 
 #### Step 2: Prime All Projects in Workspace
 
 ```powershell
-cd C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates
+cd C:\eva-foundry\07-foundation-layer\02-design\artifact-templates
 
 # Preview all projects (no changes)
 .\Invoke-PrimeWorkspace.ps1 `
-  -WorkspaceRoot "C:\AICOE\eva-foundry" `
+  -WorkspaceRoot "C:\eva-foundry\eva-foundry" `
   -DryRun
 
 # Apply to all (idempotent - safe to run on already-primed projects)
 .\Invoke-PrimeWorkspace.ps1 `
-  -WorkspaceRoot "C:\AICOE\eva-foundry"
+  -WorkspaceRoot "C:\eva-foundry\eva-foundry"
 ```
 
 #### Step 3: Verify Results
 
 ```powershell
 # Audit: check timestamps updated to Session 37
-Get-ChildItem C:\AICOE\eva-foundry -Directory -Filter "[0-9]*" | ForEach-Object {
+Get-ChildItem C:\eva-foundry\eva-foundry -Directory -Filter "[0-9]*" | ForEach-Object {
     $file = "$($_.FullName)\.github\copilot-instructions.md"
     if (Test-Path $file) {
         $updated = (Get-Content $file) -match "6:53 PM ET|March 6, 2026"
@@ -153,22 +153,22 @@ The automation script handles all these operations idempotently:
 ### Examples
 
 ```powershell
-cd C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates
+cd C:\eva-foundry\07-foundation-layer\02-design\artifact-templates
 
 # Example 1: Single project, dry-run
-.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\AICOE\eva-foundry\37-data-model" -DryRun
+.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\eva-foundry\37-data-model" -DryRun
 
 # Example 2: Single project, apply
-.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\AICOE\eva-foundry\37-data-model"
+.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\eva-foundry\37-data-model"
 
 # Example 3: Entire workspace, dry-run (preview all changes)
-.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\AICOE\eva-foundry" -DryRun
+.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\eva-foundry\eva-foundry" -DryRun
 
 # Example 4: Entire workspace, apply (full re-prime)
-.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\AICOE\eva-foundry"
+.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\eva-foundry\eva-foundry"
 
 # Example 5: Skip copilot-instructions, update governance only
-.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\AICOE\eva-foundry\51-ACA" -SkipCopilotInstructions
+.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\eva-foundry\51-ACA" -SkipCopilotInstructions
 ```
 
 ---
@@ -181,7 +181,7 @@ cd C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates
 
 ```powershell
 # Update the "Last Updated" field to 2026-03-06 18:53 ET
-Get-ChildItem C:\AICOE\eva-foundry -Directory -Filter "[0-9]*" | ForEach-Object {
+Get-ChildItem C:\eva-foundry\eva-foundry -Directory -Filter "[0-9]*" | ForEach-Object {
     $file = "$($_.FullName)\.github\copilot-instructions.md"
     if (Test-Path $file) {
         $content = Get-Content $file -Raw
@@ -202,7 +202,7 @@ Add note to projects' STATUS.md or PLAN.md:
 Get the template from foundation layer and customize:
 
 ```powershell
-$template = Get-Content "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\copilot-instructions-template.md" -Raw
+$template = Get-Content "C:\eva-foundry\07-foundation-layer\02-design\artifact-templates\copilot-instructions-template.md" -Raw
 
 # Replace template tokens for specific project:
 $instructions = $template -replace '{PROJECT_NAME}', '08-cds-rag'
@@ -210,7 +210,7 @@ $instructions = $instructions -replace '{PROJECT_FOLDER}', '08-cds-rag'
 $instructions = $instructions -replace '{PROJECT_STACK}', '[FILL_IN_TECH_STACK]'
 
 # Save to project
-$path = "C:\AICOE\eva-foundry\08-cds-rag\.github"
+$path = "C:\eva-foundry\08-cds-rag\.github"
 New-Item $path -ItemType Directory -Force | Out-Null
 Set-Content "$path\copilot-instructions.md" -Value $instructions -Encoding UTF8
 ```
@@ -221,18 +221,18 @@ Set-Content "$path\copilot-instructions.md" -Value $instructions -Encoding UTF8
 
 ```powershell
 # Quick audit
-Get-ChildItem C:\AICOE\eva-foundry -Directory  -Filter "[0-9]*" | ForEach-Object {
+Get-ChildItem C:\eva-foundry\eva-foundry -Directory  -Filter "[0-9]*" | ForEach-Object {
     $file = "$($_.FullName)\.github\copilot-instructions.md"
     $hasFile = Test-Path $file
     Write-Host "$($_.Name): $hasFile"
 }
 
 # Commit all updates
-git add C:\AICOE\.github\copilot-instructions.md
-git add "C:\AICOE\eva-foundry\*\.github\copilot-instructions.md"
-git add "C:\AICOE\eva-foundry\*\PLAN.md"
-git add "C:\AICOE\eva-foundry\*\STATUS.md"
-git add "C:\AICOE\eva-foundry\*\ACCEPTANCE.md"
+git add C:\eva-foundry\.github\copilot-instructions.md
+git add "C:\eva-foundry\*\.github\copilot-instructions.md"
+git add "C:\eva-foundry\*\PLAN.md"
+git add "C:\eva-foundry\*\STATUS.md"
+git add "C:\eva-foundry\*\ACCEPTANCE.md"
 
 git commit -m "chore(workspace): Re-prime all projects with Session 37 context (6:53 PM ET)
 
@@ -250,7 +250,7 @@ Template Version: 3.5.0 (March 1, 2026)"
 
 ```powershell
 # Quick audit
-Get-ChildItem C:\AICOE\eva-foundry -Directory  -Filter "[0-9]*" | ForEach-Object {
+Get-ChildItem C:\eva-foundry\eva-foundry -Directory  -Filter "[0-9]*" | ForEach-Object {
     $file = "$($_.FullName)\.github\copilot-instructions.md"
     $hasFile = Test-Path $file
     $isUpdated = $hasFile -and ((Get-Content $file) -match "6:53 PM ET")
@@ -258,8 +258,8 @@ Get-ChildItem C:\AICOE\eva-foundry -Directory  -Filter "[0-9]*" | ForEach-Object
 }
 
 # Commit with workspace-wide scope
-git add C:\AICOE\.github\copilot-instructions.md
-git add "C:\AICOE\eva-foundry\*\.github\copilot-instructions.md"
+git add C:\eva-foundry\.github\copilot-instructions.md
+git add "C:\eva-foundry\*\.github\copilot-instructions.md"
 git commit -m "chore(workspace): Re-prime all projects with Session 37 context (6:53 PM ET)
 
 - Update timestamps to March 6, 2026 @ 6:53 PM ET
@@ -311,7 +311,7 @@ Once re-primed, each project should:
 
 ## References
 
-- **Workspace Instructions**: `C:\AICOE\.github\copilot-instructions.md`
+- **Workspace Instructions**: `C:\eva-foundry\.github\copilot-instructions.md`
 - **Template**: `07-foundation-layer\.github\PROJECT-COPILOT-INSTRUCTIONS-TEMPLATE.md`
 - **Foundation Expert Skill**: `07-foundation-layer\.github\copilot-skills\foundation-expert.skill.md`
 - **Session 37 Summary**: `37-data-model\SESSION-37-BOOTSTRAP-SUMMARY.md`

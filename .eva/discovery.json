@@ -1,13 +1,13 @@
 {
   "meta": {
     "schema": "eva.discovery.v2",
-    "generated_at": "2026-02-25T06:36:59.825Z",
-    "repo": "C:\\AICOE\\eva-foundation\\07-foundation-layer"
+    "generated_at": "2026-03-07T23:45:39.980Z",
+    "repo": "C:\\eva-foundry\\eva-foundry\\07-foundation-layer"
   },
   "project": null,
   "planned": {
     "epic": {
-      "title": "Project 07: EVA Foundation Layer (Patterns & Standards Baseline)",
+      "title": "07-foundation-layer -- EVA Foundation Layer",
       "source": "README.md"
     },
     "features": [
@@ -839,7 +839,224 @@
         "source": "veritas-plan.json"
       }
     ],
-    "acceptance": [],
+    "acceptance": [
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Can scaffold new EVA project with: README, PLAN, STATUS, ACCEPTANCE (templates valid)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Seeded projects reference data model (Project 37 endpoint documented)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Scaffolding works for any project ID (not hard-coded to specific projects)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Verification: `./scripts/scaffolding-example.ps1 -ProjectId \"test-999\" -OutputPath ./output` succeeds",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "All 6 owned projects (36, 37, 38, 39, 40-partial, 48) documented in `.github/copilot-instructions.md`",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Each project has a governance skill documented in `.github/copilot-skills/`",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Skills are discoverable and invokable via `@skill-name` pattern",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Verification: `Get-ChildItem ./.github/copilot-skills/*.md | Measure-Object | % Count -eq 6` (or more)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Scripts generalized (no 51-ACA hardcoding or project-specific paths remain)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Templates work for any EVA project following standard structure",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Workspace-level skills callable from any project via `@skill-name`",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Verification: Manual code review of `scripts/*` + `templates/*` for project-specific logic",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Workspace-level skills elevated to `C:\\eva-foundry\\.github\\copilot-skills\\` (5 skills from 51-ACA)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Patterns documented in `docs/patterns/` with usage examples",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Pattern re-use demonstrated across 2+ projects (not just 51-ACA)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Verification: `Get-ChildItem C:\\eva-foundry\\.github\\copilot-skills/*.md | Measure-Object | % Count -ge 5`",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Template version is 3.4.0 or higher (Session 37+ standard)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "All PART 1, PART 2, PART 3 sections present and functional",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "No deprecated v2.x syntax remains",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "Verification: `Select-String -Path ./.github/copilot-instructions.md -Pattern \"v3\\.[4-9]\" | Measure-Object | % Count -ge 1`",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "AC-1: Data model record verified (ACA, maturity=active, phase=Phase 3, pbi=4/6)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "AC-2: copilot-instructions.md compliant (611 lines, v3.5.0, PART 1/2/3, ASCII-clean)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "AC-4: Core infrastructure operational (templates, apply script, governance docs)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "AC-5: ASCII compliance enforced (Pattern #1: Windows Enterprise Encoding Safety - all files verified)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "AC-6: PLAN.md has sprint stories with IDs (20+ stories across F07-01 through F07-04)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "AC-7: README.md references data-model API and veritas tools (sentinel + links confirmed)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "AC-8: Data model endpoints operational (Cloud: 55 projects, Local: 50 projects - governance data accessible from both)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "Bootstrap script validates all systems (zero issues)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": false,
+        "text": "AC-9: Project-specific criteria (TBD - can be completed in future sprint)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "ACA Data Model: Reachable, healthy, Cosmos-backed (v1.0.0)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "Template v3.5.0: Compliant, expanded content, PART 1/2/3 structure confirmed",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "Apply-Project07-Artifacts.ps1: v3.x enabled, ready for workspace deployment",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "Governance Templates: All 4 templates present (PLAN, STATUS, ACCEPTANCE, README)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "MCP Server (foundation-primer): 580 lines, 5 tools ready, ASCII-only",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "Bootstrap Script: Updated, now validating template correctly (550-650 line range)",
+        "source": "ACCEPTANCE.md"
+      },
+      {
+        "story_id": null,
+        "checked": true,
+        "text": "ASCII Compliance: All core files verified, no Unicode encoding issues",
+        "source": "ACCEPTANCE.md"
+      }
+    ],
     "declared_status": {}
   },
   "actual": {
@@ -850,17 +1067,52 @@
         "story_tags": []
       },
       {
+        "path": "ACCEPTANCE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "ADO-SCAFFOLDING-INTEGRATION.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
         "path": "CHANGELOG.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "IMPLEMENTATION-COMPLETE-v1.5.2.md",
+        "path": "CONTROL-PLANE-OWNERSHIP-BOUNDARY.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "PHASE-3-IMPLEMENTATION-COMPLETE.md",
+        "path": "DPDCA-FOLDERS-ASSESSMENT.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "EXECUTION-PLAN.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "OPTION-3-ASSESSMENT.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "PHASE2-REORGANIZATION-COMPLETE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "PHASE2-REORGANIZATION-PLAN.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "PHASE2-REORGANIZATION-STATUS.md",
         "type": "doc",
         "story_tags": []
       },
@@ -870,17 +1122,47 @@
         "story_tags": []
       },
       {
-        "path": "PREVIEW-Project14.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "PROJECT7-VALUE-TO-AI-AGENTS.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
         "path": "README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "REORGANIZATION-PROPOSAL-SESSION38-FINAL.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "REORGANIZATION-PROPOSAL.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "REORGANIZATION-SUMMARY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "SEED-FROM-PLAN-PATTERN.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "SESSION-38-DPDCA-TASK1.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "SESSION-38-REORGANIZATION-COMPLETE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "SESSION-38-SCRUM-MASTER-AUDIT.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "SESSION-38-TASK1-COMPLETION.md",
         "type": "doc",
         "story_tags": []
       },
@@ -890,7 +1172,72 @@
         "story_tags": []
       },
       {
-        "path": "v1.3.0-IMPLEMENTATION-SUMMARY.md",
+        "path": "UNIFIED-DATAMODEL-WORKFLOW.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "VERITAS-SCAFFOLDING-INTEGRATION.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/analyze_endpoints.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/CLOUD-ENDPOINT-TIMEOUT-INVESTIGATION.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/ENDPOINT-VERIFICATION-COMPLETE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/IMPLEMENTATION-COMPLETE-v1.5.2.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/MANIFEST.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/PHASE-3-IMPLEMENTATION-COMPLETE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/PREVIEW-Project14.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/PROJECT7-VALUE-TO-AI-AGENTS.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/test-output.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/v1.3.0-IMPLEMENTATION-SUMMARY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/verify_endpoints.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".github/BOOTSTRAP-API-FIRST.md",
         "type": "doc",
         "story_tags": []
       },
@@ -900,107 +1247,57 @@
         "story_tags": []
       },
       {
-        "path": "01-discovery/artifacts-inventory.md",
+        "path": ".github/PROJECT-COPILOT-INSTRUCTIONS-TEMPLATE.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/assessment-framework.md",
+        "path": ".github/SESSION-38-DISCOVER-PLAN.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/current-state-assessment.md",
+        "path": "docs/40-control-plane-RACI.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/discovery-summary.md",
+        "path": "docs/copilot-instructions-reorganization-proposal.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/gap-analysis.md",
+        "path": "docs/DATA-MODEL-HEALTH-DETECTION.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/pattern-application-methodology.md",
+        "path": "docs/foundation-completion-plan.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/PYTHON-DEPENDENCY-MANAGEMENT.md",
+        "path": "docs/github-features-inventory.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/README.md",
+        "path": "docs/github-projects-setup.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/best-practices-reference.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/marco-framework-architecture.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/MIGRATION-GUIDE-v1.0-to-v1.3.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/MIGRATION-GUIDE-v1.3-to-v1.7.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/README.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/SPRINT-BACKLOG-v1.7.0.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/standards-specification.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/v1.7.0-IMPLEMENTATION-SUMMARY.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "04-testing/manual-test-workspace-mgmt.ps1",
+        "path": "github-discussion-agent/agent.py",
         "type": "code",
         "story_tags": []
       },
       {
-        "path": "04-testing/README.md",
+        "path": "github-discussion-agent/QUICKSTART.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "04-testing/test-results-workspace-mgmt-v1.0.0.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "03-development/README.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "05-implementation/README.md",
+        "path": "github-discussion-agent/README.md",
         "type": "doc",
         "story_tags": []
       },
@@ -1015,97 +1312,373 @@
         "story_tags": []
       },
       {
+        "path": ".archive/01-discovery-automation/.coveragerc",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/.env.example",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/evidence.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/generate-docs.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/generate.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/preflight-check.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/pytest.ini",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/QUICKSTART.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/requirements.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/run-tests.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/test_generator.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/test_generator_OLD.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/01-discovery-automation/validators.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/Push-CopilotInstructions.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/run-push.bat",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "templates/build-sprint-agent.yml.template",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": "templates/copilot-instructions-template.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "templates/copilot-instructions-workspace-template.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "templates/data-model-seed-template.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "templates/professional-runner-template.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "templates/supported-folder-structure-rag.json",
+        "type": "data",
+        "story_tags": []
+      },
+      {
+        "path": "tests/test-bootstrap-api.py",
+        "type": "test",
+        "story_tags": [],
+        "is_test": true
+      },
+      {
+        "path": ".archive/05-implementation-scaffold/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/04-testing-artifacts/manual-test-workspace-mgmt.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/04-testing-artifacts/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/04-testing-artifacts/test-results-workspace-mgmt-v1.0.0.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/03-development-scaffold/README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/old-backups/Apply-Project07-Artifacts-v1.4.1.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/old-backups/Apply-Project07-Artifacts.ps1.backup_20260202_115209",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/old-backups/enhanced-find-function.txt",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/old-backups/Test-Project07-Deployment.ps1.backup_20260202_115209",
+        "type": "other",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/session-37/INSTRUCTION-QUALITY-ASSESSMENT.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/session-37/PROPOSED-INSTRUCTION-CHANGES.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/session-37/SESSION-37-COMPLETION-STATUS.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/session-37/SESSION-37-REPRIMING-GUIDE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".archive/session-37/SESSION-37-UPDATE-SUMMARY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/architecture-decisions/ADR-004-Professional-Transformation-Methodology.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/architecture-decisions/ADR-005-Dependency-Management-Strategy.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/architecture-decisions/marco-framework-architecture.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
         "path": ".github/copilot-skills/00-skill-index.skill.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/automation/.coveragerc",
-        "type": "other",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/.env.example",
-        "type": "other",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/evidence.py",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/generate-docs.py",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/generate.ps1",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/preflight-check.ps1",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/pytest.ini",
-        "type": "other",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/QUICKSTART.md",
+        "path": ".github/copilot-skills/ado-dashboard-admin.skill.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/automation/README.md",
+        "path": ".github/copilot-skills/ado-integration.skill.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "01-discovery/automation/requirements.txt",
-        "type": "other",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/run-tests.ps1",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/test_generator.py",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/test_generator_OLD.py",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "01-discovery/automation/validators.py",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/architecture-decision-records/ADR-004-Professional-Transformation-Methodology.md",
+        "path": ".github/copilot-skills/control-plane-runtime.skill.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/architecture-decision-records/ADR-005-Dependency-Management-Strategy.md",
+        "path": ".github/copilot-skills/data-model-admin.skill.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/Apply-Project07-Artifacts-v1.4.1.ps1",
+        "path": ".github/copilot-skills/foundation-expert.skill.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".github/copilot-skills/red-teaming-integration.skill.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".github/copilot-skills/universal-command-wrapper.skill.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".github/copilot-skills/veritas-admin.skill.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": ".github/discussion_templates/sprint-planning.yml",
+        "type": "config",
+        "story_tags": []
+      },
+      {
+        "path": ".github/workflows/discussion-bot-agent.yml",
+        "type": "config",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/01-discovery-phase-README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/02-design-phase-README.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/artifacts-inventory.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/assessment-framework.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/current-state-assessment.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/discovery-summary.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/gap-analysis.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/pattern-application-methodology.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/PYTHON-DEPENDENCY-MANAGEMENT.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/SPRINT-BACKLOG-v1.7.0.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/discovery-reference/v1.7.0-IMPLEMENTATION-SUMMARY.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/references/best-practices-reference.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/references/standards-specification.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/IMPLEMENTATION-STATUS-MARCH-6.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/SESSION-26-BOOTSTRAP-PROJECT-7.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/SESSION-26-COMPLETE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/SESSION-26-P1-P2-RESULTS.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/SESSION-26-P1-P4-PLAN.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/SESSION-26-P3-SCOPE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/SESSION-26-P4-SCOPE.md",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "docs/sessions/test-results-S26-P2.json",
+        "type": "doc",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/data-seeding/seed-from-plan.py",
         "type": "code",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+        "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
         "type": "code",
         "story_tags": [
           "F07-02-001",
@@ -1130,252 +1703,167 @@
         ]
       },
       {
-        "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1.backup_20260202_115209",
+        "path": "scripts/deployment/Bootstrap-Project07.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/deployment/Invoke-PrimeWorkspace.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/deployment/Phase2-Reorganization.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/deployment/Reseed-Projects.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/planning/gen-sprint-manifest.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/testing/Test-PostReorganization.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/testing/Test-Project07-Deployment.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/Add-ProjectLock.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/Capture-ProjectStructure.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/Fix-Project07-Paths.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/Initialize-ProjectStructure.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/Invoke-CommandWithLog.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/Invoke-WorkspaceHousekeeping.ps1",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/invoke_command_with_log.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "scripts/utilities/reflect-ids.py",
+        "type": "code",
+        "story_tags": []
+      },
+      {
+        "path": "templates/docker/Dockerfile.template",
         "type": "other",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/Capture-ProjectStructure.ps1",
-        "type": "code",
+        "path": "mcp-server/foundation-primer/config.json",
+        "type": "data",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/copilot-instructions-template.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/enhanced-find-function.txt",
+        "path": "mcp-server/foundation-primer/requirements.txt",
         "type": "other",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/Fix-Project07-Paths.ps1",
+        "path": "mcp-server/foundation-primer/server.py",
         "type": "code",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/Initialize-ProjectStructure.ps1",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/Invoke-WorkspaceHousekeeping.ps1",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/PATH-FIX-IMPLEMENTATION-SUMMARY.md",
+        "path": ".archive/05-implementation-scaffold/archive/copilot-instructions-ORIGINAL-20260129.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/professional-runner-template.py",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/Reseed-Projects.ps1",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/supported-folder-structure-rag.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/template-v2-usage-guide.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/Test-Project07-Deployment.ps1",
-        "type": "code",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/Test-Project07-Deployment.ps1.backup_20260202_115209",
+        "path": ".archive/04-testing-artifacts/results/housekeeping-dryrun_20260130_175553.txt",
         "type": "other",
         "story_tags": []
       },
       {
-        "path": "04-testing/results/housekeeping-dryrun_20260130_175553.txt",
+        "path": ".archive/04-testing-artifacts/results/initialize-dryrun_20260130_175453.txt",
         "type": "other",
         "story_tags": []
       },
       {
-        "path": "04-testing/results/initialize-dryrun_20260130_175453.txt",
+        "path": ".archive/04-testing-artifacts/results/initialize-dryrun_20260130_175553.txt",
         "type": "other",
         "story_tags": []
       },
       {
-        "path": "04-testing/results/initialize-dryrun_20260130_175553.txt",
-        "type": "other",
-        "story_tags": []
-      },
-      {
-        "path": "04-testing/results/project-folder-picture_20260130_175553.md",
+        "path": ".archive/04-testing-artifacts/results/project-folder-picture_20260130_175553.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "05-implementation/archive/copilot-instructions-ORIGINAL-20260129.md",
+        "path": "docs/references/guides/MIGRATION-GUIDE-v1.0-to-v1.3.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "15-cdc/sessions/artifact-deployment/session_state.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/backups/31-eva-faces/copilot-instructions_20260223_131448.md",
+        "path": "docs/references/guides/MIGRATION-GUIDE-v1.3-to-v1.7.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/backups/29-foundry/copilot-instructions_20260223_131448.md",
+        "path": "templates/docs/PATH-FIX-IMPLEMENTATION-SUMMARY.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/backups/37-data-model/copilot-instructions_20260223_131448.md",
+        "path": "templates/docs/template-v2-usage-guide.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/backups/33-eva-brain-v2/copilot-instructions_20260223_131448.md",
+        "path": "templates/docs/WORKSPACE-TEMPLATE-GUIDE.md",
         "type": "doc",
         "story_tags": []
       },
       {
-        "path": "02-design/artifact-templates/backups/38-ado-poc/copilot-instructions_20260223_131448.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/backups/39-ado-dashboard/copilot-instructions_20260223_131448.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/backups/43-spark/copilot-instructions_20260223_131448.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/backups/44-eva-jp-spark/copilot-instructions_20260223_131448.md",
-        "type": "doc",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/session_state.json",
+        "path": ".archive/15-cdc/sessions/artifact-deployment/session_state.json",
         "type": "data",
         "story_tags": []
       },
       {
-        "path": "15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260202_115337.json",
+        "path": ".archive/15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260202_115337.json",
         "type": "data",
         "story_tags": []
       },
       {
-        "path": "15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260202_115337.json",
+        "path": ".archive/15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260202_115337.json",
         "type": "data",
         "story_tags": []
       },
       {
-        "path": "15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260202_115337.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260129_230147.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_074655.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_081013.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_083119.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_083243.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_analysis_complete_20260130_083247.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260129_230147.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_074655.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_081013.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_083119.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_083243.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_paths_validated_20260130_083247.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260129_230147.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_074655.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_081013.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_083119.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_083243.json",
-        "type": "data",
-        "story_tags": []
-      },
-      {
-        "path": "02-design/artifact-templates/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260130_083247.json",
+        "path": ".archive/15-cdc/sessions/artifact-deployment/checkpoints/checkpoint_source_validated_20260202_115337.json",
         "type": "data",
         "story_tags": []
       }
@@ -1384,7 +1872,7 @@
       "F07-02-001": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1413,7 +1901,7 @@
       "F07-02-002": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1442,7 +1930,7 @@
       "F07-02-003": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1471,7 +1959,7 @@
       "F07-02-004": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1500,7 +1988,7 @@
       "F07-03-001": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1529,7 +2017,7 @@
       "F07-03-002": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1558,7 +2046,7 @@
       "F07-03-003": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1587,7 +2075,7 @@
       "F07-03-004": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1616,7 +2104,7 @@
       "F07-03-005": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1645,7 +2133,7 @@
       "F07-03-006": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1674,7 +2162,7 @@
       "F07-05-001": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1703,7 +2191,7 @@
       "F07-05-002": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1732,7 +2220,7 @@
       "F07-06-001": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1761,7 +2249,7 @@
       "F07-06-002": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1790,7 +2278,7 @@
       "F07-06-003": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1819,7 +2307,7 @@
       "F07-06-004": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1848,7 +2336,7 @@
       "F07-07-001": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1877,7 +2365,7 @@
       "F07-08-001": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1906,7 +2394,7 @@
       "F07-08-002": {
         "artifacts": [
           {
-            "path": "02-design/artifact-templates/Apply-Project07-Artifacts.ps1",
+            "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
             "type": "code",
             "story_tags": [
               "F07-02-001",
@@ -1933,6 +2421,7 @@
         ]
       }
     },
-    "commit_evidence_map": {}
+    "commit_evidence_map": {},
+    "code_complexity": {}
   }
 }

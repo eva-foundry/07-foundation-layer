@@ -36,7 +36,7 @@
    - Performance analysis
    - FAQ + implementation checklist
 
-2. `C:\AICOE\.github\copilot-instructions.md` (Updated)
+2. `C:\eva-foundry\.github\copilot-instructions.md` (Updated)
    - New Session Bootstrap section
    - API-first approach documented
    - 2 PowerShell query examples inline

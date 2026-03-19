@@ -17,7 +17,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useLang } from '@context/LangContext';
+import { useLiterals } from '@hooks/useLiterals';
 import { update{{LAYER_TITLE}}Record } from '@api/{{LAYER_NAME}}Api';
 import type { {{ENTITY_TYPE}}, Update{{ENTITY_TYPE}}Input } from '@/types/{{LAYER_NAME}}';
 
@@ -37,17 +37,7 @@ const GC_ERROR   = '#d4351c';
 const GC_SUCCESS = '#00703c';
 
 export const {{LAYER_TITLE}}EditForm: React.FC<{{LAYER_TITLE}}EditFormProps> = ({ record, onSuccess, onCancel }) => {
-  const { lang } = useLang();
-
-  const t = {
-    title:       lang === 'fr' ? 'Modifier l\\'enregistrement' : 'Edit record',
-    submit:      lang === 'fr' ? 'Enregistrer' : 'Save',
-    cancel:      lang === 'fr' ? 'Annuler' : 'Cancel',
-    required:    lang === 'fr' ? 'Champ obligatoire' : 'This field is required',
-    submitting:  lang === 'fr' ? 'Mise à jour en cours...' : 'Updating...',
-    error:       lang === 'fr' ? 'Erreur lors de la mise à jour' : 'Failed to update record',
-    noChanges:   lang === 'fr' ? 'Aucune modification détectée' : 'No changes detected',
-  };
+  const t = useLiterals('{{LAYER_NAME}}.edit_form');
 
   const [formData, setFormData] = useState<Partial<Update{{ENTITY_TYPE}}Input>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});

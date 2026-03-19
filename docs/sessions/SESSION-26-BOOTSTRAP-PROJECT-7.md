@@ -132,7 +132,7 @@
 - Add section: "Bootstrap Approach" pointing to BOOTSTRAP-API-FIRST.md
 - Update: "Session Bootstrap (MANDATORY)" to reference cloud queries
 - Verify: All references to cloud endpoint are current
-- **Artifact**: C:\AICOE\.github\copilot-instructions.md (update)
+- **Artifact**: C:\eva-foundry\.github\copilot-instructions.md (update)
 - **Time**: ~5 minutes
 
 **Status**: Blocked by P0 (need L33/L25 seeded first so queries work)

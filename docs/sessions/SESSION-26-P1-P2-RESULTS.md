@@ -183,7 +183,7 @@ Data Retrieved:              Scattered across files
 
 ### File 2: Updated copilot-instructions.md ✅
 
-**Location**: `C:\AICOE\.github\copilot-instructions.md`
+**Location**: `C:\eva-foundry\.github\copilot-instructions.md`
 
 **Changes**:
 - Replaced old-only file-based bootstrap with API-first approach
@@ -336,7 +336,7 @@ python tests/test-bootstrap-api.py
 |------|--------|--------|
 | `07-foundation-layer/.github/BOOTSTRAP-API-FIRST.md` | Created | ✅ |
 | `07-foundation-layer/tests/test-bootstrap-api.py` | Created | ✅ |
-| `C:\AICOE\.github\copilot-instructions.md` | Updated | ✅ |
+| `C:\eva-foundry\.github\copilot-instructions.md` | Updated | ✅ |
 | `docs/sessions/test-results-S26-P2.json` | Created (auto) | ✅ |
 | `docs/sessions/SESSION-26-P1-P2-RESULTS.md` | This file | ✅ |
 

@@ -1,0 +1,1032 @@
+{
+  "meta": {
+    "schema": "eva.export-to-model.v1",
+    "generated_at": "2026-03-08T02:01:06.444Z",
+    "project_id": "07-foundation-layer",
+    "source_files": [
+      "STATUS.md",
+      "PLAN.md"
+    ],
+    "discovery_path": "C:\\eva-foundry\\eva-foundry\\07-foundation-layer\\.eva\\discovery.json",
+    "reconciliation_path": "C:\\eva-foundry\\eva-foundry\\07-foundation-layer\\.eva\\reconciliation.json",
+    "layers_selected": [
+      "wbs",
+      "evidence",
+      "decisions",
+      "risks"
+    ]
+  },
+  "wbs": [
+    {
+      "id": "WBS-07foundationlayer",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": null,
+      "label": "Project: 07-foundation-layer",
+      "level": "epic",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 57,
+      "points_done": 0,
+      "stories_total": 19,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F01",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Goal",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 0,
+      "points_done": 0,
+      "stories_total": 0,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F02",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Key Discovery Findings",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 12,
+      "points_done": 0,
+      "stories_total": 4,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S001",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F02",
+      "label": "**?? CRITICAL Pattern #1: Windows Enterprise Encoding Safety**",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-02-001",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S002",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F02",
+      "label": "**? Pattern #2: Professional Component Architecture**",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-02-002",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S003",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F02",
+      "label": "**? Pattern #3: Zero-Setup Execution**",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-02-003",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S004",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F02",
+      "label": "**?? Patterns Pending Broader Validation**",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-02-004",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F03",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Project Phases",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 18,
+      "points_done": 0,
+      "stories_total": 6,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S005",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F03",
+      "label": "Phase 1: Discovery (?? IN PROGRESS)",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-03-001",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S006",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F03",
+      "label": "Phase 2: Design (complete - January 29, 2026)",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-03-002",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S007",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F03",
+      "label": "Phase 5: Workspace Management (? TESTED - v1.5.2 - January 30, 2026)",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-03-003",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S008",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F03",
+      "label": "Phase 3: Development (? COMPLETE - January 29, 2026)",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-03-004",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S009",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F03",
+      "label": "Phase 4: Testing (? READY - Pester 5.x Upgraded)",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-03-005",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S010",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F03",
+      "label": "Phase 5: Implementation (?? ON HOLD - Waiting for Testing)",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-03-006",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F04",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Project Structure",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 0,
+      "points_done": 0,
+      "stories_total": 0,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F05",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Success Criteria",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 6,
+      "points_done": 0,
+      "stories_total": 2,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S011",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F05",
+      "label": "**Primary Success Metrics**",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-05-001",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S012",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F05",
+      "label": "**Secondary Success Metrics**",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-05-002",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F06",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Deploying Project 07 to Other Projects",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 12,
+      "points_done": 0,
+      "stories_total": 4,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S013",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F06",
+      "label": "Quick Deployment Guide",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-06-001",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S014",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F06",
+      "label": "Deployment Decision Tree",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-06-002",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S015",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F06",
+      "label": "What Gets Deployed",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-06-003",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S016",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F06",
+      "label": "Supported Project Types",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-06-004",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F07",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Troubleshooting",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "stories_total": 1,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S017",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F07",
+      "label": "Common Issues",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-07-001",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F08",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "References",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 6,
+      "points_done": 0,
+      "stories_total": 2,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S018",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F08",
+      "label": "Deployment Tools",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-08-001",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-S019",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-F08",
+      "label": "Documentation",
+      "level": "user_story",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 3,
+      "points_done": 0,
+      "acceptance_criteria": null,
+      "original_story_id": "F07-08-002",
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    },
+    {
+      "id": "WBS-F09",
+      "project_id": "07-foundation-layer",
+      "parent_wbs_id": "WBS-07foundationlayer",
+      "label": "Change Log",
+      "level": "feature",
+      "status": "planned",
+      "percent_complete": 0,
+      "points_total": 0,
+      "points_done": 0,
+      "stories_total": 0,
+      "stories_done": 0,
+      "created_at": "2026-03-08T02:01:06.446Z",
+      "updated_at": "2026-03-08T02:01:06.446Z"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVD-07foundationlayer-D3-001",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-02-001",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-002",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-02-002",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-003",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-02-003",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-004",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-02-004",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-005",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-03-001",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-006",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-03-002",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-007",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-03-003",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-008",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-03-004",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-009",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-03-005",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-010",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-03-006",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-011",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-05-001",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-012",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-05-002",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-013",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-06-001",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-014",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-06-002",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-015",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-06-003",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-016",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-06-004",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-017",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-07-001",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-018",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-08-001",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.446Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    },
+    {
+      "id": "EVD-07foundationlayer-D3-019",
+      "project_id": "07-foundation-layer",
+      "phase": "D3",
+      "story_id": "F07-08-002",
+      "status": "documented",
+      "test_count": 0,
+      "test_passed": 0,
+      "coverage": null,
+      "timestamp": "2026-03-08T02:01:06.447Z",
+      "actor": "agent:veritas",
+      "source": "veritas-export",
+      "evidence_artifacts": [
+        {
+          "path": "scripts/deployment/Apply-Project07-Artifacts.ps1",
+          "type": "code",
+          "is_test": false
+        }
+      ],
+      "commit_refs": [],
+      "created_at": "2026-03-08T02:01:06.447Z",
+      "updated_at": "2026-03-08T02:01:06.447Z"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "07-foundation-layer-ADR-004",
+      "project_id": "07-foundation-layer",
+      "title": "Professional Transformation Methodology",
+      "date": "January 23, 2026",
+      "status": "adopted",
+      "context": "Project 06 (JP Auto-Extraction) demonstrated a systematic methodology for transforming development scripts into enterprise-grade systems. This methodology includes specific patterns for file organization, error handling, evidence collection, and operational excellence that should be standardized across all EVA projects.",
+      "decision": "Adopt the Professional Transformation Methodology as the standard framework for all EVA projects, consisting of:",
+      "consequences": "### Positive\r\n- Consistent professional quality across all EVA projects\r\n- Reduced onboarding time for new developers\r\n- Improved debugging capability through systematic evidence collection\r\n- Enterprise Windows compatibility by default\r\n- Self-validating project deliverables",
+      "alternatives_considered": [],
+      "superseded_by": null,
+      "deciders": [
+        "Marco Presta",
+        "Project 07 Team"
+      ],
+      "tags": [
+        "governance",
+        "veritas-export"
+      ],
+      "related_wbs_ids": [],
+      "evidence_path": "07-foundation-layer/docs/architecture-decisions/ADR-004-Professional-Transformation-Methodology.md",
+      "notes": "Extracted from 07-foundation-layer/docs/architecture-decisions/ADR-004-Professional-Transformation-Methodology.md by Veritas export-to-model",
+      "created_at": "2026-03-08T02:01:06.656Z",
+      "updated_at": "2026-03-08T02:01:06.656Z"
+    },
+    {
+      "id": "07-foundation-layer-ADR-005",
+      "project_id": "07-foundation-layer",
+      "title": "Dependency Management Strategy",
+      "date": "January 23, 2026",
+      "status": "adopted",
+      "context": "Enterprise environments often have pip installation restrictions, SSL certificate issues, and limited access to external package repositories. Project 06 revealed the need for a dependency management strategy that targets full functionality while providing practical workarounds for installation issues, rather than reduced functionality phases.",
+      "decision": "Adopt a \"Target Best, Provide Alternatives\" dependency management strategy:",
+      "consequences": "### Positive\r\n- Solutions always target full capability\r\n- Clear documentation of installation alternatives\r\n- DevBox provides consistent development environment\r\n- No artificial feature limitations\r\n- Professional installation guidance",
+      "alternatives_considered": [],
+      "superseded_by": null,
+      "deciders": [
+        "Marco Presta",
+        "Project 07 Team"
+      ],
+      "tags": [
+        "governance",
+        "veritas-export"
+      ],
+      "related_wbs_ids": [],
+      "evidence_path": "07-foundation-layer/docs/architecture-decisions/ADR-005-Dependency-Management-Strategy.md",
+      "notes": "Extracted from 07-foundation-layer/docs/architecture-decisions/ADR-005-Dependency-Management-Strategy.md by Veritas export-to-model",
+      "created_at": "2026-03-08T02:01:06.656Z",
+      "updated_at": "2026-03-08T02:01:06.656Z"
+    }
+  ],
+  "risks": [
+    {
+      "id": "07-foundation-layer-R001",
+      "project_id": "07-foundation-layer",
+      "title": "Pester 5.x version unconfirmed on this machine",
+      "description": "Pester 5.x version unconfirmed on this machine",
+      "category": "technical",
+      "probability": "Medium",
+      "impact": "Medium",
+      "risk_score": 9,
+      "status": "open",
+      "mitigation": "Run: `Get-Module -ListAvailable Pester` -- if < 5.x install it",
+      "mitigation_owner": null,
+      "due_date": null,
+      "sprint_id": null,
+      "wbs_ids": [],
+      "notes": "Extracted from STATUS.md by Veritas export-to-model",
+      "created_at": "2026-03-08T02:01:06.658Z",
+      "updated_at": "2026-03-08T02:01:06.658Z"
+    },
+    {
+      "id": "07-foundation-layer-R002",
+      "project_id": "07-foundation-layer",
+      "title": "No Veritas story plan for project 07",
+      "description": "No Veritas story plan for project 07",
+      "category": "technical",
+      "probability": "Medium",
+      "impact": "Medium",
+      "risk_score": 9,
+      "status": "open",
+      "mitigation": "Create `.eva/plan.json` with feature/story definitions",
+      "mitigation_owner": null,
+      "due_date": null,
+      "sprint_id": null,
+      "wbs_ids": [],
+      "notes": "Extracted from STATUS.md by Veritas export-to-model",
+      "created_at": "2026-03-08T02:01:06.658Z",
+      "updated_at": "2026-03-08T02:01:06.658Z"
+    },
+    {
+      "id": "07-foundation-layer-R003",
+      "project_id": "07-foundation-layer",
+      "title": "Phase 1 discovery incomplete (ecosystem survey)",
+      "description": "Phase 1 discovery incomplete (ecosystem survey)",
+      "category": "technical",
+      "probability": "Medium",
+      "impact": "Medium",
+      "risk_score": 9,
+      "status": "open",
+      "mitigation": "Low priority given tool adoption via Reseed script",
+      "mitigation_owner": null,
+      "due_date": null,
+      "sprint_id": null,
+      "wbs_ids": [],
+      "notes": "Extracted from STATUS.md by Veritas export-to-model",
+      "created_at": "2026-03-08T02:01:06.658Z",
+      "updated_at": "2026-03-08T02:01:06.658Z"
+    },
+    {
+      "id": "07-foundation-layer-R004",
+      "project_id": "07-foundation-layer",
+      "title": "37-data-model copilot-instructions.md deleted",
+      "description": "37-data-model copilot-instructions.md deleted",
+      "category": "technical",
+      "probability": "Medium",
+      "impact": "Medium",
+      "risk_score": 9,
+      "status": "open",
+      "mitigation": "Re-run: `.\\Reseed-Projects.ps1 -Projects \"37-data-model\"`",
+      "mitigation_owner": null,
+      "due_date": null,
+      "sprint_id": null,
+      "wbs_ids": [],
+      "notes": "Extracted from STATUS.md by Veritas export-to-model",
+      "created_at": "2026-03-08T02:01:06.658Z",
+      "updated_at": "2026-03-08T02:01:06.658Z"
+    }
+  ],
+  "summary": {
+    "wbs_count": 29,
+    "evidence_count": 19,
+    "decisions_count": 2,
+    "risks_count": 4,
+    "mti_score": null
+  }
+}

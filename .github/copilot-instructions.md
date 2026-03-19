@@ -2,7 +2,7 @@
 
 # GitHub Copilot Instructions -- 07-foundation-layer
 
-**Last Updated**: 2026-03-19T20:59:30Z  
+**Last Updated**: 2026-03-19T21:51:54Z  
 **Project**: 07-foundation-layer | Path: C:\eva-foundry\07-foundation-layer\  
 **Role**: Workspace foundation, priming, template, and governance-tooling owner
 
@@ -52,7 +52,8 @@ Current operational priority:
 - Treat the promoted Project 37 runtime proof for sparse `project_work` sprint/countdown filtering and `GET /model/domain-views` as established closure input for the GovOps remediation lane and Sprint 9 promotion gate; public L112-L120 route completeness is now also proven live on the promoted ACA revision, and the remaining Project 37 certification work is downstream handoff proof and acceptance for Project 60 plus audit-grade evidence discipline.
 - Treat the current cloud inventory as an explicit certification metric: the live API now proves 122 layers plus queryable workflow-definition, run, signal, transition, gate-result, and preflight records, so the next gate is not route availability but whether the workflow plane is complete enough to support a paperless basic-engine go-live claim without audit or handoff gaps.
 - Treat the Project 19 kernel engine as a live cloud dependency that is now available and reachable through `/health`, `/ready`, workflow routes, and signal routes; the remaining certification question is end-to-end persistence and fail-closed behavior, not basic deployment reachability.
-- Treat the deterministic Project 19 GitHub workflow as a separate certification surface from raw ACA reachability: repo state has been repaired to the active ACA FQDN and `/api/v1` callback routes, but remote main still failed under runs `23316487998` and `23316707313` while the stale workflow remained unpromoted.
+- Treat the deterministic Project 19 GitHub workflow as a separate certification surface from raw ACA reachability: remote main now carries the repaired ACA FQDN plus `/api/v1` callback routes and the follow-on repo-side signal fixes through commit `f9bc2b8`, workflow run `23317407539` proved the repaired entrypoint, but later runs `23317577525` and `23317816738` still failed at first signal emission with `504 stream timeout`, so the remaining blocker is stale runtime promotion rather than workflow YAML drift.
+- Treat Project 19 deployment credential sourcing as an explicit certification gate: deploy runs `23317567533` and `23317812400` failed at `Login to ACR` with `Username and password required`, and the current operator posture is that the required GitHub deployment credentials exist in Key Vault and must be wired into the governed deploy path before Project 19 cloud certification can close.
 - Treat Project 37 Sprint 11 as an active downstream-enablement packet, not a ready-only packet: Project 07 should plan around explicit Project 60 handoff closure rather than reopening either the resolved GovOps runtime gate or the now-proven public route contract.
 - Require a deterministic Sprint 9 promotion gate for `57-FKTE`: clean baseline, current Sprint 8 closure evidence, no authority drift, and no higher-priority dependency remediation emerging from Discover.
 - Publish and maintain one operator-readable audit closure matrix for the four mandatory paperless audits so cutover readiness can be checked objectively.
@@ -60,7 +61,7 @@ Current operational priority:
 - Use the first successful governed onboarding workflow run for `37-data-model` as the certification baseline for Sprint 2 execution targeting `07-foundation-layer`.
 - Certify the Project 19 onboarding workflow as an active execution path, confirming that Sprint 2 artifacts, summaries, and any later cloud-agent handoff preserve the active cycle correlation ID.
 - Treat the corrected non-dry-run `07-foundation-layer` packet, the bounded non-dry-run `19-ai-gov` packet, and the bounded non-dry-run `48-eva-veritas` packet as completed certification gates.
-- Keep Project 37 and Project 19 live runtime health in scope during certification, but treat `POST /model/admin/commit` recovery and kernel-engine reachability as proven; remaining checks should focus on end-to-end field, signal, workflow, and preflight persistence, Project 60 handoff acceptance, audit evidence discipline, and no disk-authority leakage.
+- Keep Project 37 and Project 19 live runtime health in scope during certification, but treat `POST /model/admin/commit` recovery and kernel-engine reachability as proven; remaining checks should focus on end-to-end field, signal, workflow, and preflight persistence, Project 60 handoff acceptance, audit evidence discipline, no disk-authority leakage, and successful Key Vault-backed deployment credential handoff into the Project 19 GitHub deploy path.
 
 This project should not blindly overwrite project-specific content once a repository has its own authoritative instructions.
 

@@ -1,261 +1,101 @@
 # 07-foundation-layer -- EVA Foundation Layer
 
+<!-- markdownlint-configure-file {"MD012": false} -->
 <!-- eva-primed -->
-<!-- foundation-primer: 2026-03-03 by agent:copilot -->
+<!-- project07-readme-reviewed: 2026-03-15 by agent:copilot -->
 
-## EVA Ecosystem Integration
+Project 07 is the live foundation and priming surface for the EVA workspace. Its current job is to maintain the workspace authority template, the project authority template, the governance scaffolding templates, and the scripts that safely repair or prime numbered projects.
 
-| Tool | Purpose | How to Use |
-|------|---------|------------|
-| 37-data-model | Single source of truth for all project entities | Cloud: https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io/model/projects/07-foundation-layer (localhost:8010 disabled) |
-| 29-foundry | Agentic capabilities (search, RAG, eval, observability) | C:\AICOE\eva-foundation\29-foundry |
-| 48-eva-veritas | Trust score and coverage audit | MCP tool: audit_repo / get_trust_score |
-| 07-foundation-layer | Copilot instructions primer + governance templates | MCP tool: apply_primer / audit_project |
+## Current Role
 
-**Agent rule**: Read governance docs (README, PLAN, STATUS, ACCEPTANCE) for project context. Data model API query is optional supplementary context - if cloud endpoint times out, continue with governance docs.
+- Build and repair project instruction contracts with a clear workspace-versus-project authority split.
+- Prime managed governance artifacts without blindly overwriting user-managed project content.
+- Validate the active Project 07 operator path before any change propagates across the workspace.
+- Keep retired migration-era, legacy multi-section, and old MCP-era operator surfaces out of the active path.
 
----
+## Active Surface
 
+The current live entry points are:
 
-**Owner**: Marco Presta / EVA AI COE
-**Status**: Active -- Workspace PM/Scrum Master -- Governance Toolchain Owner
-**Last Updated**: 2026-03-07 (Session 38 - Reorganized for clarity and maintainability)
-**Plan**: [PLAN.md](PLAN.md)
-**History**: [docs/](docs/) (discovery reference, architecture decisions)
+- `scripts/deployment/Bootstrap-Project07.ps1`
+- `scripts/deployment/Apply-Project07-Artifacts.ps1`
+- `scripts/deployment/Invoke-PrimeWorkspace.ps1`
+- `scripts/deployment/Reseed-Projects.ps1`
+- `scripts/testing/Test-Project07-Deployment.ps1`
+- `templates/copilot-instructions-template.md`
+- `templates/copilot-instructions-workspace-template.md`
+- `templates/governance/`
 
----
+See `PROJECT-ORGANIZATION.md` for the current structure contract.
 
-## Project Structure (Session 38 Reorganization)
+## Authority Model
 
-```
-07-foundation-layer/
-├── scripts/                          Production automation scripts
-│   ├── deployment/                   Workspace deployment & priming
-│   ├── utilities/                    Supporting utilities
-│   ├── testing/                      Test suite
-│   ├── planning/                     Sprint automation
-│   └── data-seeding/                Data model seeding
-├── templates/                        Production template library
-│   ├── copilot-instructions-template.md
-│   ├── professional-runner-template.py
-│   ├── supported-folder-structure-rag.json
-│   ├── docker/                      Docker templates
-│   └── docs/                        Template usage guides
-├── docs/                            Reference & discovery
-│   ├── architecture-decisions/      ADRs (design decisions)
-│   ├── discovery-reference/         Discovery phase documentation
-│   └── patterns/                    Pattern library
-├── .archive/                        Superseded items
-│   ├── session-37/                 Session 37 completion docs
-│   ├── old-backups/                Version backups
-│   ├── diagnostics/                Diagnostic reports
-│   └── testing-2026-01/            Old test results
-├── .github/                         GitHub configuration
-│   ├── copilot-instructions.md     Project-level AI guidance
-│   ├── copilot-skills/             AI agent skills
-│   ├── workflows/                  GitHub Actions
-│   └── discussion_templates/       Issue/PR templates
-├── tests/                          Test scripts & results
-├── PLAN.md                         Sprint plan
-├── STATUS.md                       Progress tracking
-├── ACCEPTANCE.md                   Governance checkpoints
-└── CHANGELOG.md                    Version history
-```
+Project 07 follows a strict split.
 
----
+- Workspace authority belongs in the workspace-level instructions.
+- Project authority belongs in each project-level `.github/copilot-instructions.md` file.
+- Project priming preserves `Project-Owned Context` instead of flattening project meaning into a generic scaffold.
+- Governed truth is API-first. Local `PLAN.md`, `STATUS.md`, and `ACCEPTANCE.md` are continuity artifacts, not the source of truth.
 
----
+The data model authority for Project 07 is the Project 37 API record at [Project 07 record](https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io/model/projects/07-foundation-layer).
 
-## Latest Achievement: EVA Factory Configuration-as-Product System
+## Recommended Workflow
 
-[x] **Session 7 (2026-03-03 19:39 ET)**: Transformed EVA Factory into a **fully portable, configuration-driven product**.
+Use this sequence for Project 07 changes and for workspace repair work.
 
-**What Changed**:
-- **Before**: Hardcoded paths (`.eva/evidence`), field names, schedules, thresholds in Python code
-- **After**: All configuration in YAML, code is workspace/environment-agnostic
-- **Result**: Same EVA Factory codebase deployed across unlimited workspaces without modification
+1. Run `scripts/deployment/Bootstrap-Project07.ps1`.
+2. Run `scripts/testing/Test-Project07-Deployment.ps1`.
+3. Dry-run priming first with `scripts/deployment/Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\eva-foundry" -ManagedArtifactsOnly -DryRun`, or target one project.
+4. Apply only after the dry-run is clean.
+5. Re-run the validator after any Project 07 script or template change.
 
-**Key Deliverables**:
-1. `eva-factory.config.yaml` - Configuration template for all deployment parameters
-2. `scripts/config_loader.py` - Unified config management library (287 lines)
-3. `scripts/sync-evidence-all-projects.py` - Refactored to use configuration (565 lines)
-4. `DEPLOYMENT-GUIDE.md` - Complete deployment documentation (800+ lines)
+For fallout repair across numbered projects, prefer `-ManagedArtifactsOnly` so managed artifacts are repaired without re-touching user-managed project files.
 
-**Coverage**: 
-- [x] Phase 1: Evidence backfill (63 records from 51-ACA)
-- [x] Phase 2: Sync automation (GitHub Actions + Azure Pipelines)
-- [x] Phase 3: Portfolio-wide orchestrator (configuration-driven, all 54 projects)
-- [x] Phase 4: Projects registry sync (50 -> 56 projects, 51-ACA registered)
+## Validation
 
-**Impact**: EVA Factory can now be deployed as a true independent product across any environment (Kubernetes, Docker, on-prem, cloud) with zero code changes--only config file changes.
+The active Project 07 smoke validator checks:
 
----
+- required live files exist
+- active scripts parse successfully
+- template markers are present
+- bootstrap runs cleanly
+- workspace prime dry-run works
+- single-project apply dry-run works
+- stale live operator references are not reintroduced
 
-## Purpose
-
-**07-Foundation-Layer is the Workspace PM/Scrum Master** -- the first touch on all new EVA projects.
-
-### Core Responsibilities
-
-1. **Project Scaffolding** (initial setup for any new EVA project):
-   - README, PLAN, STATUS, ACCEPTANCE, CHANGELOG
-   - Copilot instructions template (PART 1/PART 2/PART 3 structure)
-   - Skills integration (from 29-foundry + proven project patterns)
-   - Data model registration (37-data-model WBS layer seeding)
-   - Veritas readiness (48-eva-veritas MTI gating setup)
-
-2. **Governance Toolchain Ownership** (infrastructure serving all projects):
-   - **36-red-teaming** -- Promptfoo adversarial testing harness
-   - **37-data-model** -- Single source of truth API (Cosmos-backed, 27+ layers)
-   - **38-ado-poc** -- ADO Command Center (scrum orchestration hub)
-   - **39-ado-dashboard** -- EVA Home + sprint visualization
-   - **40-eva-control-plane** (partial) -- Runtime evidence spine
-   - **48-eva-veritas** -- Requirements traceability + MTI gating
-
-3. **Pattern Propagation** (capturing and distributing proven patterns):
-   - Template v3.4.0 with 18-azure-best integration
-   - Seeder scripts (Reseed-Projects.ps1 deploys to 12 active projects)
-   - Workspace management tools (scaffold, capture, housekeeping)
-   - Pattern library: encoding safety, professional components, evidence collection
-
-### The EVA Factory Architecture
-
-**Process**: DPDCA (Discover, Plan, Do, Check, Act) -- deterministic execution loop  
-**Data**: 37-data-model -- single source of truth (27+ layers describing ANY software project)  
-**Actors**: Agent Skills (sprint-advance, gap-report, veritas-expert, progress-report, sprint-report)  
-**Result**: Predictable, traceable, auditable software delivery at scale
-
-**This is not code vibes. This is data-driven AI-enabled Software Engineering and Software Factories.**
-
----
-
-## Key Artefacts
-
-| Artefact | Path | Version | Notes |
-|---|---|---|---|
-| Copilot instructions template | 02-design/artifact-templates/copilot-instructions-template.md | v3.2.0 | ACA-first, lean PART 1/2/3 |
-| Seeder script | scripts/Reseed-Projects.ps1 | v1.0.0 | -Scope active reseeds 12 projects |
-| Apply primer | 02-design/artifact-templates/Apply-Project07-Artifacts.ps1 | v1.4.0 | project-type detection, backup, DryRun |
-| Test suite | 02-design/artifact-templates/Test-Project07-Deployment.ps1 | v1.0.0 | 60+ Pester 5.x cases |
-| Push script | scripts/Push-CopilotInstructions.ps1 | -- | targeted single-project push |
-| MCP server | mcp-server/ | -- | foundation-primer; auto-starts via VS Code |
-| Workspace scaffold | 02-design/artifact-templates/Initialize-ProjectStructure.ps1 | v1.0.0 | JSON-driven |
-| Workspace capture | 02-design/artifact-templates/Capture-ProjectStructure.ps1 | v1.0.1 | snapshot generator |
-| Housekeeping | 02-design/artifact-templates/Invoke-WorkspaceHousekeeping.ps1 | v1.0.0 | compliance + auto-organise |
-
----
-
-## Quickstart
-
-### Deploy template to a project
+Primary validation command:
 
 ```powershell
-# Preview first (no writes)
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Apply-Project07-Artifacts.ps1" `
-     -TargetPath "C:\AICOE\eva-foundry\<project-folder>" -DryRun
-
-# Apply
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Apply-Project07-Artifacts.ps1" `
-     -TargetPath "C:\AICOE\eva-foundry\<project-folder>"
+powershell -ExecutionPolicy Bypass -File .\scripts\testing\Test-Project07-Deployment.ps1
 ```
 
-### Reseed all active projects (PART 1 + PART 3 only -- PART 2 preserved)
+Bootstrap check:
 
 ```powershell
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\scripts\Reseed-Projects.ps1" -Scope active
+powershell -ExecutionPolicy Bypass -File .\scripts\deployment\Bootstrap-Project07.ps1
 ```
 
-Expected: PASS=12 FAIL=0 for the current active project set.
+## Archive Policy
 
-### Scaffold a new project
+Historical but superseded material stays under `.archive/`.
 
-```powershell
-# Step 1 -- create folder structure from template
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Initialize-ProjectStructure.ps1" `
-     -ProjectRoot "C:\AICOE\eva-foundry\<new-project>" `
-     -TemplateFile "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\supported-folder-structure-rag.json"
+- The March 15 cleanup batch is preserved in `.archive/20260315_111500-project7-superseded-surfaces/`.
+- The historical Project 07 MCP prototype remains under `.archive/prototypes/mcp-server/`.
 
-# Step 2 -- deploy copilot instructions
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Apply-Project07-Artifacts.ps1" `
-     -TargetPath "C:\AICOE\eva-foundry\<new-project>"
-```
+If a file documents or drives a retired workflow, archive it instead of leaving it in the live operator path.
 
----
+## Related Files
 
-## Template Structure (v3.2.0)
+- `PLAN.md`
+- `STATUS.md`
+- `ACCEPTANCE.md`
+- `PROJECT-ORGANIZATION.md`
+- `.github/PROJECT-ORGANIZATION.md`
+- `.github/copilot-skills/foundation-expert.skill.md`
 
-```
-PART 1: Universal rules (encoding, data model API, Python env, Azure account)
-PART 2: Project-specific placeholder (filled per project; preserved on reseed)
-PART 3: Quality gates checklist
-```
+## Status
 
-PART 1 is managed here and pushed by the seeder.
-PART 2 belongs to each individual project and is never overwritten.
-
----
-
-## Phase Status
-
-| Phase | Status | Notes |
-|---|---|---|
-| 1 -- Discovery | [~] Formally open | Project 06 patterns extracted; broader ecosystem survey deferred |
-| 2 -- Design | [x] Complete | Template v3.2.0 (428 lines); ADRs and usage guide in 02-design/ |
-| 3 -- Development | [x] Complete | Apply primer (1,200+ lines) + Pester test suite (650+ lines) |
-| 4 -- Testing | [~] Ready | Test suite written; full Pester 5.x run pending |
-| 5 -- Workspace Mgmt | [x] Tested | Init / Capture / Housekeeping validated on Project 01 |
-| 6 -- Propagation | [x] Running | Reseed-Projects.ps1 active; 12 projects reseeded last run |
-
----
-
-## Open Items
-
-- Propagate v3.2.0 PART 2 corrections to 29-foundry and 44-eva-jp-spark
-  (PART 2 blocks still contain bare localhost:8010 references -- pre-date base pattern)
-- Run full Pester 5.x test suite (Install-Module Pester -MinimumVersion 5.0)
-- Add workspace management integration to Apply-Project07-Artifacts.ps1 (v1.6.0 target)
-- Create additional project-type templates: automation, api, infrastructure
-
----
-
-## Encoding Rule
-
-ASCII only. No emoji. No Unicode above U+007F. Applies to every file in this project.
-Output tokens: [PASS] / [FAIL] / [WARN] / [INFO]
-
----
-
-## Change Log
-
-| Date | Change |
-|---|---|
-| 2026-02-26 | README rewritten: ASCII-compliant, paths corrected to C:\AICOE, status synced to STATUS.md (v3.2.0, reseed PASS=12) |
-| 2026-02-25 | Template synced to v3.2.0 -- ACA-first throughout. Reseed PASS=12 FAIL=0. STATUS.md created. |
-| 2026-02-24 | Workspace copilot-instructions.md updated to v1.1.0 (ACA URL, Endpoint Lifecycle, Veritas MCP). |
-| 2026-02-23 | Template rewritten to v3.0.0 (lean 428 lines). Reseed-Projects.ps1 run on 12 active projects. |
-| 2026-01-30 | Workspace management scripts tested on Project 01. Phase 5 complete. |
-| 2026-01-29 | Phase 3 complete. Apply primer + test suite created. Self-referential copilot-instructions added. |
-| 2026-01-22 | Project initiated. |
-
----
-
-## Priming 51-ACA
-
-- **Purpose**: bootstrap the ACA integration project used for local dev and ACA-connected tests.
-- **What to create**: repository folder `51-ACA` with a minimal README, `.gitkeep`, and optional start scripts.
-- **Quick actions**:
-
-```powershell
-mkdir C:\AICOE\eva-foundry\51-ACA
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Apply-Project07-Artifacts.ps1" `
-     -TargetPath "C:\AICOE\eva-foundry\51-ACA" -DryRun
-```
-
-- **Next steps**: Run the readiness probe from this layer before wiring other projects to ACA. After verification, deploy PART 1 and PART 3 to `51-ACA` via the seeder scripts.
-
----
-
-## Notes
-
-- This README follows the ASCII-only encoding rule used across EVA projects.
+As of 2026-03-15, the active Project 07 surface has been reduced to the current priming, repair, and validation workflow. The retired workspace MCP helper dependency is no longer part of the live path, and the current validator plus bootstrap checks pass against the rebuilt surface.
+<!-- eof -->
+<!-- end -->
 

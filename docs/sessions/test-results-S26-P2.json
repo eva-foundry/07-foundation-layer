@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-03-05T17:55:41.555631",
+  "timestamp": "2026-03-07T13:25:40.359218",
   "scenarios": {
     "1_happy_path": {
       "status": "PASS",
-      "query1_time": 2.350388765335083,
-      "query2_time": 2.117988109588623,
-      "total_time": 4.468376874923706,
-      "workspace_projects": 56,
-      "workspace_active": 56,
-      "with_governance": 45
+      "query1_time": 1.5079169273376465,
+      "query2_time": 1.7427525520324707,
+      "total_time": 3.250669479370117,
+      "workspace_projects": 1,
+      "workspace_active": 0,
+      "with_governance": 0
     },
     "2_fallback_path": {
       "status": "PASS",
-      "file_read_time": 0.0020279884338378906,
+      "file_read_time": 0.0010006427764892578,
       "files_available": {
         "best_practices": true,
         "standards": true
@@ -21,25 +21,25 @@
     },
     "3_pagination": {
       "status": "READY",
-      "total_projects": 56,
+      "total_projects": 2,
       "implementation_phase": "Session 26 P0 (Project 37)"
     },
     "4_data_accuracy": {
-      "status": "PASS",
+      "status": "WARN",
       "workspace_valid": true,
       "projects_valid": true,
-      "governance_fields_present": true,
-      "acceptance_fields_present": true
+      "governance_fields_present": false,
+      "acceptance_fields_present": false
     }
   },
   "metrics": {
     "cloud_query_times": [
-      2.350388765335083,
-      2.117988109588623
+      1.5079169273376465,
+      1.7427525520324707
     ],
     "file_read_times": [
-      0.0020279884338378906
+      0.0010006427764892578
     ],
-    "performance_improvement_factor": 0.0004538534887732622
+    "performance_improvement_factor": 0.00030782667473260077
   }
 }

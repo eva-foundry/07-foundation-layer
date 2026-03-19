@@ -21,7 +21,7 @@ import { Nav{{LAYER_TITLE}}Header } from '@components/NavHeader';
 import { {{LAYER_TITLE}}Card } from '@components/{{LAYER_TITLE}}Card';
 import { {{LAYER_TITLE}}DetailDrawer } from '@components/{{LAYER_TITLE}}DetailDrawer';
 import { getDefault{{LAYER_TITLE}} } from '@eva/data-model-ui';
-import { useLang } from '@context/LangContext';
+import { useLiterals } from '@hooks/useLiterals';
 import type { {{ENTITY_TYPE}} } from '@eva/data-model-ui';
 
 // GC Design System colors
@@ -33,19 +33,7 @@ const GC_BLUE    = '#1d70b8';
 const GC_ERROR   = '#d4351c';
 
 export const {{LAYER_TITLE}}ListView: React.FC = () => {
-  const { lang } = useLang();
-
-  // i18n table -- {{LAYER_NAME}}.list.* keys
-  const t = {
-    title:        lang === 'fr' ? '{{LAYER_TITLE_FR}}' : '{{LAYER_TITLE}}',
-    subtitle:     lang === 'fr' ? 'Tous les enregistrements' : 'All records',
-    loading:      lang === 'fr' ? 'Chargement...' : 'Loading...',
-    error:        lang === 'fr' ? 'Erreur de chargement' : 'Failed to load records',
-    noResults:    lang === 'fr' ? 'Aucun enregistrement trouvé' : 'No records match the filters',
-    refreshedAt:  lang === 'fr' ? 'Mis à jour' : 'Refreshed',
-    recordCount:  lang === 'fr' ? 'enregistrements' : 'records',
-    filterAll:    lang === 'fr' ? 'Tous' : 'All',
-  };
+  const t = useLiterals('{{LAYER_NAME}}.list_view');
 
   const [records, setRecords]     = useState<{{ENTITY_TYPE}}[]>([]);
   const [refreshed, setRefreshed] = useState<string>('');

@@ -12,7 +12,7 @@ Reads README.md, PLAN.md, STATUS.md, ACCEPTANCE.md and rebuilds:
 Project Prefix (ID) Detection:
   1. --project-id argument:    python seed-from-plan.py --project-id "31-eva-faces"
   2. PROJECT_ID env var:       export PROJECT_ID="31-eva-faces"; python seed-from-plan.py
-  3. Folder name inference:    C:\AICOE\eva-foundry\51-ACA -> PROJECT_PREFIX="ACA"
+  3. Folder name inference:    C:\eva-foundry\51-ACA -> PROJECT_PREFIX="ACA"
   4. PLAN.md scan:             Look for "EPIC NN -- ..." to infer prefix
 
 Usage:

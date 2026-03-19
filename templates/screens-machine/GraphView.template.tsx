@@ -22,7 +22,7 @@
  */
 
 import React, { useMemo } from 'react';
-import { useLang } from '@context/LangContext';
+import { useLiterals } from '@hooks/useLiterals';
 import type { {{ENTITY_TYPE}} } from '@/types/{{LAYER_NAME}}';
 
 interface {{LAYER_TITLE}}GraphViewProps {
@@ -48,6 +48,7 @@ export const {{LAYER_TITLE}}GraphView: React.FC<{{LAYER_TITLE}}GraphViewProps> =
   records,
   visualizationType = 'bar',
 }) => {
+  const t = useLiterals('{{LAYER_NAME}}.graph_view');
   const { lang } = useLang();
 
   const t = {

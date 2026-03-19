@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "foundation-primer": {
-      "command": "C:\\AICOE\\.venv\\Scripts\\python.exe",
-      "args": ["server.py"],
-      "env": {}
-    }
-  }
-}

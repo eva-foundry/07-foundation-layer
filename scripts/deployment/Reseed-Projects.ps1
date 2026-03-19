@@ -1,10 +1,13 @@
 # Reseed-Projects.ps1
-# Version: 1.0.0 (February 23, 2026)
-# Applies the v3.0.0 copilot-instructions template to EVA Foundation numbered projects.
+# Version: 2.0.0 (March 15, 2026)
+# Refreshes copilot-instructions across numbered projects from the live Project 07 template.
 #
 # Strategy:
-#   - Projects WITH existing copilot-instructions.md: refresh PART 1 + PART 3, preserve PART 2
-#   - Projects WITHOUT: create from template substituting {PROJECT_NAME} etc.
+#   - Projects WITH existing copilot-instructions.md: refresh the managed foundation contract and preserve the
+#     project-owned context block.
+#   - Projects WITHOUT instructions: create from template substituting project placeholders.
+#   - Legacy PART-based files are converted by wrapping prior project-specific content into the new
+#     Project-Owned Context section.
 #
 # Usage:
 #   # Dry run (preview only):
@@ -31,9 +34,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$FOUNDATION   = "C:\AICOE\eva-foundation"
-$TEMPLATE     = "$FOUNDATION\07-foundation-layer\templates\copilot-instructions-template.md"
-$BACKUP_ROOT  = "$FOUNDATION\07-foundation-layer\.archive\02-design-artifacts\backups"
+$WorkspaceRoot = Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
+$FOUNDATION   = $WorkspaceRoot
+$TEMPLATE     = Join-Path $FOUNDATION "07-foundation-layer\templates\copilot-instructions-template.md"
+$BACKUP_ROOT  = Join-Path $FOUNDATION "07-foundation-layer\.archive\02-design-artifacts\backups"
 
 # ----- Active project list (update if registry changes) -----
 $ACTIVE_PROJECTS = @(
@@ -77,67 +81,80 @@ function Write-Log([string]$msg, [string]$type="INFO") {
 }
 
 function Split-TemplateContent([string]$content) {
-    # Returns hashtable: Part1, Part2, Part3
-    # Headers: "## PART 1 - UNIVERSAL RULES", "## PART 2 - PROJECT-SPECIFIC", "## PART 3 - QUALITY GATES"
-    $lines  = $content -split "`n"
-    $p1s = $p2s = $p3s = -1
+    $lines = $content -split "`n"
+    $ownedStart = -1
+    $validationStart = -1
+
     for ($i = 0; $i -lt $lines.Count; $i++) {
-        if ($lines[$i] -match '^## PART 1') { $p1s = $i }
-        if ($lines[$i] -match '^## PART 2') { $p2s = $i }
-        if ($lines[$i] -match '^## PART 3') { $p3s = $i }
+        if ($lines[$i] -match '^## Project-Owned Context') { $ownedStart = $i }
+        if ($lines[$i] -match '^## Validation Pattern') { $validationStart = $i }
     }
-    if ($p1s -lt 0 -or $p2s -lt 0 -or $p3s -lt 0) {
-        throw "[FAIL] Template missing PART 1/2/3 section headers"
+
+    if ($ownedStart -lt 0 -or $validationStart -lt 0) {
+        throw "[FAIL] Template missing Project-Owned Context or Validation Pattern section headers"
     }
+
     return @{
-        Header = ($lines[0..($p1s-1)] -join "`n").TrimEnd()
-        Part1  = ($lines[$p1s..($p2s-1)] -join "`n").TrimEnd()
-        Part2  = ($lines[$p2s..($p3s-1)] -join "`n").TrimEnd()
-        Part3  = ($lines[$p3s..($lines.Count-1)] -join "`n").TrimEnd()
+        Prefix        = ($lines[0..($ownedStart-1)] -join "`n").TrimEnd()
+        OwnedTemplate = ($lines[$ownedStart..($validationStart-1)] -join "`n").TrimEnd()
+        Suffix        = ($lines[$validationStart..($lines.Count-1)] -join "`n").TrimEnd()
     }
 }
 
-function Get-ExistingPart2([string]$filePath) {
+function Get-ExistingOwnedContext([string]$filePath) {
     # Returns:
-    #   $null          -> file does not exist (caller uses template PART 2)
-    #   [string]       -> existing PART 2 block to preserve
-    #     Case A: file has "## PART 2 ..." header  -> extract that section
-    #     Case B: file exists, no PART headers      -> wrap entire file content
+    #   $null    -> file does not exist (caller uses template owned-context block)
+    #   [string] -> existing owned-context block to preserve
+    # Supports both current and legacy PART-based files.
     if (-not (Test-Path $filePath)) { return $null }
     $content = Get-Content $filePath -Raw
-    $lines   = $content -split "`n"
-    $p2s = $p3s = -1
+    $lines = $content -split "`n"
+    $ownedStart = -1
+    $validationStart = -1
+    $p2s = -1
+    $p3s = -1
+
     for ($i = 0; $i -lt $lines.Count; $i++) {
+        if ($lines[$i] -match '^## Project-Owned Context') { $ownedStart = $i }
+        if ($lines[$i] -match '^## Validation Pattern') { $validationStart = $i }
         if ($lines[$i] -match '^## PART 2') { $p2s = $i }
         if ($lines[$i] -match '^## PART 3') { $p3s = $i }
     }
-    # Case A: structured file with ## PART 2 header
+
+    if ($ownedStart -ge 0 -and $validationStart -gt $ownedStart) {
+        return ($lines[$ownedStart..($validationStart-1)] -join "`n").TrimEnd()
+    }
+
     if ($p2s -ge 0) {
         $endIdx = if ($p3s -ge 0) { $p3s - 1 } else { $lines.Count - 1 }
-        return ($lines[$p2s..$endIdx] -join "`n").TrimEnd()
+        $legacyBody = ($lines[$p2s..$endIdx] -join "`n").TrimEnd()
+        return @"
+## Project-Owned Context
+
+This section was preserved from a legacy PART-based project instruction file.
+Review and normalize it during the next project-specific maintenance cycle.
+
+$legacyBody
+"@.TrimEnd()
     }
-    # Case B: existing file without PART structure - wrap as PART 2 body
-    return "## PART 2 - PROJECT-SPECIFIC`n> PRESERVED from previous copilot-instructions.md (no PART structure detected).`n> Review and restructure into the PART 2 sections below as needed.`n`n$($content.TrimEnd())"
+
+    return @"
+## Project-Owned Context
+
+This section was preserved from an older unstructured project instruction file.
+Review and normalize it during the next project-specific maintenance cycle.
+
+$($content.TrimEnd())
+"@.TrimEnd()
 }
 
-function Build-Header([string]$projectFolder, [string]$templateHeader) {
+function Expand-ProjectTokens([string]$projectFolder, [string]$content) {
     $meta = $PROJECT_META[$projectFolder]
     $name  = if ($meta) { $meta.name  } else { $projectFolder }
     $desc  = if ($meta) { $meta.desc  } else { "{PROJECT_ONE_LINE_DESCRIPTION}" }
     $stack = if ($meta) { $meta.stack } else { "{PROJECT_STACK}" }
-    return $templateHeader `
-        -replace '\{PROJECT_NAME\}',                $name `
-        -replace '\{PROJECT_ONE_LINE_DESCRIPTION\}', $desc `
-        -replace '\{PROJECT_FOLDER\}',              $projectFolder `
-        -replace '\{PROJECT_STACK\}',               $stack
-}
 
-function Build-NewPart2([string]$projectFolder, [string]$templatePart2) {
-    $meta = $PROJECT_META[$projectFolder]
-    $name  = if ($meta) { $meta.name  } else { $projectFolder }
-    $desc  = if ($meta) { $meta.desc  } else { "{PROJECT_ONE_LINE_DESCRIPTION}" }
-    $stack = if ($meta) { $meta.stack } else { "{PROJECT_STACK}" }
-    return $templatePart2 `
+    return $content `
         -replace '\{PROJECT_NAME\}',                $name `
         -replace '\{PROJECT_ONE_LINE_DESCRIPTION\}', $desc `
         -replace '\{PROJECT_FOLDER\}',              $projectFolder `
@@ -153,7 +170,7 @@ if (-not (Test-Path $TEMPLATE)) {
 
 $tmplContent = Get-Content $TEMPLATE -Raw
 $tmpl = Split-TemplateContent $tmplContent
-Write-Log "Template loaded - PART 1: $(($tmpl.Part1 -split "`n").Count) lines, PART 2: $(($tmpl.Part2 -split "`n").Count) lines, PART 3: $(($tmpl.Part3 -split "`n").Count) lines"
+Write-Log "Template loaded - Prefix: $(($tmpl.Prefix -split "`n").Count) lines, Project-Owned Context: $(($tmpl.OwnedTemplate -split "`n").Count) lines, Suffix: $(($tmpl.Suffix -split "`n").Count) lines"
 
 # Determine target list
 $targets = switch ($Scope) {
@@ -180,20 +197,28 @@ foreach ($folder in $targets) {
         Write-Log "$folder - project folder not found, skipping" "WARN"; $skip++; continue
     }
 
-    # Extract or generate PART 2
-    $existingPart2 = Get-ExistingPart2 $ciPath
-    $isNew = ($null -eq $existingPart2)
+    $existingOwnedContext = Get-ExistingOwnedContext $ciPath
+    $isNew = ($null -eq $existingOwnedContext)
 
-    $part2ToUse = if ($isNew) {
-        Build-NewPart2 $folder $tmpl.Part2
+    $ownedContextToUse = if ($isNew) {
+        Expand-ProjectTokens $folder $tmpl.OwnedTemplate
     } else {
-        $existingPart2
+        $existingOwnedContext
     }
 
-    $newHeader = Build-Header $folder $tmpl.Header
-    $assembled = "$newHeader`n`n$($tmpl.Part1)`n`n$part2ToUse`n`n$($tmpl.Part3)"
+    $prefix = Expand-ProjectTokens $folder $tmpl.Prefix
+    $suffix = Expand-ProjectTokens $folder $tmpl.Suffix
+    $assembled = "$prefix`n`n$ownedContextToUse`n`n$suffix"
 
-    $action = if ($isNew) { "CREATE (new from template)" } elseif ($existingPart2 -match '^## PART 2 - PROJECT-SPECIFIC\r?\n> PRESERVED') { "UPDATE (wrap legacy content as PART 2)" } else { "UPDATE (preserve structured PART 2)" }
+    $action = if ($isNew) {
+        "CREATE (new from template)"
+    } elseif ($existingOwnedContext -match 'legacy PART-based') {
+        "UPDATE (convert legacy PART-based content to Project-Owned Context)"
+    } elseif ($existingOwnedContext -match 'older unstructured') {
+        "UPDATE (wrap prior unstructured content as Project-Owned Context)"
+    } else {
+        "UPDATE (preserve Project-Owned Context)"
+    }
     Write-Log "$folder - $action" "INFO"
 
     if ($DryRun) {

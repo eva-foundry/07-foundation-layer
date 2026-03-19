@@ -29,7 +29,7 @@ All documentation, templates, and automation guidance prepared for workspace-wid
 ## Deliverables Created
 
 ### 1. Workspace-Level Documentation
-**File**: `C:\AICOE\.github\copilot-instructions.md`
+**File**: `C:\eva-foundry\.github\copilot-instructions.md`
 - **Status**: UPDATED (v2.0 → v2.1)
 - **Changes**:
   - Timestamp: March 6, 2026 @ 6:53 PM ET
@@ -120,10 +120,10 @@ All documentation, templates, and automation guidance prepared for workspace-wid
 ### Recommended: Automated Re-Priming
 ```powershell
 # Dry-run preview (see what will change)
-.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\AICOE\eva-foundry" -DryRun
+.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\eva-foundry\eva-foundry" -DryRun
 
 # Apply for real (update all 57 projects in < 5 minutes)
-.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\AICOE\eva-foundry"
+.\Invoke-PrimeWorkspace.ps1 -WorkspaceRoot "C:\eva-foundry\eva-foundry"
 ```
 
 **Expected Result**:
@@ -142,7 +142,7 @@ See detailed steps in SESSION-37-REPRIMING-GUIDE.md:
 ### Selective: Individual Project Re-Priming
 ```powershell
 # Prime single project after automated run
-.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\AICOE\eva-foundry\37-data-model"
+.\Invoke-PrimeWorkspace.ps1 -TargetPath "C:\eva-foundry\37-data-model"
 ```
 
 ---
@@ -152,7 +152,7 @@ See detailed steps in SESSION-37-REPRIMING-GUIDE.md:
 ### Automated Verification Command
 ```powershell
 # Confirm all 57 projects have Session 37 timestamp
-Get-ChildItem C:\AICOE\eva-foundry -Directory -Filter "[0-9]*" | ForEach-Object {
+Get-ChildItem C:\eva-foundry\eva-foundry -Directory -Filter "[0-9]*" | ForEach-Object {
     $file = "$($_.FullName)\.github\copilot-instructions.md"
     if (Test-Path $file) {
         $updated = (Get-Content $file) -match "6:53 PM ET"
@@ -165,8 +165,8 @@ Get-ChildItem C:\AICOE\eva-foundry -Directory -Filter "[0-9]*" | ForEach-Object 
 ### Project Foundry Details Validation
 ```powershell
 # Verify all projects reference Project 37 correctly
-grep-r "37-data-model" C:\AICOE\eva-foundry\*\*.github\** | Select-Object -Unique
-grep-r "localhost:8010" C:\AICOE\eva-foundry\*\*.github\** | Select-Object -Unique
+grep-r "37-data-model" C:\eva-foundry\*\*.github\** | Select-Object -Unique
+grep-r "localhost:8010" C:\eva-foundry\*\*.github\** | Select-Object -Unique
 ```
 
 ---
@@ -196,7 +196,7 @@ grep-r "localhost:8010" C:\AICOE\eva-foundry\*\*.github\** | Select-Object -Uniq
 ## Document Tree
 
 ```
-C:\AICOE\
+C:\eva-foundry\
 ├── .github/
 │   └── copilot-instructions.md (UPDATED - Session 37)
 └── eva-foundry/

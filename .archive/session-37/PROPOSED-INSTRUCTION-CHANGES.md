@@ -146,7 +146,7 @@ Add after bootstrap:
 
 The agent bootstrap sequence is:
 
-1. **Workspace Level** (`C:\AICOE\.github\copilot-instructions.md`)
+1. **Workspace Level** (`C:\eva-foundry\.github\copilot-instructions.md`)
    - Identifies workspace, skills, references
    - Sets `$base` variable (API endpoint)
 

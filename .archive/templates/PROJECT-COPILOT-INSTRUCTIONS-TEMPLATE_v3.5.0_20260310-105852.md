@@ -3,7 +3,7 @@
 **Template Version**: 3.5.0 (Session 41 - CHECK Phase Hardening)  
 **Last Updated**: March 8, 2026 @ 8:45 PM ET  
 **Project**: [XX-PROJECT-ID] -- [PROJECT_FULL_NAME]  
-**Path**: `C:\AICOE\eva-foundry\[XX-PROJECT-ID]\`  
+**Path**: `C:\eva-foundry\[XX-PROJECT-ID]\`  
 **Stack**: [TECH_STACK]  
 
 > This file is the Copilot operating manual for this repository.
@@ -22,7 +22,7 @@ Before answering any question or writing any code:
 1. **Establish $base** (Central EVA data model on port 8010 -- managed by project 37):
    - Central EVA data model: `http://localhost:8010` (all workspace projects, unified data store)
    - All projects share Project 37 data model (Cosmos DB)
-   - Depends on: Project 37 (`C:\AICOE\eva-foundry\37-data-model\`) running on port 8010
+   - Depends on: Project 37 (`C:\eva-foundry\37-data-model\`) running on port 8010
    - `$base` must be set before any model query in this session.
    - **Session 37 Status**: ✅ All 51 layers operational (50 base + 1 metadata)
 
@@ -186,7 +186,7 @@ Invoke-RestMethod "$base/model/agent-summary" -Headers $hdrs
 
 ## Navigation
 
-- **Workspace**: `C:\AICOE\.github\copilot-instructions.md` (workspace-level skills and status)
+- **Workspace**: `C:\eva-foundry\.github\copilot-instructions.md` (workspace-level skills and status)
 - **This Project**: Governance docs in root (`README.md`, `PLAN.md`, `STATUS.md`)
 - **Central Data Model**: Project 37 @ http://localhost:8010
 - **Workspace PM**: Project 07 (Foundation Layer) @ `07-foundation-layer/`

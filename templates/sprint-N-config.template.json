@@ -1,0 +1,76 @@
+{
+  "project_id": "NN-project-name",
+  "project_full_name": "[Replace with full project name]",
+  "sprint_number": "N",
+  "sprint_name": "Phase N: [Description]",
+  "sprint_start_date": "2026-03-14T00:00:00Z",
+  "sprint_end_date": "2026-03-21T23:59:59Z",
+  "sprint_duration_days": 7,
+  "team_size": 1,
+  "sprint_goal": "[Clear statement of what this sprint delivers]",
+  "workstreams": [
+    {
+      "id": "WS-1",
+      "name": "[Workstream Name]",
+      "description": "[What does this workstream deliver?]",
+      "tasks": 3,
+      "acceptance_criteria": [
+        "AC-1.1",
+        "AC-1.2",
+        "AC-1.3"
+      ],
+      "estimated_hours": 16,
+      "owner": "agent-framework"
+    }
+  ],
+  "acceptance_criteria": {
+    "AC-1.1": "Code: Feature X implemented with unit tests",
+    "AC-1.2": "Tests: 90%+ coverage, all passing",
+    "AC-1.3": "Docs: README updated, acceptance signed off"
+  },
+  "phase_closure_gate": {
+    "all_workstreams_complete": true,
+    "all_acceptance_criteria_met": true,
+    "tests_passing_threshold": 0.90,
+    "documentation_signed_off": true,
+    "github_release": false,
+    "data_model_registration": false,
+    "evidence_pack_created": false
+  },
+  "dependencies": [
+    "37-data-model",
+    "[other project dependencies]"
+  ],
+  "blockers": [],
+  "risks": [
+    {
+      "id": "R-1",
+      "description": "[Risk description]",
+      "impact": "medium",
+      "mitigation": "[What will we do if this happens?]"
+    }
+  ],
+  "reference_documents": {
+    "plan": "PLAN.md",
+    "acceptance": "ACCEPTANCE.md",
+    "status": "STATUS.md"
+  },
+  "data_model_sync": {
+    "enabled": true,
+    "endpoint": "https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io/model/sprints",
+    "sync_frequency": "on_phase_boundary"
+  },
+  "memory_system": {
+    "tier_1_governance": ".github/copilot-instructions.md",
+    "tier_2_session": "/memories/session/phase-N-*.md",
+    "tier_3_repo": "/memories/repo/ (future)"
+  },
+  "metrics": {
+    "velocity": "[Points completed / Points planned]",
+    "coverage": "[Test coverage %]",
+    "quality": "[MTI score or equivalent]"
+  },
+  "created": "2026-03-14T00:00:00Z",
+  "created_by": "[agent or human]",
+  "last_updated": "2026-03-14T00:00:00Z"
+}

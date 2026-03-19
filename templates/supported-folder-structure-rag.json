@@ -12,6 +12,9 @@
     "docs/eva-foundation/system-analysis",
     "docs/eva-foundation/workspace-notes",
     "docs/eva-foundation/comparison-reports",
+    "eval/promptfoo/providers",
+    "eval/promptfoo/assertions",
+    "eval/test-data",
     "functions",
     "scripts/deployment",
     "scripts/testing",
@@ -22,6 +25,7 @@
     "evidence/screenshots",
     "evidence/html-dumps",
     "evidence/network-traces",
+    "evidence/red-teaming",
     "sessions"
   ],
   "optionalFolders": [

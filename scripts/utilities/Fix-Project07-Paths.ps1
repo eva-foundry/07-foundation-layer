@@ -1,7 +1,23 @@
-# Fix-Project07-Paths.ps1
-# Quick fix for hardcoded path issues after folder rename from 07-copilot-instructions to 07-foundation-layer
-# Version: 1.0.0
-# Date: February 2, 2026
+<#
+.SYNOPSIS
+    Fix-Project07-Paths.ps1 - Quick fix for hardcoded path issues
+
+.DESCRIPTION
+    Repairs hardcoded paths after folder rename from 07-copilot-instructions 
+    to 07-foundation-layer.
+    
+    Updates references in deployment and testing scripts to use correct folder names.
+    
+    Version: 1.0.0
+    Created: February 2, 2026
+
+.EXAMPLE
+    .\Fix-Project07-Paths.ps1
+    Automatically fixes known hardcoded paths in Project 07 scripts
+
+.NOTES
+    This is a one-time migration utility. Can be safely re-run; will skip already-fixed files.
+#>
 
 $ErrorActionPreference = "Stop"
 

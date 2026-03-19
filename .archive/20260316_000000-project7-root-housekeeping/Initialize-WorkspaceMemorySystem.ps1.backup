@@ -1,0 +1,429 @@
+# Initialize Workspace Memory System for All 28 Projects
+# Purpose: Establish 3-tier memory system (User/Session/Repo) across all 28 projects
+# Usage: . scripts/Initialize-WorkspaceMemorySystem.ps1 -DryRun $true
+#
+# Professional Standards:
+#   - Strict-mode enabled for safety
+#   - Comprehensive error handling with exit codes (0=success, 1=business error, 2=technical error)
+#   - Pre-flight validation before execution
+#   - Structured logging for audit trail
+#   - JSON schema validation for all output artifacts
+#   - Exit-code contract: 0 (success), 1 (business logic fail), 2 (technical error)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+$VerbosePreference = 'Continue'
+
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory = $false)]
+    [ValidateNotNullOrEmpty()]
+    [string]$WorkspaceRoot = "c:\eva-foundry",
+
+    [Parameter(Mandatory = $false)]
+    [switch]$DryRun = $false,
+
+    [Parameter(Mandatory = $false)]
+    [ValidatePattern('^[1-5]$')]
+    [string]$PhaseToActive = "1"
+)
+
+# ============================================================================
+# PRE-FLIGHT VALIDATION
+# ============================================================================
+
+Write-Verbose "[PRE-FLIGHT] Validating workspace root and permissions..."
+
+if (-not (Test-Path $WorkspaceRoot -PathType Container)) {
+    Write-Error "[PREFLIGHT-FATAL] Workspace root not found: $WorkspaceRoot" -ErrorAction Stop
+    exit 2
+}
+
+$logsDir = "$WorkspaceRoot\logs"
+$evidenceDir = "$WorkspaceRoot\evidence"
+
+# Verify write permissions
+foreach ($required_dir in @($logsDir, $evidenceDir)) {
+    if (-not (Test-Path $required_dir)) {
+        try {
+            New-Item -ItemType Directory -Force -Path $required_dir | Out-Null
+        } catch {
+            Write-Error "[PREFLIGHT-FATAL] Cannot create directory: $required_dir - $($_.Exception.Message)" -ErrorAction Stop
+            exit 2
+        }
+    }
+    
+    # Test write permission
+    try {
+        $testFile = "$required_dir\.test-write-perm-$(Get-Random).tmp"
+        "test" | Out-File $testFile -ErrorAction Stop
+        Remove-Item $testFile -Force -ErrorAction SilentlyContinue
+    } catch {
+        Write-Error "[PREFLIGHT-FATAL] No write permission in: $required_dir - $($_.Exception.Message)" -ErrorAction Stop
+        exit 2
+    }
+}
+        [Parameter(Mandatory = $true)]
+        [string]$Message,
+
+        [Parameter(Mandatory = $false)]
+        [ValidateSet("INFO", "OK", "SKIP", "WARN", "ERROR")]
+        [string]$Level = "INFO"
+    )
+
+    $ts = Get-Date -Format "yyyyMMdd_HHmmss"
+    $entry = "[$ts] [$Level] $Message"
+    
+    # Console output with color
+    $color = @{
+        "OK" = "Green"
+        "SKIP" = "Yellow"
+        "WARN" = "Yellow"
+        "ERROR" = "Red"
+        "INFO" = "Cyan"
+    }
+    
+    Write-Host $entry -ForegroundColor ($color[$Level] ?? "White")
+    
+    # File logging
+    try {
+        Add-Content -Path $logPath -Value $entry -ErrorAction Stop
+    } catch {
+        Write-Host "[LOGGING-WARN] Failed to write to log: $($_.Exception.Message)" -ForegroundColor Yellow
+    }
+    Write-Error "[PREFLIGHT-FATAL] Template not found: $templatePath" -ErrorAction Stop
+    exit 2
+}
+
+# ============================================================================
+# CONFIGURATION
+# ============================================================================
+
+$startTime = Get-Date
+$timestamp = Get-Date -Format 'yyyyMMdd_HHmmss'
+$logPath = "$logsDir\${timestamp}-memory-init.log"
+$evidencePath = "$evidenceDir\${timestamp}-memory-init-evidence.json"
+
+# Workspace projects (all 28)
+$Projects = @(
+    "01-documentation-generator", "02-poc-agent-skills", "03-poc-enhanced-docs",
+    "04-os-vnext", "05-extract-cases", "06-jp-auto-extraction",
+    "07-foundation-layer", "08-cds-rag", "09-eva-repo-documentation",
+    "10-mkdocs-poc", "11-ms-infojp", "12-work-spc-reorg", "13-vscode-tools",
+    "14-az-finops", "15-cdc", "16-engineered-case-law", "17-apim",
+    "18-azure-best", "19-ai-gov", "20-assistme", "21-habit-tracker",
+    "22-rg-sandbox", "23-ei-dsst-rewrite", "24-eva-brain", "25-eva-suite",
+    "26-eva-gh", "27-devbench", "28-rbac", "29-foundry", "30-ui-bench",
+    "31-eva-faces", "32-logging", "33-eva-brain-v2", "34-eva-agents",
+    "34-AParameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ProjectPath,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ProjectId
+    )
+
+    $sessionMemPath = "$ProjectPath/.memories/session"
+
+    try {
+        if (-not (Test-Path $sessionMemPath)) {
+            New-Item -ItemType Directory -Force -Path $sessionMemPath | Out-Null
+            Write-LogEntry "Created: $sessionMemPath" "OK"
+            return $true
+        } else {
+            Write-LogEntry "Exists: $sessionMemPath" "SKIP"
+            return $false
+        }
+    } catch {
+        Write-LogEntry "Failed to create memory directory for $ProjectId
+    $entry = "[$timestamp] [$Level] $Message"
+    WriteParameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ProjectPath,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ProjectId,
+
+        [Parameter(Mandatory = $true)]
+        [ValidatePattern('^[1-5]$')]
+        [string]$PhaseNumber
+    )
+
+    $sprintConfigPath = "$ProjectPath/sprint_${PhaseNumber}_config.json"
+
+    try {
+        # Read and validate template
+        if (-not (Test-Path $templatePath)) {
+            Write-LogEntry "Template not found: $templatePath" "ERROR"
+            return $false
+        }
+
+        $template = Get-Content $templatePath -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+
+        # Customize for this project
+        $template.project_id = $ProjectId
+        $template.project_full_name = $ProjectId
+        $template.sprint_number = [int]$PhaseNumber
+        $template.sprint_name = "Phase ${PhaseNumber}: Implementation & Hardening"
+        $template.created_by = "workspace-initialization-script"
+        $template.created = Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"
+
+        # Validate JSON schema compliance before writing
+        $jsonString = $template | ConvertTo-Json -Depth 10 -ErrorAction Stop
+        
+        # Re-parse to verify validity
+        $validated = $jsonString | ConvertFrom-Json -ErrorAction Stop
+
+        # Write customized config
+        $jsonString | Out-File -Path $sprintConfigPath -Encoding UTF8 -ErrorAction Stop
+        Write-LogEntry "Created: $sprintConfigPath" "OK"
+        return $true
+    } catch {
+        Write-LogEntry "Failed to create sprint config for
+        [string]$PhaseNumber
+    )
+    
+    $sprintConfigPath = "$ProjectPath/sprint_${PhaseNumber}_config.json"
+    
+    # Read template
+    $templatePath = "$WorkspaceRoot\07-foundation-layer\templates\sprint-N-config.template.json"
+    if (-not (Test-Path $templatePath)) {
+        Write-LogEntry "Template not found: $templatePath" "ERROR"
+        return $false
+    }
+    
+    try {
+        $template = Get-Content $templatePath | ConvertFrom-Json
+        
+        # Customize for this project
+        $template.project_id = $ProjectId
+        $Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ProjectPath,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ProjectId
+    )
+
+    $sessionMemPath = "$ProjectPath/.memories/session"
+    $checkpointPath = "$sessionMemPath/phase-1-kickoff-checkpoint.md"
+
+    try {
+        $content = @"
+# [$ProjectId] Phase 1 Kickoff Checkpoint
+
+**Generated**: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss UTC')
+**Status**: Ready for sprint planning
+
+## Immediate Next Steps
+
+### 1. Governance Load
+Load workspace policies before proceeding:
+``````powershell
+`$$policies = @{
+  workspace = Get-Content ".github/copilot-instructions.md" -Raw
+  project   = Get-Content "PLAN.md" -Raw
+}
+``````
+
+### 2. API Bootstrap
+Verify Data Model API is available (fail-closed policy):
+``````powershell
+`$$base = "https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io"
+`$$health = Invoke-RestMethod "`$$base/health" -TimeoutSec 10
+Write-Host "API Status: `$$(`$$health.status) | Cosmos: `$$(`$$health.store)"
+``````
+
+### 3. Read Current Project State
+``````powershell
+`$$projectWork = Invoke-RestMethod "`$$base/model/project_work/?project_id=$ProjectId"
+`$$latest = `$$projectWork | Sort-Object { [datetime]`$$_.modified_at } | Select-Object -First 1
+Write-Host "Latest Session: `$$(`$$latest.id)"
+``````
+
+### 4. Define Phase 1 Workstreams
+Review PLAN.md for sprint objectives, then proceed with DISCOVER phase.
+
+## Critical Context
+
+### What's Complete
+- [PASS] Memory system: Initialized and ready
+
+### What's Pending
+- [TODO] Phase 1 workstreams: To be defined in PLAN.md
+- [TODO] Sprint activation: Deploy via sprint_activation.py
+
+## Session Opening Checklist
+- [ ] Load workspace policies (.github/copilot-instructions.md)
+- [ ] Verify API bootstrap (health check)
+- [ ] Read this checkpoint
+- [ ] Review PLAN.md for Phase 1 scope
+- [ ] Query project status from API (if applicable)
+- [ ] Activate sprint via sprint_activation.py
+
+## Memory Structure
+
+This project now uses three-tier memory system:
+- **Tier 1**: `.github/copilot-instructions.md` (governance, always in context)
+- **Tier 2**: `/memories/session/phase-*.md` (phase checkpoints, protected from compression)
+- **Tier 3**: `/memories/repo/` (project-specific facts, future expansion)
+
+See Project 7 templates for full documentation: `07-foundation-layer/templates/WORKSPACE-MEMORY-SYSTEM.md`
+
+---
+
+**Status**: [PASS] READY FOR PHASE 1 KICKOFF
+"@
+
+        if (-not (Test-Path $checkpointPath)) {
+            Set-Content -Path $checkpointPath -Value $content -Encoding UTF8 -ErrorAction Stop
+            Write-LogEntry "Created: $checkpointPath" "OK"
+            return $true
+        } else {
+            Write-LogEntry "Exists: $checkpointPath" "SKIP"
+            return $false
+        }
+    } catch {
+        Write-LogEntry "Failed to create checkpoint for
+See Project 7 templates for full documentation: `07-foundation-layer/templates/WORKSPACE-MEMORY-SYSTEM.md`
+
+---
+
+**Status**: ✅ READY FOR PHASE 1 KICKOFF
+"@
+    
+    try {
+        if (-not (Test-Path $checkpointPath)) {
+            Set-Content -Path $checkpointPath -Value $content -Encoding UTF8
+            Write-LogEntry "Created: $checkpointPath" "OK"
+            return $true
+        } else {
+            Write-LogEntry "Exists: $checkpointPath" "SKIP"
+            return $false
+        }
+    } catch {
+        Write-LogEntry "Failed to create checkpoint: $ProjectId - $($_.Exception.Message)" "ERROR"
+        return $false
+    }
+}
+
+# ============================================================================
+# MAIN EXECUTION
+# ============================================================================
+
+Write-Host ""
+Write-Host "=========================================="
+Write-Host "WORKSPACE MEMORY SYSTEM INITIALIZATION"
+Write-Host "=========================================="
+Write-Host "Start Time: $startTime"
+Write-Host "DryRun: $DryRun"
+Write-Host "Workspace: $WorkspaceRoot"
+Write-Host ""
+
+# Create log directory if needed
+$logsDir = "$WorkspaceRoot\logs"
+if (-not (Test-Path $logsDir)) {
+    New-Item -ItemType Directory -Force -Path $logsDir | Out-Null
+}
+
+Write-LogEntry "========== WORKSPACE MEMORY SYSTEM INITIALIZATION ==========" "START"
+Write-LogEntry "Projects to initialize: $($Projects.Count)" "INFO"
+
+# Initialize each project
+$successCount = 0
+$skipCount = 0
+$failCount = 0
+$results = @()
+
+foreach ($projectId in $Projects) {
+    $projectPath = "$WorkspaceRoot\$projectId"
+    
+    if (-not (Test-Path $projectPath)) {
+        Write-LogEntry "Project not found (skipping): $projectId" "SKIP"
+        $skipCount++
+        continue
+    }
+    
+    Write-LogEntry "Processing: $projectId" "INFO"
+    
+    # Create memory directory
+    $memOk = New-MemoryDirectory -ProjectPath $projectPath -ProjectId $projectId
+    
+    # Create sprint config
+    $sprintOk = Create-SprintConfig -ProjectPath $projectPath -ProjectId $projectId -PhaseNumber $PhaseToActive
+    
+    # Create initial checkpoints
+    $checkpointOk = Create-InitialCheckpoints -ProjectPath $projectPath -ProjectId $projectId
+    
+    if ($memOk -or $sprintOk -or $checkpointOk) {
+        $successCount++
+        $results += @{
+            project = $projectId
+            status = "OK"
+        }
+    } else {
+        $failCount++ with exit status
+try {
+    $evidence = @{
+        task = "workspace-memory-system-initialization"
+        timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"
+        workspace_root = $WorkspaceRoot
+        projects_total = $Projects.Count
+        projects_success = $successCount
+        projects_skipped = $skipCount
+        projects_failed = $failCount
+        phase_activated = [int]$PhaseToActive
+        dry_run = [bool]$DryRun
+        execution_time_seconds = [Math]::Round($elapsed, 2)
+        log_file = $logPath
+        evidence_file = $evidencePath
+        exit_code = $(if ($failCount -eq 0) { 0 } else { 1 })
+        status = $(if ($failCount -eq 0) { "SUCCESS" } else { "PARTIAL" })
+    }
+
+    $evidence | ConvertTo-Json -Depth 5 -ErrorAction Stop | Out-File -Path $evidencePath -Encoding UTF8 -ErrorAction Stop
+    Write-LogEntry "Evidence saved: $evidencePath" "OK"
+} catch {
+    Write-LogEntry "Failed to save evidence file: $($_.Exception.Message)" "ERROR"
+    exit 2
+}
+
+Write-LogEntry "[STATUS] SUCCESS: $successCount | SKIP: $skipCount | FAIL: $failCount | TOTAL TIME: ${elapsed}s" "OK"
+Write-LogEntry "========== COMPLETED ==========" "END"
+
+Write-Host ""
+Write-Host "Next Steps:" -ForegroundColor Cyan
+Write-Host "  1. Review log file: $logPath"
+Write-Host "  2. Review evidence: $evidencePath"
+Write-Host "  3. Validate sprint configs in each project"
+Write-Host "  4. Activate Phase $PhaseToActive via: python scripts/sprint_activation.py"
+Write-Host ""
+
+# Exit with proper code
+exit $(if ($failCount -eq 0) { 0 } else { 1 })_root = $WorkspaceRoot
+    projects_total = $Projects.Count
+    projects_success = $successCount
+    projects_skipped = $skipCount
+    projects_failed = $failCount
+    phase_activated = $PhaseToActive
+    dry_run = $DryRun
+    execution_time_seconds = [Math]::Round($elapsed, 2)
+    log_file = $logPath
+    status = $(if ($failCount -eq 0) { "SUCCESS" } else { "PARTIAL" })
+}
+
+$evidence | ConvertTo-Json -Depth 5 | Out-File -Path $evidencePath -Encoding UTF8
+
+Write-LogEntry "Evidence saved: $evidencePath" "OK"
+Write-LogEntry "========== COMPLETED SUCCESSFULLY ==========" "END"
+
+Write-Host ""
+Write-Host "Next Steps:"
+Write-Host "  1. Review log file: $logPath"
+Write-Host "  2. Review evidence: $evidencePath"
+Write-Host "  3. Validate sprint configs in each project"
+Write-Host "  4. Activate Phase $PhaseToActive via: python scripts/sprint_activation.py"
+Write-Host ""

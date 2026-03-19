@@ -1,0 +1,23 @@
+{
+  "schema": "eva.export-to-model.evidence.v1",
+  "timestamp": "2026-03-08T02:01:06.660Z",
+  "project_id": "07-foundation-layer",
+  "actor": "agent:veritas",
+  "action": "export-to-model",
+  "layers_exported": [
+    "wbs",
+    "evidence",
+    "decisions",
+    "risks"
+  ],
+  "record_counts": {
+    "wbs_count": 29,
+    "evidence_count": 19,
+    "decisions_count": 2,
+    "risks_count": 4,
+    "mti_score": null
+  },
+  "output_path": "C:\\eva-foundry\\eva-foundry\\07-foundation-layer\\.eva\\model-export.json",
+  "discovery_path": "C:\\eva-foundry\\eva-foundry\\07-foundation-layer\\.eva\\discovery.json",
+  "reconciliation_path": "C:\\eva-foundry\\eva-foundry\\07-foundation-layer\\.eva\\reconciliation.json"
+}

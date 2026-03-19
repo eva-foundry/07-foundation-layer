@@ -1,0 +1,42 @@
+{
+  "project_id": "07-foundation-layer",
+  "project_name": "Foundation Layer - Governance Standards & Templates",
+  "status": "in-progress",
+  "phase": "Governance & Standards Foundation",
+  "sprint_number": 1,
+  "user_stories": [
+    {
+      "id": "7.1.1",
+      "title": "DPDCA Standards & Methodology",
+      "status": "planned",
+      "description": "Document DPDCA methodology and professional standards",
+      "story_points": 13
+    },
+    {
+      "id": "7.1.2",
+      "title": "Project Templates for 27 Projects",
+      "status": "planned",
+      "description": "Create standard project structure templates",
+      "story_points": 13
+    },
+    {
+      "id": "7.1.3",
+      "title": "Evidence Tracking & Audit Framework",
+      "status": "planned",
+      "description": "Establish evidence tracking procedures",
+      "story_points": 13
+    },
+    {
+      "id": "7.1.4",
+      "title": "Risk Management Framework",
+      "status": "planned",
+      "description": "Create risk and decision templates",
+      "story_points": 16
+    }
+  ],
+  "data_model_layers": [
+    "L_governance_standards",
+    "L_risk_register",
+    "L_project_templates"
+  ]
+}

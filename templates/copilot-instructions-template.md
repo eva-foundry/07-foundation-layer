@@ -1,337 +1,168 @@
-# GitHub Copilot Instructions -- {PROJECT_NAME}
+<!-- eva-primed-copilot -->
 
-**Template Version**: 4.1.0 (Session 41 - CHECK Phase Hardening)
-**Last Updated**: 2026-03-08 ET
-**Project**: {PROJECT_NAME}
-**Path**: `C:\AICOE\eva-foundry\{PROJECT_FOLDER}\`
-**Stack**: {PROJECT_STACK}
+# GitHub Copilot Instructions -- {{PROJECT_NAME}}
 
----
-
-## PART 1 -- UNIVERSAL RULES (EVA Foundation)
-
-Applies to every EVA Foundation project. All project templates share these rules; see workspace copilot-instructions for details.
-
-### Essential References (Read in Order)
-
-1. **Workspace Context**: `C:\AICOE\.github\copilot-instructions.md`
-   - Skills available, architecture overview, key projects
-2. **Best Practices**: `C:\AICOE\.github\best-practices-reference.md`
-   - Encoding safety, patterns, evidence collection
-3. **Data Model API**: `C:\AICOE\eva-foundry\37-data-model\USER-GUIDE.md`
-   - Query patterns, PUT rules, model layer reference
-4. **This Project**: README.md → PLAN.md → STATUS.md → ACCEPTANCE.md
-
-### Session Bootstrap (Checklist)
-
-This sequence runs ONCE per agent session and establishes `$session` with API guidance.
-
-```powershell
-# Step 1: Set base URL
-$base = "https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io"
-
-# Step 2: Create session object
-$session = @{ base = $base; initialized_at = Get-Date }
-
-# Step 3: Bootstrap from API (← KEY STEP)
-try {
-    $session.guide = Invoke-RestMethod "$base/model/agent-guide" -TimeoutSec 10
-    [INFO] "Bootstrap complete. $(($session.guide.layers_available | Measure-Object).Count) layers online."
-} catch {
-    [FAIL] "Cannot contact MSub API at $base. Exiting."
-    exit 1
-}
-
-# Step 4: Verify 51 layers are available (50 base + 1 metadata)
-$layerCount = ($session.guide.layers_available | Measure-Object).Count
-if ($layerCount -ne 51) {
-    [WARN] "Expected 51 layers; API reports $layerCount. Some features may be unavailable."
-}
-
-# Step 5: Read project artifacts
-foreach ($artifact in @("README.md", "PLAN.md", "STATUS.md")) {
-    if (-not (Test-Path $artifact)) {
-        [WARN] "Missing artifact: $artifact"
-    }
-}
-
-# Step 6: Check for project skills
-if (Test-Path ".github/copilot-skills/") {
-    Get-ChildItem ".github/copilot-skills/" -Filter "*.skill.md" | ForEach-Object {
-        [INFO] "Found skill: $($_.Name)"
-    }
-} else {
-    [INFO] "No project skills directory (.github/copilot-skills/)"
-}
-
-# ✅ Bootstrap complete
-[INFO] "Session ready. Use `$session.guide` for all query patterns and write rules."
-```
-
-**Do NOT proceed until:**
-- [ ] API call returned status 200
-- [ ] `$session.guide` contains expected sections (identity, query_patterns, write_cycle, etc.)
-- [ ] Layer count verified (warning acceptable, but must be reported)
-- [ ] All project artifacts detected (or explained why missing)
-
-### Encoding & Output
-
-**Windows cp1252 RULE**: No emoji, no unicode in output. Use `[PASS]` / `[FAIL]` / `[WARN]` / `[INFO]` only.
-
-### Python Environment
-
-```powershell
-# DON'T use bare python; use venv executable
-C:\AICOE\.venv\Scripts\python.exe
-```
-
-### Azure Sandbox (marco-sandbox)
-
-- **Foundry**: `https://marco-sandbox-foundry.cognitiveservices.azure.com/`
-- **Models**: gpt-4o (20K TPM), gpt-4o-mini (50K TPM), gpt-5.1-chat (100K TPM)
-- **Key retrieval**: `az cognitiveservices account keys list --name marco-sandbox-foundry --resource-group EsDAICoE-Sandbox --query "key1" -o tsv`
-
-### Azure Best Practices
-
-Consult `C:\AICOE\eva-foundry\18-azure-best/` (32 entries: WAF, security, AI, IaC, cost) before design decisions.
+**Template Version**: 7.1.0 (Session 71 - live bootstrap contract alignment)  
+**Last Updated**: 2026-03-19  
+**Project**: {{PROJECT_NAME}}  
+**Path**: C:\eva-foundry\{{PROJECT_FOLDER}}\
 
 ---
 
-## PART 2 -- PROJECT-SPECIFIC
+## Bootstrap First
 
-Replace all `{PLACEHOLDER}` values before use. Delete unused sections.
+Before using this file, complete the workspace bootstrap from `C:\eva-foundry\.github\copilot-instructions.md`.
 
-### Project Lock
-
-This file governs **{PROJECT_FOLDER}** ({PROJECT_NAME}) for the active session only. Once loaded, the project is locked to prevent context drift.
-
-### Project Identity
-
-**Name**: {PROJECT_NAME}
-**Folder**: `C:\AICOE\eva-foundry\{PROJECT_FOLDER}`
-**ADO Epic**: #{ADO_EPIC_ID}
-**37-data-model record**: `GET /model/projects/{PROJECT_FOLDER}`
-**Maturity**: {PROJECT_MATURITY} (empty | poc | active | retired)
-**Current Phase**: {CURRENT_PHASE}
-
-**Dependencies**: {DEPENDENCY_LIST}
-**Consumed by**: {CONSUMER_LIST}
-
-### Stack and Build
-
-**Languages/Frameworks**: {LANGUAGE} {VERSION}, {FRAMEWORK} {VERSION}
+Minimum bootstrap proof:
 
 ```powershell
-{BUILD_COMMAND}          # compile/setup
-{TEST_COMMAND}           # must exit 0 before commit
-{SMOKE_TEST_COMMAND}     # quick test
-{START_COMMAND}          # dev server
-{LINT_COMMAND}           # lint/type check
+$session.health.status
+$session.ready.status
+$session.handshake.contract_version
+$session.guide.layers_available.Count
+@($session.userGuide.category_instructions.PSObject.Properties.Name).Count
 ```
 
-**Current state**: {TEST_COUNT} tests, {COVERAGE}% coverage (as of {DATE})
-
-### Critical Patterns
-
-{DESCRIBE_1_3_KEY_PATTERNS_SPECIFIC_TO_PROJECT}
-
-| Pattern | Why |
-|---------|-----|
-| {PATTERN_1} | {RATIONALE} |
-
-### Anti-Patterns (DO NOT)
-
-**Project-Specific Anti-Patterns**:
-
-| Anti-Pattern | Do Instead |
-|---|---|
-| {FORBIDDEN} | {CORRECT} |
-
-**GitHub Actions Workflows** (if project has workflows):
-
-See [37-data-model/docs/workflows/ANTI-PATTERNS-AND-BEST-PRACTICES.md](../../37-data-model/docs/workflows/ANTI-PATTERNS-AND-BEST-PRACTICES.md) for complete guide.
-
-| Anti-Pattern | Do Instead |
-|---|---|
-| Check `$LASTEXITCODE` in separate step after script | Let GitHub Actions handle exit codes natively OR use `steps.<id>.outcome` |
-| End PowerShell scripts without explicit exit code | Add `exit 0` on success, `exit 1` on failure |
-| Single-step workflows without evidence | Generate correlation ID, create receipt, upload artifacts with `if: always()` |
-| Fail fast without collecting issues | Use `continue-on-error: true`, collect all results, report comprehensive summary |
-| No job-to-job communication | Use `outputs:` in jobs, access via `needs.<job>.outputs.<key>` |
-
-**Critical**: Each workflow step = NEW shell session. Exit codes don't persist. Use job outputs or `steps.<id>.outcome`.
-
-### Project Skills
-
-```powershell
-Get-ChildItem ".github/copilot-skills/" -Filter "*.skill.md" | Select-Object Name
-```
-
-| Skill | Triggers | Purpose |
-|---|---|---|
-| {SKILL_FILE} | {PHRASES} | {PURPOSE} |
-
-### Data Model Integration (Queries)
-
-All queries use the `$session.guide` patterns established at bootstrap. Never deviate from patterns.
-
-**Universal Query Pattern** (applies to all layers):
-
-```powershell
-# Template
-$endpoint = "{LAYER_NAME}"  # e.g., "projects", "endpoints", "evidence"
-$limit = 100  # or $session.guide.query_capabilities.universal_params.limit
-$offset = 0   # pagination
-
-$response = Invoke-RestMethod "$($session.base)/model/$endpoint/?limit=$limit&offset=$offset"
-$results = $response.data  # Always access .data
-
-# Always use Select-Object before Format-Table
-$results | Select-Object id,status,phase | Format-Table
-```
-
-**Project-Specific Queries**:
-
-This project accesses these layers (from PLAN.md):
-- {LAYER_1}
-- {LAYER_2}
-
-For complete patterns, see `$session.guide.query_patterns` or `$session.guide.examples` (available after bootstrap).
-
-**Example: Safe First Query**
-
-```powershell
-# Get first 20 projects, show key fields only
-$projects = (Invoke-RestMethod "$($session.base)/model/projects/?limit=20").data
-$projects | Select-Object id, label, maturity, status | Format-Table
-
-# Count total (without fetching all data)
-$count = (Invoke-RestMethod "$($session.base)/model/projects/count").data.count
-Write-Host "Total projects: $count"
-```
-
-**For All Available Query Patterns**: See `$session.guide.query_patterns` after bootstrap, or `C:\AICOE\eva-foundry\37-data-model\USER-GUIDE.md`
-
-### Deployment
-
-**Environment**: {DEV_URL} | {PROD_URL}
-**Deploy**: `{DEPLOY_COMMAND}`
-**CI Pipeline**: {CI_URL}
+If `$session` is undefined or any of these checks fails, stop and bootstrap first.
 
 ---
 
-## PART 3 -- QUALITY GATES
+## Project Role
 
-**CHECK Phase Requirements** (before EVERY commit):
+This file is the **project-level operating contract** for `{{PROJECT_FOLDER}}`.
 
-### 3.1 Static Analysis (Mandatory)
+Use it to capture:
+- what this project is for
+- what local patterns or constraints matter here
+- how local docs should be interpreted after workspace bootstrap
 
-**Python Projects**:
+Do not use it to restate the full workspace policy set. Workspace-wide authority stays in `C:\eva-foundry\.github\copilot-instructions.md`.
+
+---
+
+## Read Order
+
+After bootstrap, read local material in this order:
+
+1. `README.md` for purpose, setup, and local architecture
+2. `PLAN.md` for current scope and intended work
+3. `STATUS.md` for latest verified state and recent decisions
+4. `ACCEPTANCE.md` for quality gates and done criteria
+
+If local docs conflict with API-governed truth, treat the Data Model API as authoritative for governance state and treat local files as working context that must be reconciled.
+
+---
+
+## Core Rules
+
+1. Confirm live API access before governance or synchronization work.
+2. Discover actual build, test, lint, and run commands from repo files instead of assuming defaults.
+3. Preserve existing project patterns unless the task explicitly requires changing them.
+4. Keep edits scoped and evidence-backed.
+5. Store execution evidence in `evidence/` and operational logs in `logs/` when automation or validation is part of the work.
+6. Use Project 48 veritas tooling for governed quality checks when the task materially affects delivery quality.
+7. Inherit context-governance policy from the workspace instructions; do not restate fixed token thresholds locally.
+
+---
+
+## Data Model Use
+
+Start with the domain views and project record before drilling into specific layers:
+
 ```powershell
-# Run both - each catches different issues
-pylint {changed_files} --disable=C,R,W  # E errors only = blockers
-flake8 {changed_files}                  # F/E errors only = blockers
+Invoke-RestMethod "$($session.base)/health"
+Invoke-RestMethod "$($session.base)/ready"
+Invoke-RestMethod "$($session.base)/model/agent-handshake"
+Invoke-RestMethod "$($session.base)/model/agent-guide"
+Invoke-RestMethod "$($session.base)/model/user-guide"
+Invoke-RestMethod "$($session.base)/model/domain-views"
+Invoke-RestMethod "$($session.base)/model/projects/{{PROJECT_FOLDER}}"
 ```
 
-**JavaScript/TypeScript**:
-```powershell
-eslint {changed_files}
-tsc --noEmit  # type check without compile
-```
+Use `$session.userGuide.category_instructions` for session, sprint, evidence, governance, observability, and ontology runbooks. Do not hardcode layer counts or static workflow assumptions.
 
-**PowerShell**:
-```powershell
-Invoke-ScriptAnalyzer {changed_files} -Severity Error
-```
+---
 
-### 3.2 Test Suite (Mandatory)
+## Traceability
 
-```powershell
-{TEST_COMMAND}  # Must exit 0 before commit
-```
-
-**If no tests exist**: Create minimal test for modified code OR acknowledge gap in commit message.
-
-### 3.3 Manual Verification (Context-Dependent)
-
-**HTTP APIs** (FastAPI, Flask, Express, etc.):
-```powershell
-# Test modified endpoints manually
-Invoke-RestMethod "http://localhost:{PORT}/{modified_endpoint}" -Method GET
-# Verify: 200 status, expected response structure, no 500 errors
-```
-
-**CLIs**:
-```powershell
-# Run smoke test with sample inputs
-.\{cli_command} {sample_args}
-# Verify: Expected output, exit code 0, no exceptions
-```
-
-**Libraries/Modules**:
-```python
-# Import and call modified functions
-import {module}
-result = {module}.{modified_function}({test_data})
-assert result == expected_output
-```
-
-### 3.4 Session 41 Anti-Pattern (Document for Prevention)
-
-**Root Cause**: Lowercase boolean `true` (JavaScript syntax) used in Python dict
+When this project uses veritas story linking, tag implementation files with the applicable story and feature identifiers:
 
 ```python
-# ❌ WRONG: JavaScript/JSON boolean in Python
-response = {
-    "data_available": true,   # NameError: name 'true' is not defined
-    "ready": false            # NameError: name 'false' is not defined
-}
-
-# ✅ CORRECT: Python boolean (capitalized)
-response = {
-    "data_available": True,   # Python boolean
-    "ready": False            # Python boolean
-}
+# EVA-STORY: {{WBS_PREFIX}}-01-001
+# EVA-FEATURE: {{WBS_PREFIX}}-01
 ```
 
-**Why py_compile Didn't Catch It**:
-- `py_compile` only validates syntax (colons, brackets, indentation)
-- Semantic errors (undefined variables) only appear at runtime
-- Functions not called during import → bug hidden until endpoint invoked
+```javascript
+// EVA-STORY: {{WBS_PREFIX}}-01-001
+// EVA-FEATURE: {{WBS_PREFIX}}-01
+```
 
-**Detection Method Effectiveness**:
-| Tool | Detects This Bug? | Error Code |
-|------|-------------------|------------|
-| **pylint** | ✅ YES | E0602: Undefined variable 'true' |
-| **flake8** | ✅ YES | F821: undefined name 'true' |
-| **py_compile** | ❌ NO | Only syntax errors |
-| **pytest** | ✅ YES | NameError at runtime (if test calls endpoint) |
-| **Manual test** | ✅ YES | 500 Internal Server Error |
-
-**Session 41 Timeline** (What Went Wrong):
-1. Committed code with lowercase `true` in line 907
-2. Skipped CHECK phase (no pylint, no flake8, no manual test)
-3. Deployed to Azure → 500 error in production
-4. Required debug endpoint + DPDCA investigation to isolate
-5. Bug was trivial but detection gap made it expensive
-
-**Lesson**: Static analysis is NOT optional. Run pylint/flake8 BEFORE every commit.
-
-### 3.5 Quality Gate Checklist (Before PR Merge)
-
-All must pass:
-
-- [ ] Static analysis exits 0 (pylint E errors, flake8 F/E errors)
-- [ ] Test command exits 0: `{TEST_COMMAND}`
-- [ ] Manual verification complete (if HTTP API/CLI/modified function)
-- [ ] `validate-model.ps1` exits 0 (if model layer changed)
-- [ ] No [FORBIDDEN] encoding patterns (Unicode, emoji, cp1252 violations)
-- [ ] STATUS.md updated with session summary
-- [ ] PLAN.md reflects actual remaining work
-- [ ] If new model entity added: PUT + write cycle closed with evidence
-- [ ] No undefined variables (pylint E0602, flake8 F821)
-- [ ] All imports resolve (no ImportError at runtime)
+Use timestamped evidence names when saving outputs tied to a story or verification step.
 
 ---
 
-*Template v4.1.0 (Session 41 - CHECK phase hardening)* | [Workspace instructions](../../../.github/copilot-instructions.md) | [EVA Data Model](../../../37-data-model/USER-GUIDE.md) | [Best Practices](../../../.github/best-practices-reference.md)
+## Project-Owned Context
+
+This section is intended to be edited by the project team and preserved by foundation reseed operations.
+
+Document only the project-specific facts that do not belong in workspace instructions:
+- domain purpose
+- important dependencies
+- real build and test commands
+- local architectural constraints
+- known exceptions or delivery hazards
+
+Replace the placeholders below during project customization.
+
+**Status**: {{PROJECT_MATURITY}}  
+**Current Phase**: {{CURRENT_PHASE}}  
+**Dependencies**: {{KEY_DEPENDENCIES}}  
+**Primary Stack**: {{PROJECT_STACK}}
+
+### Local Commands
+
+List the real commands used in this project:
+- build: {{BUILD_COMMAND}}
+- test: {{TEST_COMMAND}}
+- lint: {{LINT_COMMAND}}
+- run: {{RUN_COMMAND}}
+
+### Local Patterns
+
+- {{LOCAL_PATTERN_1}}
+- {{LOCAL_PATTERN_2}}
+- {{LOCAL_PATTERN_3}}
+
+### Local Risks Or Exceptions
+
+- {{LOCAL_RISK_1}}
+- {{LOCAL_RISK_2}}
+
+---
+
+## Validation Pattern
+
+Before commit or handoff:
+- run the repo-native validation commands that exist
+- verify changed behavior with the smallest relevant check
+- update `STATUS.md` if the task changed delivery state, scope, or risk
+- save evidence if validation or automation was part of the work
+
+---
+
+## Context Governance
+
+Context-governance policy is owned by the workspace instructions.
+
+- Use the workspace utilization bands and checkpoint guidance.
+- Add project-specific recovery or closure rules only if this repo materially increases continuity risk.
+- Do not hardcode model-window assumptions or fixed token ceilings in project instructions.
+
+---
+
+## References
+
+- Workspace authority: C:\eva-foundry\.github\copilot-instructions.md
+- Data model guide: C:\eva-foundry\37-data-model\USER-GUIDE.md
+- Category runbooks: C:\eva-foundry\37-data-model\docs\CATEGORY-RUNBOOK-EXAMPLES.md
+- Local governance: README.md -> PLAN.md -> STATUS.md -> ACCEPTANCE.md

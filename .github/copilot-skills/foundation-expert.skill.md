@@ -1,334 +1,201 @@
 # Skill: foundation-expert
-# EVA-STORY: F07-001
 
-**Version**: v1.0.0 | March 3, 2026
+**EVA-STORY**: F07-001
+
+**Version**: v2.0.0 | March 15, 2026
 **Project**: 07-foundation-layer
-**Triggers**: foundation expert, workspace pm, prime workspace, prime project, scaffold project,
-  apply governance, reseed projects, bootstrap project, foundation layer, workspace governance,
-  eva factory, project standards, copilot instructions update, template deployment
+**Triggers**: foundation expert, prime workspace, prime project, scaffold project, reseed projects,
+  bootstrap project, template rollout, workspace governance, memory priming, project standards
 
 ---
 
 ## PURPOSE
 
-This skill makes the **EVA Foundation Layer** (Workspace PM/Scrum Master) available from any 
-project folder in the workspace. It provides instant access to:
+This skill exposes the EVA Foundation Layer operating toolkit from anywhere in the workspace.
 
-1. **Project Scaffolding** -- Create new projects with full EVA governance
-2. **Workspace Priming** -- Apply governance templates to existing projects
-3. **Template Deployment** -- Update copilot-instructions and standards
-4. **Pattern Propagation** -- Distribute proven patterns across projects
-5. **Evidence Collection** -- Track priming and bootstrap status
+Use it when you need to:
+
+1. scaffold a new project structure
+2. prime or re-prime governance files
+3. update project instruction contracts safely
+4. standardize local memory wake-up checkpoints
+5. propagate validated patterns across projects
+6. hand off deeper residue cleanup to the dedicated housekeeping skill when the task shifts from priming to archive-first cleanup
+
+---
+
+## CURRENT MODEL
+
+Foundation now separates **workspace authority** from **project authority**.
+
+- Workspace policy lives in `C:\eva-foundry\.github\copilot-instructions.md`
+- Project policy lives in each project's `.github\copilot-instructions.md`
+- Project templates are not copies of workspace instructions
+- Reseed operations preserve the `Project-Owned Context` block in project instruction files
+- Governance truth lives in the Project 37 Data Model API
+
+Local files support continuity and delivery, but they do not replace API-backed governance state.
 
 ---
 
 ## CAPABILITIES
 
-### 1. Prime a Single Project
-
-Apply EVA governance templates (PLAN, STATUS, ACCEPTANCE, copilot-instructions) to one project:
+### 1. Prime A Single Project
 
 ```powershell
-pwsh -ExecutionPolicy Bypass -File `
-  "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Invoke-PrimeWorkspace.ps1" `
-  -TargetPath "C:\AICOE\eva-foundry\<project-folder>"
+pwsh -ExecutionPolicy Bypass -File \
+  "C:\eva-foundry\07-foundation-layer\scripts\deployment\Invoke-PrimeWorkspace.ps1" \
+  -TargetPath "C:\eva-foundry\<project-folder>"
 ```
 
-**What it does**:
-- ✅ Applies copilot-instructions.md (3-part template, preserves PART 2)
-- ✅ Creates/updates PLAN.md with eva-primed-plan sentinel
-- ✅ Creates/updates STATUS.md with session tracking
-- ✅ Creates ACCEPTANCE.md (never overwrites existing)
-- ✅ Injects eva-primed header into README.md
-- ✅ Writes `.eva/prime-evidence.json` with timestamp
+What it does:
 
-**Idempotent**: Safe to run multiple times. Only updates what's needed.
+- applies or refreshes project governance templates
+- writes or updates local governance files
+- writes `.eva/prime-evidence.json`
+- keeps the operation idempotent where possible
 
----
-
-### 2. Prime Entire Workspace
-
-Apply governance templates to ALL numbered projects (##-* pattern):
+### 2. Prime The Workspace
 
 ```powershell
-pwsh -ExecutionPolicy Bypass -File `
-  "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Invoke-PrimeWorkspace.ps1" `
-  -WorkspaceRoot "C:\AICOE\eva-foundry"
+pwsh -ExecutionPolicy Bypass -File \
+  "C:\eva-foundry\07-foundation-layer\scripts\deployment\Invoke-PrimeWorkspace.ps1" \
+  -WorkspaceRoot "C:\eva-foundry"
 ```
 
-**Expected**: 59 projects processed in ~5 minutes
-**Evidence**: `.eva/prime-evidence.json` in each project folder
+Use `-DryRun` first for bulk operations.
 
----
-
-### 3. Scaffold New Project
-
-Create a brand new project with complete folder structure:
+### 3. Scaffold A New Project
 
 ```powershell
-# Step 1: Create folder structure
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Initialize-ProjectStructure.ps1" `
-  -ProjectRoot "C:\AICOE\eva-foundry\<new-project>" `
-  -TemplateFile "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\supported-folder-structure-rag.json"
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\utilities\Initialize-ProjectStructure.ps1" \
+  -ProjectRoot "C:\eva-foundry\<new-project>" \
+  -TemplateFile "C:\eva-foundry\07-foundation-layer\templates\supported-folder-structure-rag.json"
 
-# Step 2: Prime the new project
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Invoke-PrimeWorkspace.ps1" `
-  -TargetPath "C:\AICOE\eva-foundry\<new-project>"
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\deployment\Invoke-PrimeWorkspace.ps1" \
+  -TargetPath "C:\eva-foundry\<new-project>"
 ```
 
-**Templates available**:
-- `supported-folder-structure-rag.json` -- RAG/AI application structure
-- `supported-folder-structure-webapp.json` -- Web application structure
-- `supported-folder-structure-api.json` -- API service structure
-
----
-
-### 4. Deploy Copilot Instructions Only
-
-Update just the copilot-instructions.md file (faster, targeted):
+### 4. Refresh Project Instructions Only
 
 ```powershell
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Apply-Project07-Artifacts.ps1" `
-  -TargetPath "C:\AICOE\eva-foundry\<project-folder>"
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\deployment\Apply-Project07-Artifacts.ps1" \
+  -TargetPath "C:\eva-foundry\<project-folder>"
 ```
 
-**Safe mode**: Backs up existing PART 2, always preserves project-specific customizations
+Use this when you only need to refresh instruction or governance artifacts.
 
----
-
-### 5. Reseed Active Projects
-
-Update copilot-instructions across all active projects (batch operation):
+### 5. Reseed Projects In Batch
 
 ```powershell
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\scripts\Reseed-Projects.ps1" -Scope active
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\deployment\Reseed-Projects.ps1" -Scope active
 ```
 
-**Scope options**:
-- `active` -- 12 active projects only (default)
-- `all` -- All numbered projects
-- `foundation` -- Only foundation-owned projects (36-40, 48)
+Behavior:
 
-**Expected outcome**: PASS=12 FAIL=0 for active scope
+- refreshes the managed foundation contract
+- preserves `Project-Owned Context`
+- converts legacy PART-based files forward when encountered
 
----
-
-### 6. Workspace Housekeeping
-
-Run compliance checks and auto-organize workspace:
+### 6. Initialize Workspace Memory Checkpoints
 
 ```powershell
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Invoke-WorkspaceHousekeeping.ps1" `
-  -WorkspaceRoot "C:\AICOE\eva-foundry"
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\Initialize-WorkspaceMemorySystem.ps1" \
+  -WorkspaceRoot "C:\eva-foundry" \
+  -PhaseToActive 1
 ```
 
-**Checks**:
-- ✅ Missing governance files (PLAN, STATUS, ACCEPTANCE)
-- ✅ Orphaned evidence files
-- ✅ Outdated copilot-instructions versions
-- ✅ Projects missing .eva folder
-- ✅ Inconsistent naming patterns
+This creates local wake-up checkpoints under `.memories/session/` without creating local sprint truth.
 
----
-
-### 7. Capture Project Structure
-
-Generate a JSON snapshot of current project structure:
+### 7. Workspace Housekeeping And Analysis
 
 ```powershell
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Capture-ProjectStructure.ps1" `
-  -ProjectRoot "C:\AICOE\eva-foundry\<project-folder>" `
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\utilities\Invoke-WorkspaceHousekeeping.ps1" \
+  -WorkspaceRoot "C:\eva-foundry"
+
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\utilities\Capture-ProjectStructure.ps1" \
+  -ProjectRoot "C:\eva-foundry\<project-folder>" \
   -OutputFile ".\captured-structure.json"
 ```
 
-**Use case**: Create new templates from successful project patterns
-
----
+For deeper cleanup passes, prefer the dedicated workspace skill `@eva-housekeeping`. Use `foundation-expert` to understand active surfaces and priming behavior, then use `@eva-housekeeping` to execute one-folder-at-a-time archive decisions.
 
 ### 8. Test Foundation Deployment
 
-Run Pester test suite to verify foundation layer health:
-
 ```powershell
-pwsh -File "C:\AICOE\eva-foundry\07-foundation-layer\02-design\artifact-templates\Test-Project07-Deployment.ps1"
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\testing\Test-Project07-Deployment.ps1"
 ```
-
-**Coverage**: 60+ test cases validating templates, scripts, and deployment patterns
-
----
-
-## GOVERNANCE PATTERNS
-
-### The EVA Factory Architecture
-
-**Process**: DPDCA (Discover, Plan, Do, Check, Act)
-**Data**: 37-data-model -- single source of truth (27+ layers)
-**Actors**: Agent Skills + GitHub Copilot
-**Result**: Predictable, traceable, auditable software delivery
-
-### Foundation-Owned Governance Projects
-
-| Project | Purpose | Status |
-|---------|---------|--------|
-| 36-red-teaming | Promptfoo adversarial testing harness | Active |
-| 37-data-model | Single source of truth API (Cosmos-backed) | Active |
-| 38-ado-poc | ADO Command Center (scrum orchestration) | Active |
-| 39-ado-dashboard | EVA Home + sprint visualization | Active |
-| 40-eva-control-plane | Runtime evidence spine | Partial |
-| 48-eva-veritas | Requirements traceability + MTI gating | Active |
-
----
-
-## TOKEN SUBSTITUTION
-
-Templates support these tokens (auto-replaced during priming):
-
-| Token | Example | Source |
-|-------|---------|--------|
-| `{{PROJECT_FOLDER}}` | `01-documentation-generator` | Folder name |
-| `{{PROJECT_LABEL}}` | `Documentation Generator` | Data model API |
-| `{{PROJECT_MATURITY}}` | `active` | Data model API |
-| `{{WBS_PREFIX}}` | `F01` | Derived from folder number |
-| `{{PRIME_DATE}}` | `2026-03-03` | Current date |
-| `{{PRIME_ACTOR}}` | `agent:copilot` | Execution context |
-| `{{TARGET_PATH}}` | `C:\AICOE\eva-foundry\...` | Absolute path |
 
 ---
 
 ## VALIDATION
 
-After any foundation operation, verify success:
+After a foundation operation, verify evidence and outputs explicitly:
 
 ```powershell
-# Check evidence file exists
-Test-Path "C:\AICOE\eva-foundry\<project>\.eva\prime-evidence.json"
-
-# Read evidence
-Get-Content "C:\AICOE\eva-foundry\<project>\.eva\prime-evidence.json" | ConvertFrom-Json
-
-# Count primed projects
-(Get-ChildItem -Path "C:\AICOE\eva-foundry" -Filter "prime-evidence.json" -Recurse | 
-  Where-Object { $_.Directory.Name -eq ".eva" }).Count
+Test-Path "C:\eva-foundry\<project>\.eva\prime-evidence.json"
+Get-Content "C:\eva-foundry\<project>\.eva\prime-evidence.json" | ConvertFrom-Json
 ```
 
-**Expected evidence structure**:
-```json
-{
-  "primed_at": "2026-03-03T13:04:36-05:00",
-  "primed_by": "agent:copilot",
-  "template_version": "v3.1.0",
-  "dry_run": false,
-  "results": {
-    "folder": "project-name",
-    "steps": [
-      "copilot-instructions:PASS",
-      "PLAN.md:CREATED",
-      "STATUS.md:CREATED",
-      "ACCEPTANCE.md:CREATED",
-      "README.md:CHECKED"
-    ]
-  }
-}
-```
+For memory priming, verify `.memories/session/` and the managed kickoff checkpoint exist.
 
 ---
 
-## DRY-RUN MODE
+## DRY RUN
 
-Add `-DryRun` to any command to preview without writing files:
+Use `-DryRun` for bulk or high-impact operations before writing files.
+
+Typical commands:
 
 ```powershell
-# Preview workspace priming
-pwsh -File "...\Invoke-PrimeWorkspace.ps1" -WorkspaceRoot "C:\AICOE\eva-foundry" -DryRun
-
-# Preview single project
-pwsh -File "...\Apply-Project07-Artifacts.ps1" -TargetPath "...\project" -DryRun
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\deployment\Invoke-PrimeWorkspace.ps1" -WorkspaceRoot "C:\eva-foundry" -DryRun
+pwsh -File "C:\eva-foundry\07-foundation-layer\scripts\deployment\Reseed-Projects.ps1" -Scope active -DryRun
 ```
-
-**Output tokens**: `[DRY]` `[PASS]` `[FAIL]` `[WARN]` `[INFO]` `[SKIP]`
 
 ---
 
 ## ANTI-PATTERNS
 
-❌ **DON'T**: Manually edit copilot-instructions.md PART 1 or PART 3
-✅ **DO**: Edit PART 2 only, reseed to get latest PART 1/3
-
-❌ **DON'T**: Delete `.eva/prime-evidence.json` (breaks audit trail)
-✅ **DO**: Re-prime if you need to update evidence timestamp
-
-❌ **DON'T**: Skip dry-run on workspace-wide operations
-✅ **DO**: Always preview with `-DryRun` first on bulk operations
-
-❌ **DON'T**: Reseed without checking git status first
-✅ **DO**: Commit project work before reseeding templates
-
-❌ **DON'T**: Create projects without using scaffold scripts
-✅ **DO**: Use `Initialize-ProjectStructure.ps1` for consistency
+- Do not treat project instructions as copies of workspace instructions.
+- Do not manually reintroduce legacy multi-section template assumptions into current project templates.
+- Do not overwrite project-owned context blindly during reseed.
+- Do not generate local sprint truth when running memory priming.
+- Do not skip API bootstrap or dry-run checks for bulk rollout work.
 
 ---
 
 ## QUICK REFERENCE
 
 ```powershell
-# Foundation layer scripts location
-$foundation = "C:\AICOE\eva-foundry\07-foundation-layer"
-
-# Templates directory
-$templates = "$foundation\02-design\artifact-templates"
-
-# Scripts directory
-$scripts = "$foundation\scripts"
-
-# MCP server
-$mcp = "$foundation\mcp-server\foundation-primer"
+$foundation = "C:\eva-foundry\07-foundation-layer"
+$templates = "$foundation\templates"
+$deployment = "$foundation\scripts\deployment"
+$utilities = "$foundation\scripts\utilities"
+$testing = "$foundation\scripts\testing"
 ```
-
----
-
-## DATA MODEL INTEGRATION
-
-Foundation layer reads project metadata from `37-data-model`:
-
-```powershell
-# Example: Get project info
-$base = "http://localhost:8010"
-$info = Invoke-RestMethod "$base/model/projects/07-foundation-layer"
-
-# Returns:
-# {
-#   id: "07-foundation-layer",
-#   label: "Foundation Layer",
-#   maturity: "active",
-#   wbs_id: "WBS-007",
-#   phase: "production"
-# }
-```
-
-**Used for**: Token substitution in templates, WBS prefix generation, maturity gating
 
 ---
 
 ## WHEN TO INVOKE THIS SKILL
 
-**Invoke "foundation-expert" when**:
-- User asks to prime workspace or project
-- User wants to bootstrap/scaffold new project
-- User asks about governance standards
-- User mentions copilot-instructions updates
-- User asks "what templates are available"
-- User wants to update multiple projects at once
+Invoke `foundation-expert` when the user needs project priming, template rollout, workspace cleanup, local memory checkpoint setup, or safe propagation of Project 07 standards across the workspace.
+
+If the user explicitly wants deeper housekeeping, archive-first cleanup, or one-folder semantic cleanup, invoke `@eva-housekeeping` and pair it with `bob-semantic-filter` for dense file-content reduction.
+
+Typical triggers:
+
 - User asks about EVA Factory or DPDCA pattern
 
 **Related skills**:
+
 - `veritas-expert` (48-eva-veritas) -- Requirements traceability
 - `sprint-advance` (51-ACA) -- Sprint progression workflow
 - `data-model-query` (37-data-model) -- Data model operations
 
 ---
 
-**Foundation Layer**: The first touch on every EVA project. 🏭
+**Foundation Layer**: The first touch on every EVA project.
 
-*Template version*: v3.1.0  
-*Last updated*: 2026-03-03 13:58 ET  
+*Template version*: v7.0.0  
+*Last updated*: 2026-03-15 11:20 UTC  
 *Owner*: Marco Presta / EVA AI COE

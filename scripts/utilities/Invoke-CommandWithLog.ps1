@@ -44,7 +44,7 @@
     Queries ADO, returns iteration path
     
 .EXAMPLE
-    $result = Invoke-CommandWithLog -Command "C:\AICOE\.venv\Scripts\python.exe check.py" -ReturnFullLog
+    $result = Invoke-CommandWithLog -Command "C:\eva-foundry\.venv\Scripts\python.exe check.py" -ReturnFullLog
     Runs Python script, returns all output
     
 .OUTPUTS

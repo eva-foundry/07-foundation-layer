@@ -73,14 +73,22 @@ class BootstrapTester:
             projects = resp2.json()
             
             print(f"[OK] Query 2 (projects): {time2:.3f}s")
+            
+            # Defensive handling: ensure projects is a list of dicts
+            if isinstance(projects, str):
+                projects = json.loads(projects)
+            if not isinstance(projects, list):
+                projects = [projects] if projects else []
+            
             print(f"     └─ Total projects: {len(projects)}")
             
-            active = [p for p in projects if p.get('is_active')]
+            # Filter for active projects (handle string items gracefully)
+            active = [p for p in projects if isinstance(p, dict) and p.get('is_active')]
             print(f"     └─ Active projects: {len(active)}")
             self.metrics['cloud_query_times'].append(time2)
             
-            # Check governance fields
-            governance_count = sum(1 for p in projects if p.get('governance'))
+            # Check governance fields (only for dict items)
+            governance_count = sum(1 for p in projects if isinstance(p, dict) and p.get('governance'))
             print(f"     └─ With governance metadata: {governance_count}")
             
             total_time = time1 + time2
@@ -117,8 +125,8 @@ class BootstrapTester:
         print("="*60)
         
         # Time file reads
-        best_practices_path = Path(r'C:\AICOE\.github\best-practices-reference.md')
-        standards_path = Path(r'C:\AICOE\.github\standards-specification.md')
+        best_practices_path = Path(r'C:\eva-foundry\.github\best-practices-reference.md')
+        standards_path = Path(r'C:\eva-foundry\.github\standards-specification.md')
         
         files_exist = {
             'best_practices': best_practices_path.exists(),
@@ -200,6 +208,11 @@ class BootstrapTester:
         print("="*60)
         
         try:
+            # Initialize variables with default values
+            has_governance = False
+            has_ac = False
+            status = 'PASS'
+            
             # Query workspace
             resp = requests.get(
                 f"{CLOUD_BASE}/model/workspace_config/{WORKSPACE_ID}",
@@ -228,19 +241,26 @@ class BootstrapTester:
             projects = resp.json()
             
             # Check governance field presence
-            if projects and isinstance(projects, list):
+            if projects and isinstance(projects, list) and len(projects) > 0:
                 sample = projects[0]
-                has_governance = 'governance' in sample
-                has_ac = 'acceptance_criteria' in sample
-                
-                print(f"\n[OK] Projects schema valid")
-                print(f"     ├─ Governance field: {'✓' if has_governance else '✗'}")
-                print(f"     └─ Acceptance criteria: {'✓' if has_ac else '✗'}")
-                
-                if has_governance and has_ac:
-                    status = 'PASS'
+                if isinstance(sample, dict):
+                    has_governance = 'governance' in sample
+                    has_ac = 'acceptance_criteria' in sample
+                    
+                    print(f"\n[OK] Projects schema valid")
+                    print(f"     ├─ Governance field: {'✓' if has_governance else '✗'}")
+                    print(f"     └─ Acceptance criteria: {'✓' if has_ac else '✗'}")
+                    
+                    if has_governance and has_ac:
+                        status = 'PASS'
+                    else:
+                        status = 'WARN'
                 else:
+                    print(f"[WARN] First project item is not a dict: {type(sample)}")
                     status = 'WARN'
+            else:
+                print(f"[WARN] No valid projects found to validate schema")
+                status = 'WARN'
             
             self.results['scenarios']['4_data_accuracy'] = {
                 'status': status,
@@ -267,6 +287,11 @@ class BootstrapTester:
         print("PERFORMANCE METRICS")
         print("="*60)
         
+        # Initialize with default values
+        bootstrap_cloud = None
+        bootstrap_files = None
+        improvement = None
+        
         if self.metrics['cloud_query_times']:
             cloud_avg = sum(self.metrics['cloud_query_times']) / len(self.metrics['cloud_query_times'])
             print(f"Cloud API query time (average): {cloud_avg:.3f}s")
@@ -278,20 +303,21 @@ class BootstrapTester:
         if self.metrics['bootstrap_times_files']:
             bootstrap_files = sum(self.metrics['bootstrap_times_files']) / len(self.metrics['bootstrap_times_files'])
             print(f"Bootstrap time (files): {bootstrap_files:.3f}s")
+        
+        # Only calculate improvement if both metrics are available
+        if bootstrap_cloud and bootstrap_files:
+            improvement = bootstrap_files / bootstrap_cloud
+            print(f"\nPerformance improvement: {improvement:.1f}x faster (API-first)")
             
-            if bootstrap_cloud and bootstrap_files:
-                improvement = bootstrap_files / bootstrap_cloud
-                print(f"\nPerformance improvement: {improvement:.1f}x faster (API-first)")
-                
-                if improvement >= 10:
-                    print("[OK] Goal achieved: 10x performance gain ✓")
-                else:
-                    print(f"[WARN] Goal: 10x, achieved: {improvement:.1f}x")
+            if improvement >= 10:
+                print("[OK] Goal achieved: 10x performance gain ✓")
+            else:
+                print(f"[WARN] Goal: 10x, achieved: {improvement:.1f}x")
         
         self.results['metrics'] = {
             'cloud_query_times': self.metrics['cloud_query_times'],
             'file_read_times': self.metrics['file_read_times'],
-            'performance_improvement_factor': improvement if 'improvement' in locals() else None
+            'performance_improvement_factor': improvement
         }
     
     def run_all_tests(self):
@@ -343,7 +369,7 @@ class BootstrapTester:
     def save_results(self):
         """Save test results to JSON"""
         
-        output_path = Path("C:\\AICOE\\eva-foundry\\07-foundation-layer\\docs\\sessions\\test-results-S26-P2.json")
+        output_path = Path("C:\\eva-foundry\\eva-foundry\\07-foundation-layer\\docs\\sessions\\test-results-S26-P2.json")
         output_path.parent.mkdir(parents=True, exist_ok=True)
         
         with open(output_path, 'w') as f:

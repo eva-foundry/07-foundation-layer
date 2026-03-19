@@ -179,7 +179,7 @@
    
    Problem:
    ```powershell
-   C:\AICOE\.venv\Scripts\python.exe
+   C:\eva-foundry\.venv\Scripts\python.exe
    ```
    
    Issues:
@@ -310,7 +310,7 @@ Add to workspace-level instructions:
 
 ```powershell
 # Quick validation script
-Test-CopilotInstructions -WorkspaceRoot C:\AICOE\eva-foundry -Mode "strict"
+Test-CopilotInstructions -WorkspaceRoot C:\eva-foundry\eva-foundry -Mode "strict"
 
 # Output:
 # [PASS] Workspace instructions found

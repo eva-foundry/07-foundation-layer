@@ -16,7 +16,7 @@
  */
 
 import React, { useState } from 'react';
-import { useLang } from '@context/LangContext';
+import { useLiterals } from '@hooks/useLiterals';
 import { create{{LAYER_TITLE}}Record } from '@api/{{LAYER_NAME}}Api';
 import type { {{ENTITY_TYPE}}, Create{{ENTITY_TYPE}}Input } from '@/types/{{LAYER_NAME}}';
 
@@ -35,16 +35,7 @@ const GC_ERROR   = '#d4351c';
 const GC_SUCCESS = '#00703c';
 
 export const {{LAYER_TITLE}}CreateForm: React.FC<{{LAYER_TITLE}}CreateFormProps> = ({ onSuccess, onCancel }) => {
-  const { lang } = useLang();
-
-  const t = {
-    title:       lang === 'fr' ? 'Créer un nouvel enregistrement' : 'Create new record',
-    submit:      lang === 'fr' ? 'Créer' : 'Create',
-    cancel:      lang === 'fr' ? 'Annuler' : 'Cancel',
-    required:    lang === 'fr' ? 'Champ obligatoire' : 'This field is required',
-    submitting:  lang === 'fr' ? 'Création en cours...' : 'Creating...',
-    error:       lang === 'fr' ? 'Erreur lors de la création' : 'Failed to create record',
-  };
+  const t = useLiterals('{{LAYER_NAME}}.create_form');
 
   const [formData, setFormData] = useState<Partial<Create{{ENTITY_TYPE}}Input>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -57,7 +48,7 @@ export const {{LAYER_TITLE}}CreateForm: React.FC<{{LAYER_TITLE}}CreateFormProps>
     // TODO: Add validation rules based on schema
     {{#REQUIRED_FIELDS}}
     if (!formData.{{FIELD_NAME}}) {
-      newErrors.{{FIELD_NAME}} = t.required;
+      newErrors.{{FIELD_NAME}} = t('errors.required');
     }
     {{/REQUIRED_FIELDS}}
 
@@ -110,7 +101,7 @@ export const {{LAYER_TITLE}}CreateForm: React.FC<{{LAYER_TITLE}}CreateFormProps>
     >
       {/* Form header */}
       <h2 style={{ margin: '0 0 24px', fontSize: '1.25rem', fontWeight: 700, color: GC_TEXT }}>
-        {t.title}
+        {t('title')}
       </h2>
 
       {/* Submit error banner */}
@@ -128,7 +119,7 @@ export const {{LAYER_TITLE}}CreateForm: React.FC<{{LAYER_TITLE}}CreateFormProps>
             fontSize: '0.875rem',
           }}
         >
-          <strong>{t.error}:</strong> {submitError}
+          <strong>{t('messages.error')}:</strong> {submitError}
         </div>
       )}
 
@@ -246,7 +237,7 @@ export const {{LAYER_TITLE}}CreateForm: React.FC<{{LAYER_TITLE}}CreateFormProps>
             opacity: submitting ? 0.6 : 1,
           }}
         >
-          {t.cancel}
+          {t('actions.cancel')}
         </button>
         <button
           type="submit"
@@ -263,7 +254,7 @@ export const {{LAYER_TITLE}}CreateForm: React.FC<{{LAYER_TITLE}}CreateFormProps>
             cursor: submitting ? 'not-allowed' : 'pointer',
           }}
         >
-          {submitting ? t.submitting : t.submit}
+          {submitting ? t('messages.creating') : t('actions.submit')}
         </button>
       </div>
     </form>

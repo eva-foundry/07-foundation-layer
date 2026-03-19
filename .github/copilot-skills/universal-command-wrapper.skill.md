@@ -46,11 +46,11 @@ category: debugging infrastructure-pattern
 
 ```powershell
 # Source the script
-. C:\AICOE\eva-foundry\07-foundation-layer\scripts\Invoke-CommandWithLog.ps1
+. C:\eva-foundry\07-foundation-layer\scripts\Invoke-CommandWithLog.ps1
 
 # Example 1: Run pytest, extract summary
 $result = Invoke-CommandWithLog `
-    -Command "C:\AICOE\.venv\Scripts\python.exe -m pytest services/ -x -q" `
+    -Command "C:\eva-foundry\.venv\Scripts\python.exe -m pytest services/ -x -q" `
     -SearchPattern "passed|failed|error" `
     -Label "pytest"
 
@@ -68,7 +68,7 @@ Write-Host "Iteration: $($result.Output)"
 
 # Example 3: Full log output
 $result = Invoke-CommandWithLog `
-    -Command "C:\AICOE\.venv\Scripts\python.exe check-state.py" `
+    -Command "C:\eva-foundry\.venv\Scripts\python.exe check-state.py" `
     -ReturnFullLog `
     -Label "state-check"
 
@@ -79,7 +79,7 @@ $result.Output | Out-String | Write-Host
 
 ```python
 import sys
-sys.path.insert(0, 'C:/AICOE/eva-foundry/07-foundation-layer/scripts')
+sys.path.insert(0, 'C:/eva-foundry/07-foundation-layer/scripts')
 from invoke_command_with_log import run_with_log
 
 # Example 1: Run pytest, extract summary
@@ -130,7 +130,7 @@ print(result['output'])
 === COMMAND LOG ===
 Timestamp: 2026-02-28 14:30:22
 Command: pytest services/ -x -q
-WorkingDirectory: C:\AICOE\eva-foundry\51-ACA
+WorkingDirectory: C:\eva-foundry\51-ACA
 Label: pytest
 ==================
 
@@ -181,7 +181,7 @@ run_in_terminal("pytest services/")
 **After (Fixed)**:
 ```powershell
 # Agent loads wrapper
-. C:\AICOE\eva-foundry\07-foundation-layer\scripts\Invoke-CommandWithLog.ps1
+. C:\eva-foundry\07-foundation-layer\scripts\Invoke-CommandWithLog.ps1
 
 # Agent runs via wrapper
 $result = Invoke-CommandWithLog -Command "pytest services/" -SearchPattern "passed"
@@ -206,14 +206,14 @@ Add to PART 1 (Universal Rules) after Section 3 (Data Model API):
 
 **PowerShell**:
 ```powershell
-. C:\AICOE\eva-foundry\07-foundation-layer\scripts\Invoke-CommandWithLog.ps1
+. C:\eva-foundry\07-foundation-layer\scripts\Invoke-CommandWithLog.ps1
 $result = Invoke-CommandWithLog -Command "your-command" -SearchPattern "pattern"
 ```
 
 **Python**:
 ```python
 import sys
-sys.path.insert(0, 'C:/AICOE/eva-foundry/07-foundation-layer/scripts')
+sys.path.insert(0, 'C:/eva-foundry/07-foundation-layer/scripts')
 from invoke_command_with_log import run_with_log
 result = run_with_log(command="your-command", search_pattern="pattern")
 ```
@@ -229,7 +229,7 @@ result = run_with_log(command="your-command", search_pattern="pattern")
 ### PowerShell Test
 
 ```powershell
-cd C:\AICOE\eva-foundry\07-foundation-layer
+cd C:\eva-foundry\07-foundation-layer
 . scripts\Invoke-CommandWithLog.ps1
 
 # Test 1: Simple command
@@ -249,7 +249,7 @@ Write-Host "[TEST 3] Exit: $($r.ExitCode), Success: $($r.Success)"
 
 ```python
 import sys
-sys.path.insert(0, 'C:/AICOE/eva-foundry/07-foundation-layer/scripts')
+sys.path.insert(0, 'C:/eva-foundry/07-foundation-layer/scripts')
 from invoke_command_with_log import run_with_log
 
 # Test 1: Simple command

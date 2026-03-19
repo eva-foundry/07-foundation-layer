@@ -1,4 +1,4 @@
-﻿# EVA-FEATURE: F07-02
+# EVA-FEATURE: F07-02
 # EVA-STORY: F07-02-001
 # EVA-STORY: F07-02-002
 # EVA-STORY: F07-02-003
@@ -19,22 +19,16 @@
 # EVA-STORY: F07-08-001
 # EVA-STORY: F07-08-002
 # Apply-Project07-Artifacts.ps1
-# Version: 1.5.0 (February 23, 2026)
+# Version: 2.0.1 (March 19, 2026)
 # Intelligent primer script for deploying Project 07 artifacts to any EVA project
 # Self-demonstrating: Uses the same professional patterns it deploys
 # See CHANGELOG.md for version history and upgrade notes
 #
-# CHANGES in 1.5.0:
-# - Updated all paths from I:\ to C:\AICOE (drive migration)
-# - SourcePath now auto-detects C:\AICOE\eva-foundation\07-foundation-layer
-# - Examples updated to real numbered project paths
-# - Template source is now v3.0.0 (PART1+PART2+PART3, 207 lines)
-#
-# CRITICAL FIXES in 1.4.0:
-# - Fixed PART 1 extraction regex to use multiline anchors (^## PART 2:)
-# - Enhanced compliance validation to check implementation presence, not just names
-# - Added line count validation (>1000 lines) to detect truncated extractions
-# - Integrated debug evidence collection at extraction operations
+# CHANGES in 2.0.0:
+# - Aligns with the v7.1.0 project instruction contract template
+# - Preserves the Project-Owned Context block instead of legacy PART 2 content
+# - Uses the Validation Pattern section from the live template instead of legacy PART 3 assembly
+# - Simplifies validation to the current project contract markers
 
 <#
 .SYNOPSIS
@@ -50,9 +44,9 @@
     
     Features:
     1. Analyzes target project structure
-    2. Detects existing copilot-instructions.md and preserves PART 2
-    3. Applies universal PART 1 patterns
-    4. Generates project-specific PART 2 template with discovered content
+    2. Detects existing copilot-instructions.md and preserves the Project-Owned Context block
+    3. Applies the managed foundation contract from the live template
+    4. Generates project-specific Project-Owned Context content when none exists
     5. Creates backup before any changes
     6. Validates deployment against Project 07 standards
     7. Generates compliance report
@@ -61,7 +55,7 @@
     Path to target project folder (default: current directory)
 
 .PARAMETER SourcePath
-    Path to Project 07 artifacts (default: auto-detect from C:\AICOE\eva-foundation\07-foundation-layer)
+    Path to Project 07 artifacts (default: auto-detect from C:\eva-foundry\eva-foundation\07-foundation-layer)
 
 .PARAMETER DryRun
     Preview changes without applying them
@@ -76,15 +70,15 @@
     Skip post-deployment compliance validation
 
 .EXAMPLE
-    .\Apply-Project07-Artifacts.ps1 -TargetPath "C:\AICOE\eva-foundation\31-eva-faces" -DryRun
+    .\Apply-Project07-Artifacts.ps1 -TargetPath "C:\eva-foundry\eva-foundation\31-eva-faces" -DryRun
     Preview what would be applied to 31-eva-faces
 
 .EXAMPLE
-    .\Apply-Project07-Artifacts.ps1 -TargetPath "C:\AICOE\eva-foundation\33-eva-brain-v2"
+    .\Apply-Project07-Artifacts.ps1 -TargetPath "C:\eva-foundry\eva-foundation\33-eva-brain-v2"
     Apply Project 07 artifacts with interactive prompts
 
 .EXAMPLE
-    .\Apply-Project07-Artifacts.ps1 -TargetPath "C:\AICOE\eva-foundation\44-eva-jp-spark" -Force
+    .\Apply-Project07-Artifacts.ps1 -TargetPath "C:\eva-foundry\eva-foundation\44-eva-jp-spark" -Force
     Force apply without prompts (use with caution)
 
 .NOTES
@@ -287,10 +281,10 @@ class StructuredErrorHandlerPS {
         
         $errorReport | ConvertTo-Json -Depth 10 | Out-File $errorFile -Encoding UTF8
         
-        # ASCII-only console output (encoding safety)
-        Write-Host "[ERROR] $($this.ComponentName): $($error.Exception.GetType().Name)" -ForegroundColor Red
-        Write-Host "[ERROR] Message: $($error.Exception.Message)" -ForegroundColor Red
-        Write-Host "[ERROR] Details saved to: $errorFile" -ForegroundColor Red
+        # Best Practice: Use Write-Error for error reporting (proper stream)
+        Write-Error "$($this.ComponentName): $($error.Exception.GetType().Name)"
+        Write-Error "Message: $($error.Exception.Message)"
+        Write-Error "Details saved to: $errorFile"
         
         return $errorFile
     }
@@ -318,6 +312,7 @@ function Write-Status {
     <#
     .SYNOPSIS
         ASCII-only status output (Windows enterprise encoding safety)
+        Outputs to both console (colored) and Information stream (capturable)
     #>
     param(
         [Parameter(Mandatory=$true)]
@@ -342,10 +337,16 @@ function Write-Status {
         "Check" { "White" }
     }
     
+    $formattedMessage = "$symbol $Message"
+    
+    # Best Practice: Write to both streams
+    # - Console: Colored output for interactive use
+    # - Information: Capturable output for logging/automation
     if ($NoNewline) {
-        Write-Host "$symbol $Message" -ForegroundColor $color -NoNewline
+        Write-Host $formattedMessage -ForegroundColor $color -NoNewline
     } else {
-        Write-Host "$symbol $Message" -ForegroundColor $color
+        Write-Host $formattedMessage -ForegroundColor $color
+        Write-Information $formattedMessage -InformationAction Continue
     }
 }
 
@@ -385,7 +386,7 @@ function Find-Project07Source {
     #>
     
     $searchPaths = @(
-        "C:\AICOE\eva-foundation\07-foundation-layer\templates",
+        "C:\eva-foundry\07-foundation-layer\templates",
         (Join-Path (Split-Path $PSScriptRoot -Parent) "templates"),
         (Join-Path $PSScriptRoot "."),
         ".\templates"
@@ -499,10 +500,68 @@ function Get-ProjectMetadata {
     return $metadata
 }
 
+function Resolve-TemplateTokens {
+    <#
+    .SYNOPSIS
+        Resolve managed template placeholders using target project metadata
+    #>
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Content,
+
+        [Parameter(Mandatory=$true)]
+        [hashtable]$Metadata
+    )
+
+    $projectFolder = $Metadata.Name
+    $projectName = $Metadata.Name
+    $wbsPrefix = if ($projectFolder -match '^(\d{2})-') { "F$($matches[1])" } else { 'FXX' }
+    $projectStack = if ($Metadata.TechStack.Count -gt 0) { $Metadata.TechStack -join ' + ' } else { '[TODO: Replace with real stack]' }
+    $projectPatterns = if ($Metadata.Components.Count -gt 0) {
+        @(
+            "$($Metadata.ProjectType) architecture aligned to components: $($Metadata.Components -join ', ')",
+            '[TODO: Add the most important implementation pattern for this project]',
+            '[TODO: Add any delivery or integration constraint that must be preserved]'
+        )
+    } else {
+        @(
+            '[TODO: Add the most important implementation pattern for this project]',
+            '[TODO: Add the second most important implementation pattern for this project]',
+            '[TODO: Add any delivery or integration constraint that must be preserved]'
+        )
+    }
+
+    $tokenMap = [ordered]@{
+        '{{PROJECT_NAME}}' = $projectName
+        '{{PROJECT_FOLDER}}' = $projectFolder
+        '{{WBS_PREFIX}}' = $wbsPrefix
+        '{{PROJECT_MATURITY}}' = '[TODO: Confirm maturity]'
+        '{{CURRENT_PHASE}}' = '[TODO: Confirm current phase]'
+        '{{KEY_DEPENDENCIES}}' = '[TODO: Replace with real dependencies]'
+        '{{PROJECT_STACK}}' = $projectStack
+        '{{BUILD_COMMAND}}' = '[TODO: Add build command]'
+        '{{TEST_COMMAND}}' = '[TODO: Add test command]'
+        '{{LINT_COMMAND}}' = '[TODO: Add lint command]'
+        '{{RUN_COMMAND}}' = '[TODO: Add run command]'
+        '{{LOCAL_PATTERN_1}}' = $projectPatterns[0]
+        '{{LOCAL_PATTERN_2}}' = $projectPatterns[1]
+        '{{LOCAL_PATTERN_3}}' = $projectPatterns[2]
+        '{{LOCAL_RISK_1}}' = '[TODO: Add the main execution or deployment risk]'
+        '{{LOCAL_RISK_2}}' = '[TODO: Add known exceptions, temporary waivers, or operating hazards]'
+    }
+
+    $resolvedContent = $Content
+    foreach ($token in $tokenMap.Keys) {
+        $resolvedContent = $resolvedContent.Replace($token, $tokenMap[$token])
+    }
+
+    return $resolvedContent
+}
+
 function Extract-ExistingPart2 {
     <#
     .SYNOPSIS
-        Extract PART 2 from existing copilot-instructions.md
+        Extract the current Project-Owned Context block or convert legacy content
     #>
     param(
         [Parameter(Mandatory=$true)]
@@ -515,29 +574,59 @@ function Extract-ExistingPart2 {
     
     $content = Get-Content $CopilotInstructionsPath -Raw
     
-    # Find PART 2 section (use multiline mode with line anchor)
-    # Matches both '## PART 2:' (v2.x) and '## PART 2 --' (v3.x) headers
-    if ($content -match '(?sm)^## PART 2[: ].*?$') {
-        $part2Content = $matches[0]
-        
-        Write-Status "Extracted existing PART 2 content ($($part2Content.Length) chars)" -Type Pass
-        
+    if ($content -match '(?sm)^## Project-Owned Context\s*$.*?(?=^## Validation Pattern\s*$)') {
+        $ownedContextContent = $matches[0].TrimEnd()
+
+        Write-Status "Extracted existing Project-Owned Context ($($ownedContextContent.Length) chars)" -Type Pass
+
         return @{
-            Content = $part2Content
-            HasArchitecture = $content -match '### Architecture Overview'
-            HasWorkflows = $content -match '### Development Workflows'
-            HasTroubleshooting = $content -match '### Troubleshooting'
-            HasCriticalPatterns = $content -match '### Critical Code Patterns'
+            Content = $ownedContextContent
+            Source = 'current'
         }
     }
-    
+
+    if ($content -match '(?sm)^## PART 2[: -].*?(?=^## PART 3[: -]|\z)') {
+        $legacyContent = $matches[0].TrimEnd()
+
+        Write-Status "Converted legacy PART 2 content into Project-Owned Context ($($legacyContent.Length) chars)" -Type Warn
+
+        return @{
+            Content = @"
+## Project-Owned Context
+
+This section was preserved from a legacy PART-based project instruction file.
+Review and normalize it during the next project-specific maintenance cycle.
+
+$legacyContent
+"@.TrimEnd()
+            Source = 'legacy-part'
+        }
+    }
+
+    $trimmed = $content.Trim()
+    if (-not [string]::IsNullOrWhiteSpace($trimmed)) {
+        Write-Status "Wrapped existing unstructured project instructions into Project-Owned Context" -Type Warn
+
+        return @{
+            Content = @"
+## Project-Owned Context
+
+This section was preserved from an older unstructured project instruction file.
+Review and normalize it during the next project-specific maintenance cycle.
+
+$trimmed
+"@.TrimEnd()
+            Source = 'legacy-unstructured'
+        }
+    }
+
     return $null
 }
 
 function New-ProjectSpecificPart2 {
     <#
     .SYNOPSIS
-        Generate PART 2 template based on project analysis
+        Generate the Project-Owned Context section based on project analysis
     #>
     param(
         [Parameter(Mandatory=$true)]
@@ -562,137 +651,62 @@ function New-ProjectSpecificPart2 {
         $componentList = "[TODO: Document core components]"
     }
     
-    $template = @"
-## PART 2 -- $projectName PROJECT SPECIFIC
-
-> **$($Metadata.ProjectType)**  
-> Generated by Project 07 Artifact Primer on $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
-
-### Documentation Guide
-
-**Primary References**:
-- **This file** (copilot-instructions.md): Quick reference workflows and patterns
-- **[architecture-ai-context.md](./architecture-ai-context.md)**: Comprehensive architecture reference
-- **Project Documentation**: ``docs/`` folder
-
-### Architecture Overview
-
-**System Type**: $($Metadata.ProjectType)
-
-**Core Components**:
-$componentList
-
-**Technology Stack**: $techStack
-
-**Critical Architecture Patterns**:
-- [TODO: Document key patterns specific to this project]
-- [TODO: Add fallback strategies if applicable]
-- [TODO: Add security considerations]
-
-### Project Structure
-
-``````
-$(if ($Metadata.HasScripts) { "scripts/          # Main execution scripts`n" })$(if ($Metadata.HasTests) { "tests/            # Test cases and fixtures`n" })$(if ($Metadata.HasDocs) { "docs/             # Documentation`n" })$(if ($Metadata.HasFunctions) { "functions/        # Azure Functions`n" })$(if ($Metadata.HasInfra) { "infra/            # Infrastructure as Code`n" })[TODO: Complete project structure tree]
-``````
-
-### Development Workflows
-
-**Local Development Setup**:
-
-``````powershell
-# [TODO: Add setup steps]
-# 1. Clone repository
-# 2. Install dependencies
-# 3. Configure environment
-# 4. Run application
-``````
-
-**Quick Commands**:
-- Start: ``[TODO: Add start command]``
-- Test: ``[TODO: Add test command]``
-- Build: ``[TODO: Add build command]``
-- Deploy: ``[TODO: Add deploy command]``
-
-### Critical Code Patterns
-
-#### Pattern 1: [TODO: Add Pattern Name]
-
-**Purpose**: [TODO: Describe purpose]
-
-**Implementation**:
-``````python
-# [TODO: Add code example]
-``````
-
-### Testing
-
-**Test Structure**:
-$(if ($Metadata.HasTests) {
-    "- Tests located in: ``tests/``"
-} else {
-    "- [TODO: Set up testing infrastructure]"
-})
-
-**Running Tests**:
-``````powershell
-# [TODO: Add test commands]
-``````
-
-### CI/CD Pipeline
-
-[TODO: Document CI/CD workflows]
-
-### Troubleshooting
-
-#### Issue 1: [Common Issue Name]
-
-**Symptom**: [TODO: Describe symptom]  
-**Cause**: [TODO: Root cause]  
-**Solution**: [TODO: Resolution steps]
-
-### Performance Optimization
-
-[TODO: Document performance considerations]
-
----
-
-**For comprehensive architecture details, see [architecture-ai-context.md](./architecture-ai-context.md)**
-
-"@
-
-    # If existing PART 2 content, preserve it in HTML comment
     if ($ExistingPart2 -and $ExistingPart2.Content) {
-        Write-Status "Preserving existing PART 2 content for manual review" -Type Info
-        
-        $template += @"
-
-<!--
-PRESERVED EXISTING PART 2 CONTENT (Review and integrate manually):
-
-This content was backed up before deployment. Review the sections below and:
-1. Copy useful project-specific patterns to appropriate [TODO] sections above
-2. Remove this comment block when integration is complete
-
-$($ExistingPart2.Content)
--->
-
-"@
+        Write-Status "Preserving existing Project-Owned Context block" -Type Info
+        return $ExistingPart2.Content
     }
-    
-    return $template
+
+    return @"
+## Project-Owned Context
+
+This section is intended to be edited by the project team and preserved by foundation reseed operations.
+
+Document only the project-specific facts that do not belong in workspace instructions:
+- domain purpose
+- important dependencies
+- real build and test commands
+- local architectural constraints
+- known exceptions or delivery hazards
+
+**Status**: [TODO: Confirm maturity]  
+**Current Phase**: [TODO: Confirm current phase]  
+**Dependencies**: [TODO: Replace with real dependencies]  
+**Primary Stack**: $techStack
+
+### Local Commands
+
+List the real commands used in this project:
+- build: [TODO: Add build command]
+- test: [TODO: Add test command]
+- lint: [TODO: Add lint command]
+- run: [TODO: Add run command]
+
+### Local Patterns
+
+- $($Metadata.ProjectType) architecture with components: $components
+- [TODO: Add the most important implementation pattern for this project]
+- [TODO: Add any delivery or integration constraint that must be preserved]
+
+### Local Risks Or Exceptions
+
+- [TODO: Add the main execution or deployment risk]
+- [TODO: Add known exceptions, temporary waivers, or operating hazards]
+"@.TrimEnd()
 }
 
 function New-Part1Content {
     <#
     .SYNOPSIS
-        Extract universal PART 1 from template
+        Extract the managed foundation contract prefix from the template
     .DESCRIPTION
-        Extracts everything before the actual PART 2 section header (## PART 2:)
-        NOT the TOC entry (### PART 2:). Uses multiline mode with line anchors.
+        Extracts everything before the Project-Owned Context section header.
     #>
     param(
         [Parameter(Mandatory=$true)]
         [string]$TemplatePath,
+
+        [Parameter(Mandatory=$true)]
+        [hashtable]$Metadata,
         
         [Parameter(Mandatory=$false)]
         [object]$DebugCollector = $null
@@ -703,50 +717,67 @@ function New-Part1Content {
         $DebugCollector.CaptureState("before_part1_extraction") | Out-Null
     }
     
-    $templateContent = Get-Content $TemplatePath -Raw
+    $templateContent = Resolve-TemplateTokens -Content (Get-Content $TemplatePath -Raw) -Metadata $Metadata
     
-    # CRITICAL FIX: Use multiline mode (?m) with start-of-line anchor (^)
-    # Matches both '## PART 2:' (v2.x) and '## PART 2 --' (v3.x template headers)
-    # (?s) = single-line mode (. matches newlines)
-    # (?m) = multiline mode (^ matches start of any line)
-    if ($templateContent -match '(?sm)^(.*?)^## PART 2[ :-]') {
+    if ($templateContent -match '(?sm)^(.*?)^## Project-Owned Context\s*$') {
         $part1Content = $matches[1]
-        
-        # VALIDATION: Check extracted content size (Project 07 pattern)
+
         $lineCount = ($part1Content -split "`n").Count
-        
-        if ($lineCount -lt 200) {
-            $error = "CRITICAL: Extracted PART 1 has only $lineCount lines (expected >200). Regex matched wrong marker."
+
+        if ($lineCount -lt 20) {
+            $error = "CRITICAL: Extracted template prefix has only $lineCount lines. Regex matched the wrong marker."
             Write-Status $error -Type Error
-            
+
             if ($DebugCollector) {
-                # Save truncated content for analysis
                 $errorFile = Join-Path $DebugCollector.DebugDir "part1_extraction_failed_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
                 $part1Content | Out-File $errorFile -Encoding UTF8
                 $DebugCollector.CaptureState("part1_extraction_validation_failed") | Out-Null
             }
-            
+
             throw $error
         }
-        
-        Write-Status "Extracted PART 1: $lineCount lines" -Type Pass
-        
-        # EVIDENCE: Capture success state (Project 07 pattern)
+
+        Write-Status "Extracted managed template prefix: $lineCount lines" -Type Pass
+
         if ($DebugCollector) {
             $DebugCollector.CaptureState("after_part1_extraction_success") | Out-Null
         }
-        
+
         return $part1Content
     }
-    
-    # Fallback if regex fails completely
-    Write-Status "Could not extract PART 1 from template. Using full template." -Type Warn
+
+    Write-Status "Could not extract template prefix from Project-Owned Context marker. Using full template." -Type Warn
     
     if ($DebugCollector) {
         $DebugCollector.CaptureState("part1_extraction_fallback") | Out-Null
     }
     
     return $templateContent
+}
+
+function New-ValidationContent {
+    <#
+    .SYNOPSIS
+        Extract the Validation Pattern section and trailing references from the template
+    #>
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$TemplatePath,
+
+        [Parameter(Mandatory=$true)]
+        [hashtable]$Metadata
+    )
+
+    $templateContent = Resolve-TemplateTokens -Content (Get-Content $TemplatePath -Raw) -Metadata $Metadata
+
+    if ($templateContent -match '(?sm)^## Validation Pattern\s*$.*$') {
+        $validationContent = $matches[0].Trim()
+        $lineCount = ($validationContent -split "`n").Count
+        Write-Status "Extracted validation suffix: $lineCount lines" -Type Pass
+        return $validationContent
+    }
+
+    throw "CRITICAL: Could not extract Validation Pattern section from template"
 }
 
 function Test-DeploymentCompliance {
@@ -777,28 +808,28 @@ function Test-DeploymentCompliance {
     
     $content = Get-Content $copilotPath -Raw
     
-    # Check 2: Has PART 1 (matches v2.x '## PART 1: UNIVERSAL' and v3.x '## PART 1 -- UNIVERSAL')
-    if ($content -match '## PART 1[: -]') {
-        $results.Passed += "[CHECK] PART 1 present"
+    # Check 2: Has bootstrap section
+    if ($content -match '(?m)^## Bootstrap First\s*$') {
+        $results.Passed += "[CHECK] Bootstrap First section present"
     } else {
-        $results.Failed += "[FAIL] PART 1 missing"
+        $results.Failed += "[FAIL] Bootstrap First section missing"
     }
-    
-    # Check 3: Has PART 2 (matches v2.x '## PART 2:' and v3.x '## PART 2 --')
-    if ($content -match '## PART 2[: -]') {
-        $results.Passed += "[CHECK] PART 2 present"
+
+    # Check 3: Has Project-Owned Context section
+    if ($content -match '(?m)^## Project-Owned Context\s*$') {
+        $results.Passed += "[CHECK] Project-Owned Context present"
     } else {
-        $results.Failed += "[FAIL] PART 2 missing"
+        $results.Failed += "[FAIL] Project-Owned Context missing"
     }
     
     # Check 4: No Unicode violations (CRITICAL - encoding safety)
     $unicodePatterns = @(
-        '✓', '✗', '✅', '❌', '⏳', '🎯', '…', '►', '▼', '●'
+        '[^\u0000-\u007F]'
     )
     
     $unicodeViolations = @()
     foreach ($pattern in $unicodePatterns) {
-        if ($content -match [regex]::Escape($pattern)) {
+        if ($content -match $pattern) {
             $unicodeViolations += $pattern
         }
     }
@@ -809,52 +840,27 @@ function Test-DeploymentCompliance {
         $results.Failed += "[FAIL] Unicode violations found: $($unicodeViolations -join ', ')"
     }
     
-    # Check 5: Has Professional Components (ENHANCED: check for actual implementations)
-    $requiredComponents = @(
-        @{ Name = 'DebugArtifactCollector'; Pattern = '### Implementation.*DebugArtifactCollector|class DebugArtifactCollector'; MinLines = 50 },
-        @{ Name = 'SessionManager'; Pattern = '### Implementation.*SessionManager|class SessionManager'; MinLines = 50 },
-        @{ Name = 'StructuredErrorHandler'; Pattern = '### Implementation.*StructuredErrorHandler|class StructuredErrorHandler'; MinLines = 50 },
-        @{ Name = 'ProfessionalRunner'; Pattern = '### Implementation.*ProfessionalRunner|class ProfessionalRunner'; MinLines = 50 }
-    )
-    
-    foreach ($component in $requiredComponents) {
-        if ($content -match $component.Pattern) {
-            # Additional validation: check implementation has minimum content
-            $sectionPattern = "(?sm)(### Implementation.*$($component.Name).*?)(?=^###|\z)"
-            if ($content -match $sectionPattern) {
-                $implLines = ($matches[1] -split "`n").Count
-                if ($implLines -ge $component.MinLines) {
-                    $results.Passed += "[CHECK] $($component.Name) implementation present ($implLines lines)"
-                } else {
-                    $results.Warnings += "[WARN] $($component.Name) implementation too short ($implLines lines, expected >$($component.MinLines))"
-                }
-            } else {
-                $results.Passed += "[CHECK] $($component.Name) implementation present"
-            }
-        } else {
-            # Check if at least mentioned (TOC/release notes) but not implemented
-            if ($content -match [regex]::Escape($component.Name)) {
-                $results.Failed += "[FAIL] $($component.Name) mentioned but implementation section missing"
-            } else {
-                $results.Failed += "[FAIL] $($component.Name) completely missing"
-            }
-        }
-    }
-    
-    # Check 6: Has Encoding Safety section
-    if ($content -match 'Encoding & Script Safety') {
-        $results.Passed += "[CHECK] Encoding safety documented"
+    # Check 5: Has Validation Pattern section
+    if ($content -match '(?m)^## Validation Pattern\s*$') {
+        $results.Passed += "[CHECK] Validation Pattern present"
     } else {
-        $results.Failed += "[FAIL] Encoding safety section missing"
+        $results.Failed += "[FAIL] Validation Pattern missing"
     }
-    
-    # Check 7: Has Azure Account Management (if applicable)
-    if ($content -match 'Azure Account Management') {
-        $results.Passed += "[CHECK] Azure account patterns documented"
+
+    # Check 6: Has reference block
+    if ($content -match '(?m)^## References\s*$') {
+        $results.Passed += "[CHECK] References section present"
     } else {
-        $results.Warnings += "[WARN] Azure patterns not found (may not be applicable)"
+        $results.Warnings += "[WARN] References section missing"
     }
-    
+
+    # Check 7: No unresolved template placeholders remain
+    if ($content -match '\{\{[A-Z0-9_]+\}\}') {
+        $results.Failed += "[FAIL] Unresolved template placeholders found"
+    } else {
+        $results.Passed += "[CHECK] No unresolved template placeholders remain"
+    }
+
     # Check 8: Verify any batch files have encoding safety
     $batchFiles = Get-ChildItem -Path $TargetPath -Filter "*.bat" -Recurse -ErrorAction SilentlyContinue
     foreach ($bat in $batchFiles) {
@@ -941,19 +947,19 @@ $(if ($Results.Failed.Count -gt 0) {
     foreach ($failure in $Results.Failed) {
         if ($failure -match "Unicode violations") {
             $remediation += "- **Unicode Violations**: Replace Unicode characters with ASCII equivalents:"
-            $remediation += "  - Replace checkmarks (✓ ✅) with [PASS]"
-            $remediation += "  - Replace X marks (✗ ❌) with [FAIL]"
-            $remediation += "  - Replace ellipsis (…) with ..."
+            $remediation += "  - Replace checkmarks with [PASS]"
+            $remediation += "  - Replace X marks with [FAIL]"
+            $remediation += "  - Replace ellipsis with ..."
             $remediation += "  - See: [Encoding Safety Guide](../../copilot-instructions-template.md#critical-encoding--script-safety)"
         }
-        if ($failure -match "PART 1 missing") {
-            $remediation += "- **Missing PART 1**: Re-run primer with -Force to apply universal patterns from template v2.1.0"
+        if ($failure -match "Bootstrap First section missing") {
+            $remediation += "- **Missing Bootstrap Section**: Re-run primer to restore the managed contract header from the live template."
         }
-        if ($failure -match "PART 2 missing") {
-            $remediation += "- **Missing PART 2**: Generate project-specific section using primer script"
+        if ($failure -match "Project-Owned Context missing") {
+            $remediation += "- **Missing Project-Owned Context**: Re-run primer to generate or restore the preserved project-specific section."
         }
-        if ($failure -match "Encoding safety section missing") {
-            $remediation += "- **Missing Encoding Safety**: Critical section for Windows enterprise compatibility"
+        if ($failure -match "Validation Pattern missing") {
+            $remediation += "- **Missing Validation Pattern**: Restore the template suffix so handoff and verification guidance remain intact."
         }
     }
     ($remediation | Select-Object -Unique) -join "`n"
@@ -963,7 +969,7 @@ $(if ($Results.Failed.Count -gt 0) {
 
 ## Standards Reference
 
-- **Template**: [copilot-instructions-template.md](../../copilot-instructions-template.md) v2.1.0
+- **Template**: [copilot-instructions-template.md](../../templates/copilot-instructions-template.md) v7.1.0
 - **Best Practices**: [best-practices-reference.md](../../best-practices-reference.md)
 - **Standards Spec**: [standards-specification.md](../../standards-specification.md)
 - **Usage Guide**: [template-v2-usage-guide.md](../../template-v2-usage-guide.md)
@@ -1003,13 +1009,13 @@ function Write-DeploymentReport {
 
 **Generated**: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")  
 **Target**: $($Metadata.Name)  
-**Template Version**: 2.0.0
+**Template Version**: 7.0.0
 
 ## Deployment Summary
 
-- **PART 1**: Universal best practices applied from template v2.1.0
-- **PART 2**: Project-specific template generated from analysis
-$(if ($ExistingPart2) { "- **Existing Content**: Preserved in HTML comments for manual review" })
+- **Managed Contract**: Refreshed from the live Project 07 project template
+- **Project-Owned Context**: Generated from analysis or preserved from the existing file
+$(if ($ExistingPart2) { "- **Existing Content**: Preserved as the Project-Owned Context block" })
 $(if ($BackupPath) { "- **Backup**: Original file backed up" })
 
 ## Project Analysis
@@ -1023,7 +1029,7 @@ $(if ($BackupPath) { "- **Backup**: Original file backed up" })
 
 ### 1. Review Generated Content
 
-Open ``.github/copilot-instructions.md`` and review generated PART 2:
+Open ``.github/copilot-instructions.md`` and review the Project-Owned Context section:
 - [ ] Update [TODO] placeholders with actual values
 - [ ] Add project-specific code examples
 - [ ] Document actual workflows and commands
@@ -1031,10 +1037,7 @@ $(if ($ExistingPart2) { "- [ ] Review preserved content in HTML comments and int
 
 ### 2. Customize Based on Project Type
 
-See [template-v2-usage-guide.md]($SourcePath\template-v2-usage-guide.md) for:
-- Project type-specific customization examples (RAG, Automation, API, Pipeline)
-- Complete placeholder reference (60+ placeholders)
-- Validation checklist
+See the live Project 07 templates in ``$SourcePath`` for the current structure and validation expectations.
 
 ### 3. Test with Copilot
 
@@ -1057,7 +1060,7 @@ Select-String -Path ".github/copilot-instructions.md" -Pattern "\[TODO\]"
 ## Reference Documentation
 
 - **Template Source**: ``$SourcePath``
-- **Usage Guide**: [template-v2-usage-guide.md]($SourcePath\template-v2-usage-guide.md)
+- **Template Directory**: ``$SourcePath``
 - **Best Practices**: [best-practices-reference.md](../../best-practices-reference.md)
 - **Standards**: [standards-specification.md](../../standards-specification.md)
 
@@ -1074,7 +1077,7 @@ Copy-Item "$BackupPath" ".github\copilot-instructions.md" -Force
 
 ---
 
-*Generated by Project 07 Artifact Primer v1.4.1*
+*Generated by Project 07 Artifact Primer v2.0.0*
 "@
     
     $report | Out-File $OutputPath -Encoding UTF8
@@ -1092,20 +1095,27 @@ function Start-ArtifactDeployment {
     
     Write-Host ""
     Write-Host "========================================" -ForegroundColor Cyan
-    Write-Host "  Project 07 Artifact Primer v1.4.1" -ForegroundColor Cyan
+    Write-Host "  Project 07 Artifact Primer v2.0.1" -ForegroundColor Cyan
     Write-Host "  Intelligent Copilot Instructions Deployment" -ForegroundColor Cyan
     Write-Host "========================================" -ForegroundColor Cyan
     Write-Host ""
     
-    # Initialize professional components
-    $collector = [DebugArtifactCollectorPS]::new("artifact-deployment", $TargetPath)
-    $session = [SessionManagerPS]::new("artifact-deployment", $TargetPath)
-    $errorHandler = [StructuredErrorHandlerPS]::new("artifact-deployment", $TargetPath)
-    
-    # ALWAYS capture pre-state (Project 07 pattern)
-    $collector.CaptureState("deployment_start") | Out-Null
+    # Initialize professional components only for real runs so dry-run stays side-effect free.
+    $collector = $null
+    $session = $null
+    $errorHandler = $null
+    if (-not $DryRun) {
+        $collector = [DebugArtifactCollectorPS]::new("artifact-deployment", $TargetPath)
+        $session = [SessionManagerPS]::new("artifact-deployment", $TargetPath)
+        $errorHandler = [StructuredErrorHandlerPS]::new("artifact-deployment", $TargetPath)
+        $collector.CaptureState("deployment_start") | Out-Null
+    }
     
     try {
+        # ===================================================================
+        # DISCOVER: Validate environment and analyze target
+        # ===================================================================
+        
         # Step 1: Validate paths
         Write-Status "Validating target path: $TargetPath" -Type Arrow
         if (-not (Test-Path $TargetPath)) {
@@ -1115,13 +1125,15 @@ function Start-ArtifactDeployment {
         $TargetPath = (Resolve-Path $TargetPath).Path
         Write-Status "Target: $TargetPath" -Type Pass
         
-        $session.SaveCheckpoint("paths_validated", @{
-            target_path = $TargetPath
-            dry_run = $DryRun.IsPresent
-        })
+        if ($session) {
+            $session.SaveCheckpoint("paths_validated", @{
+                target_path = $TargetPath
+                dry_run = $DryRun.IsPresent
+            })
+        }
         
         # Step 2: Find Project 07 source
-        $collector.CaptureState("before_source_detection") | Out-Null
+        if ($collector) { $collector.CaptureState("before_source_detection") | Out-Null }
         
         if ([string]::IsNullOrWhiteSpace($SourcePath)) {
             Write-Status "Auto-detecting Project 07 artifacts..." -Type Arrow
@@ -1139,25 +1151,29 @@ function Start-ArtifactDeployment {
             throw "Template not found: $templatePath"
         }
         
-        $collector.CaptureState("after_source_detection") | Out-Null
-        $session.SaveCheckpoint("source_validated", @{
-            source_path = $SourcePath
-            template_path = $templatePath
-        })
+        if ($collector) { $collector.CaptureState("after_source_detection") | Out-Null }
+        if ($session) {
+            $session.SaveCheckpoint("source_validated", @{
+                source_path = $SourcePath
+                template_path = $templatePath
+            })
+        }
         
         # Step 3: Analyze target project
         Write-Status "Analyzing target project..." -Type Arrow
-        $collector.CaptureState("before_analysis") | Out-Null
+        if ($collector) { $collector.CaptureState("before_analysis") | Out-Null }
         
         $metadata = Get-ProjectMetadata -ProjectPath $TargetPath
         
-        $collector.CaptureState("after_analysis") | Out-Null
-        $session.SaveCheckpoint("analysis_complete", @{
-            project_name = $metadata.Name
-            project_type = $metadata.ProjectType
-            components = $metadata.Components
-            tech_stack = $metadata.TechStack
-        })
+        if ($collector) { $collector.CaptureState("after_analysis") | Out-Null }
+        if ($session) {
+            $session.SaveCheckpoint("analysis_complete", @{
+                project_name = $metadata.Name
+                project_type = $metadata.ProjectType
+                components = $metadata.Components
+                tech_stack = $metadata.TechStack
+            })
+        }
         
         Write-Host ""
         Write-Status "Project Analysis:" -Type Info
@@ -1175,26 +1191,30 @@ function Start-ArtifactDeployment {
         if ($metadata.HasCopilotInstructions) {
             Write-Status "Existing copilot-instructions.md detected" -Type Warn
             
-            $collector.CaptureState("before_extraction") | Out-Null
+            if ($collector) { $collector.CaptureState("before_extraction") | Out-Null }
             $existingPart2 = Extract-ExistingPart2 -CopilotInstructionsPath $metadata.ExistingCopilotPath
-            $collector.CaptureState("after_extraction") | Out-Null
+            if ($collector) { $collector.CaptureState("after_extraction") | Out-Null }
             
-            if (-not $SkipBackup) {
+            if (-not $SkipBackup -and -not $DryRun) {
                 Write-Status "Creating backup..." -Type Arrow
                 $backupPath = New-BackupCopy -FilePath $metadata.ExistingCopilotPath
                 Write-Status "Backup saved: $backupPath" -Type Pass
             }
         }
         
+        # ===================================================================
+        # PLAN: Define deployment strategy and expected outcomes
+        # ===================================================================
+        
         # Step 5: Generate deployment plan
         Write-Host ""
         Write-Status "Deployment Plan:" -Type Arrow
-        Write-Host "  [1] Apply universal PART 1 from template v2.1.0 (~1000 lines with implementations)"
-        Write-Host "  [2] Generate project-specific PART 2 from analysis"
+        Write-Host "  [1] Apply the managed project contract prefix from the live template"
+        Write-Host "  [2] Preserve or generate the Project-Owned Context section"
         if ($existingPart2) {
-            Write-Host "  [3] Preserve existing PART 2 content in HTML comments"
+            Write-Host "  [3] Reuse preserved project-specific content from the existing file"
         }
-        Write-Host "  [4] Create supporting documentation structure"
+        Write-Host "  [4] Append the Validation Pattern and References suffix"
         if (-not $SkipValidation) {
             Write-Host "  [5] Validate deployment against Project 07 standards"
         }
@@ -1212,7 +1232,7 @@ function Start-ArtifactDeployment {
             }
             Write-Host ""
             
-            # Generate preview content - Focus on PART 2 (project-specific)
+            # Generate preview content - Focus on the project-owned context block
             Write-Status "Generating project-specific content preview..." -Type Arrow
             Write-Host ""
             
@@ -1220,21 +1240,19 @@ function Start-ArtifactDeployment {
             $part2Lines = ($part2Content -split "`n").Count
             
             Write-Host "========================================" -ForegroundColor Cyan
-            Write-Host " PROJECT-SPECIFIC CONTENT PREVIEW" -ForegroundColor Cyan
+            Write-Host " PROJECT-OWNED CONTEXT PREVIEW" -ForegroundColor Cyan
             Write-Host "========================================" -ForegroundColor Cyan
             Write-Host ""
-            Write-Host "[INFO] PART 1 (Universal Best Practices): ~1,000 lines from template v2.1.0"
-            Write-Host "        - Encoding Safety, Professional Components, Azure Patterns"
-            Write-Host "        - Complete working implementations (DebugArtifactCollector, SessionManager, etc.)"
+            Write-Host "[INFO] Managed template prefix: workspace bootstrap, project role, read order, and core rules"
             Write-Host ""
-            Write-Host "[INFO] PART 2 (Generated for this project): $part2Lines lines"
+            Write-Host "[INFO] Project-Owned Context block: $part2Lines lines"
             Write-Host "        - Project Type: $($metadata.ProjectType)"
             Write-Host "        - Components: $($metadata.Components -join ', ')"
             Write-Host "        - Tech Stack: $($metadata.TechStack -join ', ')"
             Write-Host ""
             
             Write-Host "========================================" -ForegroundColor Green
-            Write-Host " PART 2: GENERATED CONTENT (Full)" -ForegroundColor Green
+            Write-Host " PROJECT-OWNED CONTEXT: GENERATED CONTENT (Full)" -ForegroundColor Green
             Write-Host "========================================" -ForegroundColor Green
             Write-Host ""
             $part2Content -split "`n" | ForEach-Object { Write-Host $_ }
@@ -1244,7 +1262,7 @@ function Start-ArtifactDeployment {
             Write-Host " CUSTOMIZATION NEEDED" -ForegroundColor Yellow
             Write-Host "========================================" -ForegroundColor Yellow
             Write-Host ""
-            Write-Host "After deployment, update these [TODO] items in PART 2:"
+            Write-Host "After deployment, update these [TODO] items in Project-Owned Context:"
             Write-Host "  1. Complete project structure tree"
             Write-Host "  2. Add setup/start/test/deploy commands"
             Write-Host "  3. Document critical code patterns specific to this project"
@@ -1256,9 +1274,9 @@ function Start-ArtifactDeployment {
             Write-Host " DEPLOYMENT SUMMARY" -ForegroundColor Cyan
             Write-Host "========================================" -ForegroundColor Cyan
             Write-Host ""
-            Write-Host "Total file size: ~$([math]::Round(($part2Lines + 1000) / 50, 1)) KB (~$($part2Lines + 1000) lines)"
-            Write-Host "  - PART 1: ~1,000 lines (from template, production-tested)"
-            Write-Host "  - PART 2: $part2Lines lines (generated, needs customization)"
+            Write-Host "Total file size: ~$([math]::Round(($part2Lines + 100) / 50, 1)) KB (~$($part2Lines + 100) lines)"
+            Write-Host "  - Managed prefix and suffix: ~100 lines (from live template)"
+            Write-Host "  - Project-Owned Context: $part2Lines lines (generated or preserved, needs customization)"
             Write-Host ""
             Write-Host "To apply these changes, run without -DryRun flag:"
             Write-Host "  .\Apply-Project07-Artifacts.ps1 -TargetPath `"$TargetPath`""
@@ -1275,11 +1293,15 @@ function Start-ArtifactDeployment {
             }
         }
         
+        # ===================================================================
+        # DO: Execute deployment with evidence collection
+        # ===================================================================
+        
         # Step 7: Execute deployment
         Write-Host ""
         Write-Status "Deploying artifacts..." -Type Arrow
         
-        $collector.CaptureState("before_deployment") | Out-Null
+        if ($collector) { $collector.CaptureState("before_deployment") | Out-Null }
         
         # Create .github directory if needed
         $githubDir = Join-Path $TargetPath ".github"
@@ -1289,8 +1311,9 @@ function Start-ArtifactDeployment {
         }
         
         # Generate combined content (with debug evidence - Project 07 pattern)
-        $part1Content = New-Part1Content -TemplatePath $templatePath -DebugCollector $collector
+        $part1Content = New-Part1Content -TemplatePath $templatePath -Metadata $metadata -DebugCollector $collector
         $part2Content = New-ProjectSpecificPart2 -Metadata $metadata -ExistingPart2 $existingPart2
+        $validationContent = New-ValidationContent -TemplatePath $templatePath -Metadata $metadata
         
         # Validate content size (Project 07 pattern)
         $part1Lines = ($part1Content -split "`n").Count
@@ -1299,34 +1322,41 @@ function Start-ArtifactDeployment {
         
         Write-Host ""
         Write-Status "Content Generation Summary:" -Type Info
-        Write-Host "  PART 1 (Universal): $part1Lines lines"
-        Write-Host "  PART 2 (Project-Specific): $part2Lines lines"
+        Write-Host "  Managed template prefix: $part1Lines lines"
+        Write-Host "  Project-Owned Context: $part2Lines lines"
+        Write-Host "  Validation suffix: $(($validationContent -split "`n").Count) lines"
         Write-Host "  Total: $totalLines lines"
         
-        if ($part1Lines -lt 200) {
-            throw "CRITICAL: PART 1 extraction failed - only $part1Lines lines (expected >200, v3.x template PART 1 is ~293 lines)"
+        if ($part1Lines -lt 20) {
+            throw "CRITICAL: Managed template prefix extraction failed - only $part1Lines lines"
         }
-        
-        if ($totalLines -lt 1000) {
-            Write-Status "WARNING: Total content is $totalLines lines (expected ~1093)" -Type Warn
+
+        if ($totalLines -lt 80) {
+            Write-Status "WARNING: Total content is $totalLines lines (expected >80)" -Type Warn
         }
         Write-Host ""
-        
-        $finalContent = $part1Content + "`n`n" + $part2Content
+
+        $finalContent = $part1Content.TrimEnd() + "`n`n" + $part2Content.Trim() + "`n`n" + $validationContent.Trim() + "`n"
         
         # Write copilot-instructions.md
         $outputPath = Join-Path $githubDir "copilot-instructions.md"
         [System.IO.File]::WriteAllText($outputPath, $finalContent, [System.Text.Encoding]::UTF8)
         
-        $collector.CaptureState("after_deployment") | Out-Null
+        if ($collector) { $collector.CaptureState("after_deployment") | Out-Null }
         
         Write-Status "Created: $outputPath" -Type Pass
         Write-Status "Size: $([math]::Round((Get-Item $outputPath).Length / 1KB, 2)) KB" -Type Info
         
-        $session.SaveCheckpoint("deployment_complete", @{
-            output_path = $outputPath
-            file_size = (Get-Item $outputPath).Length
-        })
+        if ($session) {
+            $session.SaveCheckpoint("deployment_complete", @{
+                output_path = $outputPath
+                file_size = (Get-Item $outputPath).Length
+            })
+        }
+        
+        # ===================================================================
+        # CHECK: Verify deployment and generate reports
+        # ===================================================================
         
         # Step 8: Generate deployment report
         $reportPath = Join-Path $githubDir ".project07-deployment-report.md"
@@ -1344,11 +1374,11 @@ function Start-ArtifactDeployment {
             Write-Host ""
             Write-Status "Validating deployment..." -Type Arrow
             
-            $collector.CaptureState("before_validation") | Out-Null
+            if ($collector) { $collector.CaptureState("before_validation") | Out-Null }
             
             $validationResults = Test-DeploymentCompliance -TargetPath $TargetPath
             
-            $collector.CaptureState("after_validation") | Out-Null
+            if ($collector) { $collector.CaptureState("after_validation") | Out-Null }
             
             # Generate compliance report
             $compliancePath = Join-Path $githubDir ".project07-compliance-report.md"
@@ -1367,6 +1397,10 @@ function Start-ArtifactDeployment {
             Write-Status "Compliance report: $compliancePath" -Type Info
         }
         
+        # ===================================================================
+        # ACT: Record evidence and provide next steps
+        # ===================================================================
+        
         # Step 10: Summary
         Write-Host ""
         Write-Host "========================================" -ForegroundColor Green
@@ -1375,7 +1409,7 @@ function Start-ArtifactDeployment {
         Write-Host ""
         Write-Host "Next steps:"
         Write-Host "  1. Open: $outputPath"
-        Write-Host "  2. Review PART 2 and update [TODO] items"
+        Write-Host "  2. Review Project-Owned Context and update [TODO] items"
         Write-Host "  3. Read: $reportPath"
         if (-not $SkipValidation) {
             Write-Host "  4. Review compliance: $compliancePath"
@@ -1384,34 +1418,40 @@ function Start-ArtifactDeployment {
         Write-Host ""
         
         # ALWAYS capture success state (Project 07 pattern)
-        $collector.CaptureState("deployment_success") | Out-Null
+        if ($collector) { $collector.CaptureState("deployment_success") | Out-Null }
         
-        $session.SaveCheckpoint("final_state", @{
-            status = "success"
-            files_created = @($outputPath, $reportPath, $compliancePath)
-            validation_passed = $validationResults.Failed.Count -eq 0
-        })
+        if ($session) {
+            $session.SaveCheckpoint("final_state", @{
+                status = "success"
+                files_created = @($outputPath, $reportPath, $compliancePath)
+                validation_passed = $validationResults.Failed.Count -eq 0
+            })
+        }
         
     } catch {
-        # ALWAYS capture error state (Project 07 pattern)
-        $collector.CaptureState("deployment_error") | Out-Null
-        
-        $errorFile = $errorHandler.LogError($_, @{
-            operation = "artifact_deployment"
-            target_path = $TargetPath
-            source_path = $SourcePath
-            dry_run = $DryRun.IsPresent
-        })
+        if ($collector) { $collector.CaptureState("deployment_error") | Out-Null }
+
+        $errorFile = $null
+        if ($errorHandler) {
+            $errorFile = $errorHandler.LogError($_, @{
+                operation = "artifact_deployment"
+                target_path = $TargetPath
+                source_path = $SourcePath
+                dry_run = $DryRun.IsPresent
+            })
+        }
         
         Write-Host ""
         Write-Host "========================================" -ForegroundColor Red
         Write-Status "Deployment Failed!" -Type Error
         Write-Host "========================================" -ForegroundColor Red
         Write-Host ""
-        Write-Host "Debug artifacts available in:"
-        Write-Host "  - $($collector.DebugDir)"
-        Write-Host "  - $errorFile"
-        Write-Host ""
+        if ($collector -or $errorFile) {
+            Write-Host "Debug artifacts available in:"
+            if ($collector) { Write-Host "  - $($collector.DebugDir)" }
+            if ($errorFile) { Write-Host "  - $errorFile" }
+            Write-Host ""
+        }
         
         throw
     }

@@ -1,46 +1,52 @@
+# [MANDATORY] BOOTSTRAP CHECKPOINT -- READ THIS FIRST
+
+**CRITICAL: Before reading anything else, answer this question:**
+
+**Did you execute the API bootstrap sequence for this session?**  
+- [ ] YES - I called `/health`, `/ready`, `/model/agent-handshake`, `/model/agent-guide`, and `/model/user-guide`, and established `$session` object with live API data  
+- [ ] NO - I have not bootstrapped yet
+
+**If NO (or uncertain), execute this NOW before proceeding:**
+
+```powershell
+$base = "https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io"
+$session = @{
+    base = $base
+    initialized_at = Get-Date
+    health = (Invoke-RestMethod "$base/health" -TimeoutSec 10)
+    ready = (Invoke-RestMethod "$base/ready" -TimeoutSec 10)
+    handshake = (Invoke-RestMethod "$base/model/agent-handshake" -TimeoutSec 10)
+    guide = (Invoke-RestMethod "$base/model/agent-guide" -TimeoutSec 10)
+    userGuide = (Invoke-RestMethod "$base/model/user-guide" -TimeoutSec 10)
+}
+Write-Host "[BOOTSTRAP] Health: $($session.health.status) | Ready: $($session.ready.status) | Store: $($session.ready.store)"
+Write-Host "[BOOTSTRAP] Handshake: $($session.handshake.protocol) | Contract: $($session.handshake.contract_version)"
+Write-Host "[BOOTSTRAP] Layers available: $($session.guide.layers_available.Count)"
+Write-Host "[BOOTSTRAP] Category runbooks loaded: $(@($session.userGuide.category_instructions.PSObject.Properties.Name).Count)"
+```
+
+**Bootstrap must complete successfully before reading project files or performing governance operations.**
+
+**Fail-Closed Policy:** If the API is unreachable, governance work stops. Use degraded troubleshooting only for local diagnosis, never for authoritative operations.
+
+---
+
 # AICOE Workspace -- GitHub Copilot Instructions
 
-**Workspace**: C:\AICOE\eva-foundry  
+**Workspace**: {WORKSPACE_PATH}  
 **Owner**: {WORKSPACE_OWNER} / EVA AI COE  
 **Last Updated**: {TIMESTAMP} (Session {SESSION_NUMBER} - {SESSION_DESCRIPTION})  
-**Template Version**: 4.2.0 (Session 41 - Quality Standards Update)
+**Template Version**: 7.1.0 (Session 71 - authority split alignment)
 
 ---
 
 ## Workspace Overview
 
-{PROJECT_COUNT} numbered projects ({PROJECT_RANGE} + test-99) implementing the **EVA architecture**: DPDCA-driven AI software engineering with data-first governance, evidence-based quality gates, and automated remediation frameworks. Central data source: **Project 37 (EVA Data Model)** - **51 operational layers** (50 base + 1 metadata) via cloud API.
+{PROJECT_COUNT} numbered projects ({PROJECT_RANGE} + test-99) implement the EVA architecture: API-first governance, evidence-backed delivery, D3PDCA execution, and reusable operating patterns for local and cloud agents.
 
----
-
-## Agent Bootstrap: The API Entry Point
-
-**Every agent session must start here**, before reading project instructions.
-
-### One-Step Bootstrap
-
-```powershell
-# Fetch complete guidance from Project 37 Cosmos DB API
-$base = "https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io"
-$session = @{ 
-    base = $base
-    guide = (Invoke-RestMethod "$base/model/agent-guide")
-}
-
-# You now have access to:
-# - $session.guide.query_patterns (how to query)
-# - $session.guide.write_cycle (how to write safely)
-# - $session.guide.common_mistakes (what NOT to do)
-# - $session.guide.layers_available (all 51 operational layers)
-```
-
-**Why?** The API is your single source of truth for:
-- ✅ Query safety limits (prevents timeouts & terminal scramble)
-- ✅ Write cycle rules (prevents data corruption)  
-- ✅ Layer schemas (current definitions, not stale docs)
-- ✅ Lessons learned (from recent sessions, live)
-
-**Next**: Read [Project 37 User Guide](eva-foundry/37-data-model/USER-GUIDE.md) for full bootstrap sequence and session state management.
+**Single source of truth**: Project 37 Data Model API.  
+**Live layer count**: `$session.guide.layers_available.Count`  
+**Governance runbooks**: `$session.userGuide.category_instructions`
 
 ---
 
@@ -50,127 +56,161 @@ Workspace provides these skills via `@skill-name` invocation:
 
 | Skill | Invoke As | Purpose |
 |-------|-----------|---------|
-| **EVA Factory Guide** | `@eva-factory-guide` | Learn DPDCA process, data model, evidence tracking, patterns |
-| **Foundation Expert** | `@foundation-expert` | Prime/scaffold projects, deploy templates, governance checks |
-| **Scrum Master** | `@scrum-master` | Sprint cycles, progress reports, velocity, MTI traceability |
-| **Workflow Forensics** | `@workflow-forensics-expert` | Evidence audits, metric accuracy, pipeline validation |
+| **Paperless Authority Refresh** | `@paperless-authority-refresh` | Refresh the workspace root and Project 07 instruction chain from live onboarding state |
+| **EVA Factory Guide** | `@eva-factory-guide` | D3PDCA, data model, evidence, and factory patterns |
+| **Foundation Expert** | `@foundation-expert` | Priming, scaffolding, template rollout, workspace repair |
+| **Scrum Master** | `@scrum-master` | Sprint planning, progress, velocity, and evidence gates |
+| **Workflow Forensics** | `@workflow-forensics-expert` | Audit evidence, metrics, and pipeline behavior |
 
-Each project may add skills in `.github/copilot-skills/`. Say "list skills" in that project for details.
+Projects may add their own skills under `.github/copilot-skills/`.
 
 ---
 
-## Key Architecture References
+## Workspace Tools
+
+**Workspace-wide scrum tools**:
+- `scripts/sprint_activation.py`
+- `scripts/sprint_progress.py`
+- `scripts/velocity_tracker.py`
+- `scripts/sprint_retrospective.py`
+- `scripts/verify-sprint-readiness.ps1`
+- `scripts/semantic_tree_summarizer.py`
+- `scripts/housekeeping_project_planner.py`
+- `scripts/housekeeping_packet_executor.py`
+
+**Veritas tools** from Project 48:
+- `audit_repo`
+- `get_trust_score`
+- `sync_repo`
+- `export_to_model`
+- `dependency_audit`
+- `scan_portfolio`
+
+Use these against API-backed governance state, not as a substitute for it.
+
+---
+
+## Agent Bootstrap: The API Entry Point
+
+Every agent session starts with the API bootstrap, then reads workspace and project instructions.
+
+```powershell
+$base = "https://msub-eva-data-model.victoriousgrass-30debbd3.canadacentral.azurecontainerapps.io"
+$session = @{
+    base = $base
+    initialized_at = Get-Date
+    health = (Invoke-RestMethod "$base/health" -TimeoutSec 10)
+    ready = (Invoke-RestMethod "$base/ready" -TimeoutSec 10)
+    handshake = (Invoke-RestMethod "$base/model/agent-handshake" -TimeoutSec 10)
+    guide = (Invoke-RestMethod "$base/model/agent-guide" -TimeoutSec 10)
+    userGuide = (Invoke-RestMethod "$base/model/user-guide" -TimeoutSec 10)
+}
+```
+
+This gives you:
+- transport health and readiness
+- deterministic bootstrap contract shape
+- query patterns
+- write-cycle rules
+- common mistakes
+- live layer inventory
+- category runbooks for common governance workflows
+
+Primary references:
+- `37-data-model/USER-GUIDE.md`
+- `37-data-model/docs/CATEGORY-RUNBOOK-EXAMPLES.md`
+- `37-data-model/docs/PAPERLESS-DPDCA-TUTORIAL.md`
+
+---
+
+## Governance Model
+
+1. Workspace instructions define workspace-wide rules.
+2. Project instructions define project-specific contracts.
+3. The Data Model API is authoritative for governance state.
+4. Local governance files are continuity and working aids, not competing sources of truth.
+
+Treat `GET /model/agent-handshake` as the canonical startup contract before deeper guide or layer calls.
+
+Do not generate project instructions by copying workspace instructions verbatim. Project templates must only hold project-level contract material.
+
+---
+
+## D3PDCA Model
+
+Apply D3PDCA at every level that can be decomposed:
+
+- **Discover**: understand current state, constraints, and evidence
+- **Define/Plan**: frame the task and success criteria clearly
+- **Do**: execute in small controlled steps
+- **Check**: verify each meaningful unit before advancing
+- **Act**: record results, update context, and promote stable learnings
+
+Use this at session, feature, component, and operation level when the work justifies it.
+
+---
+
+## Memory Model
+
+Use the three-tier memory stack consistently:
+
+1. `/memories/` for persistent user and workspace patterns
+2. `/memories/session/` for active-session checkpoints and handoffs
+3. `/memories/repo/` for repository facts and proven local patterns
+
+Project-local `.memories/session/` files are wake-up aids only. They do not replace API-governed truth.
+
+---
+
+## Context Governance
+
+Every agent session enforces context governance as a first-class concern.
+
+**Context Window Reality**: GPT-5.4 may expose up to 400K context, but usable headroom is reduced by system instructions, tool definitions, reserved output, file context, and tool results.
+
+Use adaptive utilization bands rather than hardcoded token mythology:
+
+| Band | Approx. utilization | Action | Notes |
+|------|----------------------|--------|-------|
+| **GREEN** | <55% | Normal operation | Coherence and retrieval remain strong |
+| **YELLOW** | 55-70% | Save session checkpoint | Start recovery discipline early |
+| **ORANGE** | 70-85% | Prepare closure or compaction | Reduce exploration, protect policy fidelity |
+| **RED** | >85% | Close or safely compact before further complex work | Zero tolerance for governance drift |
+
+Policy guidance:
+- optimize for decision quality and recoverability, not maximum token consumption
+- checkpoint earlier for policy-heavy, multi-project, or evidence-heavy work
+- treat reasoning softening, retrieval drift, or continuity loss as triggers even if visible utilization still looks acceptable
+
+---
+
+## Engineering Standards
+
+All automation and scripts should follow these rules:
+
+1. ASCII-only output and file content unless the target file already requires otherwise.
+2. Dual logging: console plus timestamped file output.
+3. Evidence artifacts at start, success, and failure.
+4. Explicit exit codes: `0` success, `1` business failure, `2` technical failure.
+5. Timestamp-prefixed artifact names: `{YYYYMMDD_HHMMSS}-{category}-{descriptor}.{ext}`.
+6. Pre-flight checks before mutations, deployment, or long-running operations.
+
+---
+
+## Key References
 
 | Component | Role | Location |
 |-----------|------|----------|
-| **Project 37 (Data Model)** | Single source of truth, 51 layers, cloud API | `eva-foundry/37-data-model/` |
-| **Project 07 (Foundation)** | Workspace PM, governance standards, templates | `eva-foundry/07-foundation-layer/` |
-| **Project 48 (Veritas)** | Requirements traceability, MTI quality gate | `eva-foundry/48-eva-veritas/` |
-| **Project 51 (ACA)** | Reference DPDCA implementation (6+ months refined) | `eva-foundry/51-ACA/` |
+| **Project 37** | Data model API and governance truth | `37-data-model/` |
+| **Project 07** | Foundation templates and rollout tooling | `07-foundation-layer/` |
+| **Project 48** | Veritas MTI and evidence tooling | `48-eva-veritas/` |
+| **Project 51** | Mature reference implementation | `51-ACA/` |
+
+Additional references:
+- `C:\eva-foundry\.github\best-practices-reference.md`
+- `C:\eva-foundry\.github\standards-specification.md`
+- `{WORKSPACE_PATH}\18-azure-best\`
 
 ---
 
-## For More Information
-
-- **Best Practices**: `C:\AICOE\.github\best-practices-reference.md`
-- **Standards & Compliance**: `C:\AICOE\.github\standards-specification.md`
-- **Data Model API**: `eva-foundry/37-data-model/USER-GUIDE.md`
-- **Azure Guidance**: `eva-foundry/18-azure-best/` (32 entries: WAF, security, AI, IaC, cost)
-- **Project Setup**: Each project's `README.md`, `PLAN.md`, `STATUS.md`, `ACCEPTANCE.md`
-
----
-
-## Workspace Quality Standards (Session 41 Update)
-
-**CRITICAL**: All EVA projects follow mandatory CHECK phase before commits. Skipping verification leads to production bugs.
-
-### Minimum CHECK Requirements (All Projects)
-
-**Before EVERY commit**:
-1. **Static Analysis**: pylint/flake8/eslint (language-appropriate) → no E/F errors
-2. **Test Suite**: Project test command → exit 0
-3. **Manual Verification**: Test modified endpoints/functions/scripts
-
-**Session 41 Documented Anti-Pattern**:
-```python
-# ❌ WRONG: JavaScript boolean in Python
-{"available": true}   # NameError: 'true' undefined
-
-# ✅ CORRECT: Python boolean (capitalized)
-{"available": True}   # Python syntax
-```
-
-**Detection Gap Analysis** (Session 41):
-- pylint: ✅ Would catch E0602 (undefined variable)
-- flake8: ✅ Would catch F821 (undefined name)
-- pytest: ✅ Would catch runtime error (if test exists)
-- Manual test: ✅ Would show 500 error immediately
-- **Gap**: Skipped all 4 → Bug reached production
-
-**Consequence**: 3 failed fix attempts, debug endpoint creation, DPDCA investigation—all avoidable with CHECK phase compliance.
-
-See project-level copilot-instructions.md for full CHECK phase details.
-
----
-
-## Workspace Context per Session
-
-| Item | Value |
-|------|-------|
-| **Session Number** | {SESSION_NUMBER} |
-| **Session Phase** | {SESSION_PHASE} |
-| **Last Status Update** | {LAST_STATUS_UPDATE} |
-| **Active Projects** | {ACTIVE_PROJECT_COUNT}/57 |
-| **Projects Needing Priming** | {UNPRIMED_COUNT} |
-| **Test Coverage** | {TEST_COVERAGE}% (aggregate) |
-
----
-
-*This instruction file follows GitHub best practices: repository context only, concise, API-first bootstrap. For operational procedures, methodology guides, and detailed API protocol documentation, see [Project 37 User Guide](eva-foundry/37-data-model/USER-GUIDE.md).*
-
----
-
-## Implementation Notes for Project 7
-
-**This template is designed for Project 7's distribution script** (`Invoke-PrimeWorkspace.ps1`):
-
-### Substitution Variables
-
-Replace these before distributing:
-- `{WORKSPACE_OWNER}` → User name or team (e.g., "Marco Presta")
-- `{TIMESTAMP}` → Current timestamp (e.g., "2026-03-07 6:53 PM ET")
-- `{SESSION_NUMBER}` → Active session (e.g., "38")
-- `{SESSION_DESCRIPTION}` → Session focus (e.g., "Instruction Hardening")
-- `{PROJECT_COUNT}` → Total projects (e.g., "57")
-- `{PROJECT_RANGE}` → Range (e.g., "01-56")
-- `{SESSION_PHASE}` → Current phase (e.g., "Active Development")
-- `{LAST_STATUS_UPDATE}` → When STATUS.md was last updated workspace-wide
-- `{ACTIVE_PROJECT_COUNT}` → Count of active projects (not poc/retired)
-- `{UNPRIMED_COUNT}` → Count needing copilot-instructions.md
-- `{TEST_COVERAGE}` → Average across all projects (if measurable)
-
-### Automation Rules
-
-- **PART 1** (this entire file): Safe to overwrite on sync cycles
-- **Part 2** Note: Not applicable for workspace-level file (differs from project-level)
-- **Idempotent**: Can run multiple times without duplication
-- **Dry-run**: Test with `-DryRun` flag before full deployment
-- **Rollback**: Previous version backed up as `.backup.{timestamp}`
-
-### Distribution via Project 7
-
-```powershell
-# Push to workspace root
-$template = Get-Content "07-foundation-layer/02-design/artifact-templates/copilot-instructions-workspace-template.md"
-$expanded = $template -replace '{WORKSPACE_OWNER}', $owner `
-                      -replace '{TIMESTAMP}', (Get-Date -Format "yyyy-MM-dd h:mm tt ZZ") `
-                      -replace '{SESSION_NUMBER}', $sessionNumber
-
-Set-Content "C:\AICOE\.github\copilot-instructions.md" $expanded
-git add ".github/copilot-instructions.md"
-git commit -m "chore: Update workspace instructions (Session $sessionNumber)"
-```
-
----
-
-*Workspace template v4.2.0 (Session 41 - Quality standards hardening) | Created for Session 38+ distribution*
+*This instruction file follows GitHub best practices: repository context only, ≤2 pages, no procedural content. For operational procedures, methodology guides, and API protocol documentation, see project-specific guides.*

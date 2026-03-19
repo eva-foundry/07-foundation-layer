@@ -10,7 +10,7 @@
 
 ### 1. Workspace-Level Documentation ✅
 
-**File**: `C:\AICOE\.github\copilot-instructions.md`
+**File**: `C:\eva-foundry\.github\copilot-instructions.md`
 
 **Changes**:
 - Updated timestamp: `2026-03-06 18:53 ET (6:53 PM)`
@@ -30,7 +30,7 @@
 
 ### 2. Project-Level Template ✅
 
-**File**: `C:\AICOE\eva-foundry\07-foundation-layer\.github\PROJECT-COPILOT-INSTRUCTIONS-TEMPLATE.md`
+**File**: `C:\eva-foundry\07-foundation-layer\.github\PROJECT-COPILOT-INSTRUCTIONS-TEMPLATE.md`
 
 **Status**: CREATED (NEW)
 
@@ -47,7 +47,7 @@
 
 ### 3. Re-Priming Workflow Guide ✅
 
-**File**: `C:\AICOE\eva-foundry\07-foundation-layer\.github\SESSION-37-REPRIMING-GUIDE.md`
+**File**: `C:\eva-foundry\07-foundation-layer\.github\SESSION-37-REPRIMING-GUIDE.md`
 
 **Status**: CREATED (NEW)
 
@@ -71,7 +71,7 @@
 
 ### 4. Individual Project Updates ✅
 
-**File**: `C:\AICOE\eva-foundry\51-ACA\.github\copilot-instructions.md`
+**File**: `C:\eva-foundry\51-ACA\.github\copilot-instructions.md`
 
 **Changes**:
 - Updated template version: 3.3.2 → 3.4.0
@@ -113,7 +113,7 @@ All documentation now references:
 ## Files Modified/Created
 
 ```
-✅ MODIFIED: C:\AICOE\.github\copilot-instructions.md
+✅ MODIFIED: C:\eva-foundry\.github\copilot-instructions.md
 ✅ CREATED:  07-foundation-layer\.github\PROJECT-COPILOT-INSTRUCTIONS-TEMPLATE.md
 ✅ CREATED:  07-foundation-layer\.github\SESSION-37-REPRIMING-GUIDE.md
 ✅ MODIFIED: 51-ACA\.github\copilot-instructions.md (timestamp)

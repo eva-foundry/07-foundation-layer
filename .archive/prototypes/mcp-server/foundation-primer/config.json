@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "foundation-primer": {
+      "command": "C:\\eva-foundry\\.venv\\Scripts\\python.exe",
+      "args": ["server.py"],
+      "env": {}
+    }
+  }
+}
