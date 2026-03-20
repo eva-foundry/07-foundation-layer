@@ -2,7 +2,7 @@
 
 # GitHub Copilot Instructions -- 07-foundation-layer
 
-**Last Updated**: 2026-03-20T00:52:54Z  
+**Last Updated**: 2026-03-20T10:12:37Z  
 **Project**: 07-foundation-layer | Path: C:\eva-foundry\07-foundation-layer\  
 **Role**: Workspace foundation, priming, template, and governance-tooling owner
 
@@ -39,10 +39,10 @@ Treat this repo as authoritative for:
 - Protection against placeholder leakage and encoding corruption
 
 Current operational priority:
-- Certify the workspace scrum-master toolchain for paperless execution against the live Data Model API.
-- Audit the kernel-engine path end-to-end for governed field persistence, telemetry, metrics, and disk-bound leakage.
-- Audit Project 37 for operational completeness as the factory persistence plane.
-- Re-certify Agile/Scrum tooling, metrics, dashboards, and Azure DevOps bidirectional readiness before any workspace-wide paperless cutover.
+- Maintain the workspace scrum-master toolchain in approved paperless execution mode against the live Data Model API.
+- Preserve governance-rights, telemetry, metrics, and authority-refresh surfaces so the data model stays authoritative and disk remains alignment or export only.
+- Keep Project 37 operational completeness, Project 19 kernel persistence, and Project 60 downstream handoff in bounded maintenance after the March 20 paperless approval.
+- Keep Sprint 9 check and act for `57-FKTE` explicit while the broader workspace cutover stays approved and data-model-first.
 - Drive Veritas-style numbered-project backlog audits so repo-side ideas are either captured in the data model or explicitly classified as residue.
 - Refresh the workspace root and Project 07 instruction chain on every numbered-project onboarding cycle, using the active cycle correlation ID as the operator-visible join key.
 - Keep the active numbered-project cycle aligned to `paperless-onboarding-20260318T041500Z` unless a newer governed cycle is explicitly issued.
@@ -84,7 +84,7 @@ This project should not blindly overwrite project-specific content once a reposi
 10. For housekeeping, work one folder at a time under nested D3PDCA: baseline, classify, archive, validate, summarize.
 11. Prefer `@eva-housekeeping` for filesystem cleanup and `bob-semantic-filter` for single-file semantic reduction.
 12. Archive into timestamped buckets; do not hard-delete residue unless the user explicitly asks for deletion.
-13. Paperless-certification work must prove that governance truth lives in the API path; disk artifacts may exist for evidence, cache, export, or operator convenience, but not as the authoritative state transition mechanism.
+13. Paperless-certification work now operates under the approved March 20 cutover posture: governance truth lives in the API path, and disk artifacts may exist for evidence, cache, export, or operator convenience, but not as the authoritative state transition mechanism.
 14. Scrum-tool certification must verify three things explicitly: live API read/write contract correctness, timestamp-prefix evidence/log discipline, and no hidden dependency on repo-local governance files for runtime decisions.
 15. When evaluating dashboards or ADO integration, distinguish between operational telemetry persisted in the data model and external-system synchronization that can be rebuilt from the governed API state.
 16. For numbered-project onboarding, every cycle must carry one shared correlation ID in the form `paperless-onboarding-YYYYMMDDTHHMMSSZ` across the live `project_work` packet, linked stories, evidence files, instruction refresh notes, GitHub workflow runs, and cloud-agent executions.
@@ -183,6 +183,7 @@ For deterministic bootstrap-sensitive tooling, prefer this order:
 
 - Workspace bootstrap must resolve `GET /model/agent-handshake` before any deeper guide or layer query.
 - The active numbered-project cycle is `paperless-onboarding-20260318T041500Z` unless a newer governed cycle is explicitly published.
+- Workspace paperless certification is approved under `paperless-certification-20260320T012158Z`: all 62 projects are Level 4 certified, and disk governance files remain alignment or export surfaces only.
 - Sprint 9 remains active for `57-FKTE`; do not advance later packets until check and act are explicit.
 - `61-GovOps` is closed as a runtime proof point, and Project 60 remains a separate downstream handoff dependency.
 - If the model needs a genuinely new concept, add a new layer instead of forcing a semantically mismatched existing one.
