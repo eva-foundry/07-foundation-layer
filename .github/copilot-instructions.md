@@ -2,7 +2,7 @@
 
 # GitHub Copilot Instructions -- 07-foundation-layer
 
-**Last Updated**: 2026-03-19T21:51:54Z  
+**Last Updated**: 2026-03-20T00:52:54Z  
 **Project**: 07-foundation-layer | Path: C:\eva-foundry\07-foundation-layer\  
 **Role**: Workspace foundation, priming, template, and governance-tooling owner
 
@@ -45,6 +45,7 @@ Current operational priority:
 - Re-certify Agile/Scrum tooling, metrics, dashboards, and Azure DevOps bidirectional readiness before any workspace-wide paperless cutover.
 - Drive Veritas-style numbered-project backlog audits so repo-side ideas are either captured in the data model or explicitly classified as residue.
 - Refresh the workspace root and Project 07 instruction chain on every numbered-project onboarding cycle, using the active cycle correlation ID as the operator-visible join key.
+- Keep the active numbered-project cycle aligned to `paperless-onboarding-20260318T041500Z` unless a newer governed cycle is explicitly issued.
 - Treat GitHub Projects automation as an active Project 07 certification surface: the live board population path now runs through `97-workspace-notes/scripts/populate-project-boards.ps1`, all five org boards are populated, and instruction refresh work must keep that route aligned with the active cycle correlation ID and paperless governance posture.
 - Treat `GET /model/agent-handshake` as the canonical startup contract for workspace agents and templates: health and readiness prove transport, handshake proves shape, `domain-views` proves ontology-first orientation, and only then should deeper guides or layer queries run.
 - Treat the `61-GovOps` blank-id residue as a closed runtime proof point after the Project 37 promotion passed live GET/DELETE recovery verification, promoted-runtime `project_work` sprint/countdown query verification, and `GET /model/domain-views`; keep any remaining Project 60 registration-path follow-up explicitly separate from that resolved gate.
@@ -62,6 +63,8 @@ Current operational priority:
 - Certify the Project 19 onboarding workflow as an active execution path, confirming that Sprint 2 artifacts, summaries, and any later cloud-agent handoff preserve the active cycle correlation ID.
 - Treat the corrected non-dry-run `07-foundation-layer` packet, the bounded non-dry-run `19-ai-gov` packet, and the bounded non-dry-run `48-eva-veritas` packet as completed certification gates.
 - Keep Project 37 and Project 19 live runtime health in scope during certification, but treat `POST /model/admin/commit` recovery and kernel-engine reachability as proven; remaining checks should focus on end-to-end field, signal, workflow, and preflight persistence, Project 60 handoff acceptance, audit evidence discipline, no disk-authority leakage, and successful Key Vault-backed deployment credential handoff into the Project 19 GitHub deploy path.
+
+When the live model needs a genuinely new concept, create a new layer or managed artifact rather than peg-adapting an existing one.
 
 This project should not blindly overwrite project-specific content once a repository has its own authoritative instructions.
 
@@ -89,6 +92,7 @@ This project should not blindly overwrite project-specific content once a reposi
 18. Treat workflow intake certification as a distinct gate from workflow execution certification: the first gate proves governed dispatch, artifact capture, and correlation continuity before any broader autonomous action is approved.
 19. Treat dry-run execution proof as a distinct gate from non-dry-run onboarding closure: the `07-foundation-layer` gate closed under workflow run `23246825920`, Sprint 3 for `19-ai-gov` closed under workflow run `23248103118`, Sprint 4 for `48-eva-veritas` closed under workflow run `23249582741`, Sprint 5 for `50-eva-ops` closed under workflow run `23252326729`, Sprint 6 for `62-agent-memory` closed under workflow run `23253213262`, Sprint 7 for `59-performance` closed under workflow run `23253719737`, Sprint 8 for `58-cybersec` closed under corrected non-dry-run workflow run `23255692804`, Sprint 9 is now active for `57-FKTE` with governed dry-run workflow run `23272454604` successful, and no later packet beyond Sprint 9 is active.
 20. Use task-scoped GitHub PAT secrets from Key Vault for execution surfaces: `github-pat-dev` for routine GitHub operations, `github-pat-projects` for Project v2 GraphQL automation, `github-pat-admin-org` only for org-governance changes, and treat `github-pat` as a temporary compatibility alias rather than an authority surface.
+21. When a governed workflow, template, or model surface needs a genuinely new concept, create a new layer or managed artifact rather than peg-adapting a semantically mismatched existing one. Priming convenience does not justify ontology drift.
 
 ---
 
@@ -174,6 +178,14 @@ For deterministic bootstrap-sensitive tooling, prefer this order:
 4. `GET /model/domain-views`
 5. `GET /model/agent-guide`
 6. `GET /model/user-guide`
+
+## Current Live Alignment
+
+- Workspace bootstrap must resolve `GET /model/agent-handshake` before any deeper guide or layer query.
+- The active numbered-project cycle is `paperless-onboarding-20260318T041500Z` unless a newer governed cycle is explicitly published.
+- Sprint 9 remains active for `57-FKTE`; do not advance later packets until check and act are explicit.
+- `61-GovOps` is closed as a runtime proof point, and Project 60 remains a separate downstream handoff dependency.
+- If the model needs a genuinely new concept, add a new layer instead of forcing a semantically mismatched existing one.
 
 ---
 
